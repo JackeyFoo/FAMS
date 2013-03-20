@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import vl.view.NewAssetPage;
 import vl.view.NewDeliverOut;
+import vl.view.NewRentOut;
 
 public class MenuItemActionListen implements ActionListener {
 
@@ -19,6 +20,11 @@ public class MenuItemActionListen implements ActionListener {
 			
 			new NewDeliverOut();
 		}
+        if(e.getActionCommand().equals("½è³ö¹ÜÀí")){
+			
+			new NewRentOut();
+		} 
+        
 	}
 
 }
