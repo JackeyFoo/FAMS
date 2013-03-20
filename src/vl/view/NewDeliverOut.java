@@ -92,7 +92,7 @@ public class NewDeliverOut extends JDialog {
 		contentpanel.add(leftpanel);
 		contentpanel.add(rightpanel);
 		
-		
+		//kkkkkkkkkk
 		
 		/****************资产ID:*************/
 		JPanel leftpanel01 = new JPanel();	
@@ -217,12 +217,12 @@ public class NewDeliverOut extends JDialog {
 		leftpanel12.add(assetrunningstatus);
 		
 
-		/**************合同信息***************/
+		/**************出库凭证***************/
 		
 		JPanel leftpanel10 = new JPanel();	
 		rightpanel.add(leftpanel10);
 		
-		JLabel contractlabel = new JLabel("合同信息:  ");	
+		JLabel contractlabel = new JLabel("出库凭证:  ");	
 		JTextField assetcontract = new JTextField();
 		assetcontract.setColumns(30);
 		
