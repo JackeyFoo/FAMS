@@ -1,7 +1,9 @@
 package vl.view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
 
 public class NewRentOut extends JDialog {
 
@@ -44,9 +46,11 @@ public class NewRentOut extends JDialog {
 	}
 
 	void initDialog() {
+	
 
 		contentpanel = new JPanel(); 
 		contentpanel.setBorder(BorderFactory.createTitledBorder("借出信息"));
+		
 		
 		add(contentpanel, BorderLayout.CENTER);
 		
@@ -77,57 +81,127 @@ public class NewRentOut extends JDialog {
 	}
 	//initContengpanel
 	void initContentPanel(){
-		contentpanel.setLayout(new BoxLayout(contentpanel, BoxLayout.X_AXIS));
-		JPanel leftpanel01 = new JPanel();
-		leftpanel01.setLayout(new BoxLayout(leftpanel01, BoxLayout.Y_AXIS));
-		
-		JPanel leftpanel02 = new JPanel();
-		leftpanel02.setLayout(new BoxLayout(leftpanel02, BoxLayout.Y_AXIS));
+	
 
-		contentpanel.add(leftpanel01);
-		contentpanel.add(leftpanel02);
 		
 		
-		JPanel leftpanel05 = new JPanel();	
-		leftpanel01.add(leftpanel05);
+		contentpanel.setLayout(new BoxLayout(contentpanel, BoxLayout.X_AXIS));
 		
+		JPanel leftpanel = new JPanel();
+		leftpanel.setLayout(new BoxLayout(leftpanel, BoxLayout.Y_AXIS));
+		
+		JPanel rightpanel = new JPanel();
+		rightpanel.setBorder(BorderFactory.createTitledBorder("借出凭证"));		
+		
+		contentpanel.add(leftpanel);
+		contentpanel.add(rightpanel);
+		
+		
+		//JPanel leftpanel05 = new JPanel();	
+		//leftpanel01.add(leftpanel05);
+		JPanel top1 = new JPanel();
+		leftpanel.add(top1);
 		JLabel idlabel = new JLabel("资产ID:  ");
-		leftpanel05.add(idlabel);
+		JLabel assetid = new JLabel("系统自动生成");
+		top1.add(idlabel);
+		top1.add(assetid);
 		
 		
+		JPanel top2 = new JPanel();
+		leftpanel.add(top2);		
 		JLabel rentlabel = new JLabel("借出ID:  ");
-		leftpanel01.add(rentlabel);
+		JLabel rentid = new JLabel("系统自动生成");
+		top2.add(rentlabel);
+		top2.add(rentid);	
 		
 		
+		JPanel top3 = new JPanel();
+		leftpanel.add(top3);		
 		JLabel rentpartmentlabel = new JLabel("租用部门:  ");
-		leftpanel01.add(rentpartmentlabel);
+		JTextField renttype = new JTextField();
+		renttype.setColumns(30);
+		top3.add(rentpartmentlabel);
+		top3.add(renttype);
 		
+
 		
+		JPanel mid1 = new JPanel();
+		leftpanel.add(mid1);		
 		JLabel rentmanlabel = new JLabel("租用人员:  ");
-		leftpanel01.add(rentmanlabel);
+		JTextField rentmantype = new JTextField();
+		rentmantype.setColumns(30);
+		mid1.add(rentmanlabel);
+		mid1.add(rentmantype);
 		
-		
+		JPanel mid2 = new JPanel();
+		leftpanel.add(mid2);
 		JLabel rentdaylabel = new JLabel("租用日期:  ");
-		leftpanel01.add(rentdaylabel);
+		JTextField rentdaytype = new JTextField();
+		rentdaytype.setColumns(30);
+		mid2.add(rentdaylabel);
+		mid2.add(rentdaytype);
 		
-		
+		JPanel mid3 = new JPanel();
+		leftpanel.add(mid3);
 		JLabel rentbackdaylabel = new JLabel("预计归还日期：  ");
-		leftpanel01.add(rentbackdaylabel);
-				
+		JTextField rentbackdaytype = new JTextField();
+		rentbackdaytype.setColumns(30);
+		mid3.add(rentbackdaylabel);
+		mid3.add(rentbackdaytype);
 		
+		
+
+		
+		JPanel mid4 = new JPanel();
+		leftpanel.add(mid4);		
 		JLabel rentmanagerlabel = new JLabel("经手人:  ");
-		leftpanel01.add(rentmanagerlabel);
+		JTextField rentmanagertype = new JTextField();
+		rentmanagertype.setColumns(30);
+		mid4.add(rentmanagerlabel);
+		mid4.add(rentmanagertype);
 		
+		JPanel mid5 = new JPanel();
+		leftpanel.add(mid5);
 		JLabel rentbackday1label = new JLabel("归还日期:  ");
-		leftpanel01.add(rentbackday1label);
+		JTextField rentbackday1type = new JTextField();
+		rentbackday1type.setColumns(30);
+		mid5.add(rentbackday1label);
+		mid5.add(rentbackday1type);
 		
-		
+		JPanel mid6 = new JPanel();
+		leftpanel.add(mid6);
 		JLabel rentbackmanlabel = new JLabel("归还人员:  ");
-		leftpanel01.add(rentbackmanlabel);
+		JTextField rentbackmantype = new JTextField();
+		rentbackmantype.setColumns(30);
+		mid6.add(rentbackmanlabel);
+		mid6.add(rentbackmantype);
 		
+		JPanel mid7 = new JPanel();
+		leftpanel.add(mid7);
 		JLabel rentnotelabel = new JLabel("备注:  ");
-		leftpanel01.add(rentnotelabel);
+		JTextField rentnotetype = new JTextField();
+		rentnotetype.setColumns(30);
+		mid7.add(rentnotelabel);
+		mid7.add(rentnotetype);
 		
+		
+		JPanel mid8 = new JPanel();	
+		leftpanel.add(mid8);
+		JLabel instatuslabel = new JLabel("记录状态状态:  ");	
+		JLabel assetindeliverstatus = new JLabel("new or not");		
+		mid8.add(instatuslabel);
+		mid8.add(assetindeliverstatus);
+	
+		
+		JPanel right = new JPanel();	
+		rightpanel.add(right);		
+		JLabel rentcontractlabel = new JLabel("租借凭证:  ");	
+		JTextField rentcontract = new JTextField();
+		rentcontract.setColumns(30);
+		
+		right.add(rentcontractlabel);
+		right.add(rentcontract);
+
 		
 	}
 }

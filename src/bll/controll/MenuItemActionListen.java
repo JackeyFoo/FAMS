@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 
 import vl.view.NewAssetPage;
 import vl.view.NewDeliverOut;
+import vl.view.NewDiscard;
+import vl.view.NewMaintain;
 import vl.view.NewRentOut;
+import vl.view.NewTransfer;
 
 public class MenuItemActionListen implements ActionListener {
 
@@ -24,7 +27,18 @@ public class MenuItemActionListen implements ActionListener {
 			
 			new NewRentOut();
 		} 
-        
+        if(e.getActionCommand().equals("转移管理")){
+			
+        	new NewTransfer();
+		} 
+        if(e.getActionCommand().equals("维修管理")){
+			
+			new NewMaintain();
+		} 
+        if(e.getActionCommand().equals("报废管理")){
+			
+			new NewDiscard();
+		} 
 	}
 
 }
