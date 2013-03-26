@@ -33,6 +33,11 @@ public class ImagePanel extends JPanel {
 			// handle exception...
 		}
 	}
+	
+	public double getheight(){
+		
+		return height;
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {

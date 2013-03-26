@@ -340,14 +340,22 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		
 		int h = files.length;
 		
-		rightpanel01.setPreferredSize(new Dimension(300, h * 500));
+		int height = 0;
+		
+		rightpanel01.setPreferredSize(new Dimension(300, height));
 		
 		for(int i = 0; i < h; i++){
 			
-			rightpanel01.add(new ImagePanel(files[i].getAbsolutePath()));
+			ImagePanel imgpanel = new ImagePanel(files[i].getAbsolutePath());
+			
+			height += (int)imgpanel.getheight();
+			
+			rightpanel01.setPreferredSize(new Dimension(300, height));
+			
+			rightpanel01.add(imgpanel);
 		}
 		
-		rightpanel01.revalidate();
+		rightpanel01.updateUI();
 		
 	}
 
