@@ -18,6 +18,8 @@ import vl.interfaces.MyDialog;
 import dal.dal.AssetsDAO;
 import dal.model.Assets;
 import bll.controll.ChooseImageActionListen;
+import bll.controll.ImageFileCopy;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -40,6 +42,8 @@ public class NewAssetPage extends JDialog implements MyDialog {
 	private JTextField assetcontract;
 
 	private JPanel  rightpanel01;
+	
+	private File[] files;
 	/**
 	 * 
 	 */
@@ -104,11 +108,18 @@ public class NewAssetPage extends JDialog implements MyDialog {
 				if (isFull()) {
 
 					packData();
+					
+					String temp = new ImageFileCopy().copyFile(files, asset);
+					
+					asset.setAssetcontract(temp);
+					
 					new AssetsDAO().insert(asset);
 
 					JOptionPane.showMessageDialog(null, "数据保存成功", "SUCCESS",
 							JOptionPane.INFORMATION_MESSAGE);
+					
 					NewAssetPage.this.dispose();
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
@@ -148,7 +159,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		JPanel leftpanel02 = new JPanel();
 		leftpanel.add(leftpanel02);
 
-		JLabel typelabel = new JLabel("资产类型:  ");
+		JLabel typelabel = new JLabel("资产类型(必填):  ");
 		assettype = new JTextField();
 		assettype.setColumns(30);
 
@@ -159,7 +170,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		JPanel leftpanel03 = new JPanel();
 		leftpanel.add(leftpanel03);
 
-		JLabel namelabel = new JLabel("资产名称:  ");
+		JLabel namelabel = new JLabel("资产名称(必填):  ");
 		assetname = new JTextField();
 		assetname.setColumns(30);
 
@@ -170,7 +181,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		JPanel leftpanel04 = new JPanel();
 		leftpanel.add(leftpanel04);
 
-		JLabel brandlabel = new JLabel("资产品牌:  ");
+		JLabel brandlabel = new JLabel("资产品牌(必填):  ");
 		assetbrand = new JTextField();
 		assetbrand.setColumns(30);
 
@@ -181,7 +192,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		JPanel leftpanel05 = new JPanel();
 		leftpanel.add(leftpanel05);
 
-		JLabel modellabel = new JLabel("资产型号:  ");
+		JLabel modellabel = new JLabel("资产型号(必填):  ");
 		assetmodel = new JTextField();
 		assetmodel.setColumns(30);
 
@@ -192,7 +203,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		JPanel leftpanel06 = new JPanel();
 		leftpanel.add(leftpanel06);
 
-		JLabel nolabel = new JLabel("资产机号:  ");
+		JLabel nolabel = new JLabel("资产机号(必填):  ");
 		assetno = new JTextField();
 		assetno.setColumns(30);
 
@@ -203,7 +214,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		JPanel leftpanel07 = new JPanel();
 		leftpanel.add(leftpanel07);
 
-		JLabel datelabel = new JLabel("购入日期:  ");
+		JLabel datelabel = new JLabel("购入日期(必填):  ");
 		assetpurchasedate = new JTextField();
 		assetpurchasedate.setColumns(30);
 
@@ -214,7 +225,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		JPanel leftpanel08 = new JPanel();
 		leftpanel.add(leftpanel08);
 
-		JLabel manufacturerlabel = new JLabel("资产生产商:  ");
+		JLabel manufacturerlabel = new JLabel("资产生产商(必填):  ");
 		assetmanufacturer = new JTextField();
 		assetmanufacturer.setColumns(30);
 
@@ -225,7 +236,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		JPanel leftpanel09 = new JPanel();
 		leftpanel.add(leftpanel09);
 
-		JLabel dealerlabel = new JLabel("资产经销商:  ");
+		JLabel dealerlabel = new JLabel("资产经销商(必填):  ");
 		assetdealer = new JTextField();
 		assetdealer.setColumns(30);
 
@@ -337,6 +348,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 	@Override
 	public void addImageToPanel(File[] files) {
 		// TODO Auto-generated method stub
+		this.files = files;
 		
 		int h = files.length;
 		

@@ -123,6 +123,53 @@ public class Assets implements ModelObject{
 		return this.assetid;
 	}
 
+	@Override
+	public String getValue(int i) {
+		// TODO Auto-generated method stub
+		String result = "";
+		
+		switch(i){
+		case 0:
+			result = getAssetid();
+			break;
+		case 1:
+			result = this.getAssettype();
+			break;
+		case 2:
+			result = this.getAssetname();
+			break;
+		case 3:
+			result = this.getAssetbrand();
+			break;
+		case 4:
+			result = this.getAssetmodel();
+			break;
+		case 5:
+			result = this.getAssetno() + "";
+			break;
+		case 6:
+			result = this.getAssetpurchasedate();
+			break;
+		case 7:
+			result = this.getAssetManufacturer();
+			break;
+		case 8:
+			result = this.getAssetdealer();
+			break;
+		case 9:
+			result = this.getAssetcontract();
+			break;
+		case 10:
+			result = this.getAssetindeliverstatus();
+			break;
+		case 11:
+			result = this.getAssetrunningstatus();
+			break;
+
+		}
+		return result;
+	}
+
 }
 /*
 --创建资产表

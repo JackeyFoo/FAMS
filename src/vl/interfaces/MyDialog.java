@@ -9,4 +9,5 @@ public interface MyDialog{
 	public void addImageToPanel(File[] files);
 	
 	public void removeImgae();
+	
 }

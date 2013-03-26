@@ -63,4 +63,57 @@ public class AssetsDAO {
 
 		return new DecimalFormat("00000000").format(id);
 	}
+	
+	public Assets[] getAll(){
+		
+		try {
+			int size = 0;
+			int i = 0;
+			
+			Statement select = SQLDBConnect.getSQLDBConection()
+					.createStatement();
+
+			ResultSet result = select
+					.executeQuery("SELECT COUNT(*) FROM Assets");
+
+			while (result.next()) { // process results one row at a time
+				size = result.getInt(1);
+			}
+			
+			Assets[] assets = new Assets[size];
+			
+			result = select
+					.executeQuery("SELECT * FROM Assets");
+
+			while (result.next() && i < size) { // process results one row at a time
+				
+				assets[i].setAssetid(result.getInt(1) + "");
+				assets[i].setAssettype(result.getString(2));
+				assets[i].setAssetname(result.getString(3));
+				assets[i].setAssetbrand(result.getString(4));
+				assets[i].setAssetmodel(result.getString(5));
+				assets[i].setAssetno(result.getInt(6));
+				assets[i].setAssetpurchasedate(result.getString(7));
+				assets[i].setAssetManufacturer(result.getString(8));
+				assets[i].setAssetdealer(result.getString(9));
+				assets[i].setAssetcontract(result.getString(10));
+				assets[i].setAssetindeliverstatus(result.getString(11));
+				assets[i].setAssetrunningstatus(result.getString(12));
+				
+				i++;				
+			}
+			
+			return assets;
+			
+
+		} catch (SQLException e) {
+			
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return null;
+		}
+		
+	}
 }
