@@ -1,14 +1,13 @@
 package vl.view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -27,16 +26,15 @@ public class NewMaintain extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewMaintain() {
-		super();
+	public NewMaintain(JFrame jframe) {
+
+		super(jframe, "设备维护", false);
 
 		setResizable(false);
-		setTitle("设备维护");
 		setSize(800, 500);
 		setLocation(200, 150);
 		setVisible(true);
 		setLayout(new BorderLayout());
-		setAlwaysOnTop(true);
 		initDialog();
 
 		setVisible(true);

@@ -1,9 +1,12 @@
 package dal.model;
 
+import dal.interfaces.ModelObject;
 
 
-public class Assets{
+
+public class Assets implements ModelObject{
 	
+	private String assetid = null;
 	private String assettype = null;
 	private String assetname = null;
 	private String assetbrand = null;
@@ -16,6 +19,10 @@ public class Assets{
 	private String assetindeliverstatus = "";
 	private String assetrunningstatus = "";	
 	
+	
+	public Assets(){
+		
+	}
 	
 	public Assets(String assettype, String assetname, String assetbrand,
 			String assetmodel, int assetno, String assetpurchasedate,
@@ -35,6 +42,13 @@ public class Assets{
 		this.assetrunningstatus = assetrunningstatus;
 	}
 	
+	public String getAssetid(){
+		return assetid;
+	}
+	
+	public void setAssetid(String assetid){
+		this.assetid = assetid;
+	}
 	
 	public String getAssettype() {
 		return assettype;
@@ -101,6 +115,12 @@ public class Assets{
 	}
 	public void setAssetrunningstatus(String assetrunningstatus) {
 		this.assetrunningstatus = assetrunningstatus;
+	}
+
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return this.assetid;
 	}
 
 }
