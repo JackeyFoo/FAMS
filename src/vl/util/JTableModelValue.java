@@ -36,4 +36,7 @@ public class JTableModelValue extends AbstractTableModel{
 		return mo[i].getValue(j);
 	}
 
+	 public String getColumnName(int i){  
+         return col[i];  
+}
 }

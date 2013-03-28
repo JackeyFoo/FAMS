@@ -19,12 +19,13 @@ public class ImageFileCopy {
 	public String copyFile(File f[], ModelObject o) {
 		try {
 			String resultpath = "";
-			
+
 			String path = getObjectName(o.getClass().getName());
-			
-			String parentpath = System.getProperty("user.dir")+ File.separator + "data" + File.separator
-					+ path + File.separator + o.getID();
-			
+
+			String parentpath = System.getProperty("user.dir") + File.separator
+					+ "data" + File.separator + path + File.separator
+					+ o.getID();
+
 			File outparentdir = new File(parentpath);
 			outparentdir.mkdirs();
 
@@ -34,13 +35,14 @@ public class ImageFileCopy {
 
 					File outfile = new File(parentpath + File.separator
 							+ file.getName());
-					
-					resultpath += (file.getAbsolutePath() + "<");
+
+					resultpath += (outfile.getAbsolutePath() + "<");
 
 					FileChannel fcin = new FileInputStream(file).getChannel();
 
 					FileChannel fcout = new FileOutputStream(outfile)
 							.getChannel();
+					
 					fcin.transferTo(0, fcin.size(), fcout);
 
 					fcin.close();
@@ -48,13 +50,13 @@ public class ImageFileCopy {
 				}
 
 			}
-			
+
 			return resultpath;
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -63,8 +65,8 @@ public class ImageFileCopy {
 		}
 
 	}
-	
-	private String getObjectName(String o){
+
+	private String getObjectName(String o) {
 		return o.substring(10);
 	}
 }

@@ -6,8 +6,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import util.Utility;
 import vl.component.Jmenubar;
-
 
 public class MainPage extends JFrame {
 
@@ -36,6 +36,9 @@ public class MainPage extends JFrame {
 
 			initMenuBar();
 
+			Utility.initDataDir();
+	
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,21 +59,23 @@ public class MainPage extends JFrame {
 
 		menubar = new Jmenubar();
 
-		menubar.setJmenu(this, "资产操作", new String[] { "添加资产", "出库管理", "借出管理", "转移管理", 
-				"维修管理", "维修管理" }, new int[] { 1 }, "menuitem");
+		menubar.setJmenu(this, "资产操作", new String[] { "添加资产", "库存管理", "出库管理",
+				"借出管理", "转移管理", "维修管理", "报废管理" }, new int[] { 1 }, "menuitem");
 
 		menubar.setJmenu(this, "资产搜索", new String[] { "资产ID搜索", "高级搜索" }, null,
 				"menuitem");
 
-		menubar.setJmenu(this, "资产统计", new String[] { "资产统计分析" }, null, "menuitem");
-
-		menubar.setJmenu(this, "数据操作", new String[] { "资产数据导入", "资产数据导出" }, null,
+		menubar.setJmenu(this, "资产统计", new String[] { "资产统计分析" }, null,
 				"menuitem");
 
-		menubar.setJmenu(this, "系统设置", new String[] { "资产数据导入", "资产数据导出" }, null,
-				"menuitem");
+		menubar.setJmenu(this, "数据操作", new String[] { "资产数据导入", "资产数据导出" },
+				null, "menuitem");
 
-		menubar.setJmenu(this, "窗口", new String[] { "终端管理窗口" }, null, "checkboxitem");
+		menubar.setJmenu(this, "系统设置", new String[] { "资产数据导入", "资产数据导出" },
+				null, "menuitem");
+
+		menubar.setJmenu(this, "窗口", new String[] { "终端管理窗口" }, null,
+				"checkboxitem");
 
 		menubar.setJmenu(this, "帮助", new String[] { "关于我们" }, null, "menuitem");
 

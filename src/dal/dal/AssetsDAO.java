@@ -6,11 +6,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 
+
 import dal.model.Assets;
 
 public class AssetsDAO {
 
-	public boolean insert(Assets asset) {
+	public static boolean insert(Assets asset) {
 
 		try {
 			String sql = "insert into Assets(AssetType, AssetName, AssetBrand, AssetModel,"
@@ -41,7 +42,7 @@ public class AssetsDAO {
 		}
 	}
 
-	public String getID() {
+	public static String getID() {
 		int id = -1;
 		
 		try {
@@ -50,10 +51,19 @@ public class AssetsDAO {
 					.createStatement();
 
 			ResultSet result = select
-					.executeQuery("SELECT   IDENT_CURRENT('Assets')");
+					.executeQuery("SELECT IDENT_CURRENT('Assets')");
 
 			while (result.next()) { // process results one row at a time
 				id = result.getInt(1);
+			}
+			
+			if(id == 1){
+				result = select
+						.executeQuery("SELECT * FROM Assets");
+				
+				if(!result.next()) {
+					id = 0;
+				}
 			}
 
 		} catch (SQLException e) {
@@ -61,31 +71,35 @@ public class AssetsDAO {
 			e.printStackTrace();
 		}
 
-		return new DecimalFormat("00000000").format(id);
+		return new DecimalFormat("00000000").format(id + 1);
 	}
 	
-	public Assets[] getAll(){
+	public static Assets[] getAll(){
 		
 		try {
+			
+			Assets[] assets;
 			int size = 0;
 			int i = 0;
 			
 			Statement select = SQLDBConnect.getSQLDBConection()
 					.createStatement();
-
+			
 			ResultSet result = select
 					.executeQuery("SELECT COUNT(*) FROM Assets");
-
-			while (result.next()) { // process results one row at a time
+			
+			while (result.next()) {
 				size = result.getInt(1);
 			}
-			
-			Assets[] assets = new Assets[size];
-			
+
+			assets = new Assets[size];
+					
 			result = select
 					.executeQuery("SELECT * FROM Assets");
 
 			while (result.next() && i < size) { // process results one row at a time
+				
+				assets[i] = new Assets();
 				
 				assets[i].setAssetid(result.getInt(1) + "");
 				assets[i].setAssettype(result.getString(2));
@@ -100,7 +114,7 @@ public class AssetsDAO {
 				assets[i].setAssetindeliverstatus(result.getString(11));
 				assets[i].setAssetrunningstatus(result.getString(12));
 				
-				i++;				
+				i++;
 			}
 			
 			return assets;

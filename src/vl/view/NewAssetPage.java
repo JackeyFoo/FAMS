@@ -25,6 +25,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class NewAssetPage extends JDialog implements MyDialog {
+	
+	private JFrame jframe;
 
 	private Assets asset;
 
@@ -55,6 +57,8 @@ public class NewAssetPage extends JDialog implements MyDialog {
 	public NewAssetPage(JFrame jframe) {
 
 		super(jframe, "添加设备", false);
+		
+		this.jframe = jframe;
 
 		setResizable(false);
 		setSize(800, 500);
@@ -67,7 +71,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 
 	}
 
-	void initDialog() {
+	public void initDialog() {
 
 		contentpanel = new JPanel();
 		contentpanel.setBorder(BorderFactory.createTitledBorder("资产信息"));
@@ -82,7 +86,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		initControlPanel();
 	}
 
-	void initControlPanel() {
+	public void initControlPanel() {
 
 		JButton save = new JButton("保存");
 		JButton cancel = new JButton("取消");
@@ -113,12 +117,14 @@ public class NewAssetPage extends JDialog implements MyDialog {
 					
 					asset.setAssetcontract(temp);
 					
-					new AssetsDAO().insert(asset);
+					AssetsDAO.insert(asset);
 
 					JOptionPane.showMessageDialog(null, "数据保存成功", "SUCCESS",
 							JOptionPane.INFORMATION_MESSAGE);
 					
 					NewAssetPage.this.dispose();
+					
+					new AllAssetsPage(jframe);
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
@@ -130,7 +136,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 
 	}
 
-	void initContentPanel() {
+	public void initContentPanel() {
 
 		contentpanel.setLayout(new BoxLayout(contentpanel, BoxLayout.X_AXIS));
 
@@ -150,7 +156,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		leftpanel.add(leftpanel01);
 
 		JLabel idlabel = new JLabel("资产ID(系统自动生成):  ");
-		assetid = new JLabel(new AssetsDAO().getID());
+		assetid = new JLabel(AssetsDAO.getID());
 
 		leftpanel01.add(idlabel);
 		leftpanel01.add(assetid);
@@ -295,7 +301,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 
 	}
 
-	private void packData() {
+	public void packData() {
 
 		asset = new Assets();
 
@@ -313,7 +319,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 
 	}
 
-	private boolean isFull() {
+	public boolean isFull() {
 		if (assettype.getText().equals("")) {
 			return false;
 		} else if (assetname.getText().equals("")) {

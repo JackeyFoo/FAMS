@@ -2,9 +2,9 @@ package bll.controll;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 
+import vl.view.AllAssetsPage;
 import vl.view.NewAssetPage;
 import vl.view.NewDeliverOut;
 import vl.view.NewDiscard;
@@ -27,9 +27,16 @@ public class MenuItemActionListen implements ActionListener {
 			
 			new NewAssetPage(jframe);
 		}
+		
+        if(e.getActionCommand().equals("库存管理")){
+			
+			new AllAssetsPage(jframe);
+		} 
+        
         if(e.getActionCommand().equals("出库管理")){
 			
 			new NewDeliverOut(jframe);
+        	
 		}
         if(e.getActionCommand().equals("借出管理")){
 			
