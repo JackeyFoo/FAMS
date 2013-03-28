@@ -133,6 +133,8 @@ public class DeliverOutDAO {
 				deliverouts[i].setDeliverremark(result.getString(7));
 				deliverouts[i].setDelivercertificate(result.getString(8));
 				deliverouts[i].setDeliverrecordisnew(result.getString(9));
+				deliverouts[i].setReturndate(result.getString(10));
+				deliverouts[i].setReturnstaff(result.getString(11));
 
 				i++;
 			}

@@ -170,6 +170,12 @@ public class DeliverOut implements ModelObject {
 		case 7:
 			result = this.getDeliverrecordisnew();
 			break;
+		case 8:
+			result = this.getReturndate();
+			break;
+		case 9:
+			result = this.getReturnstaff();
+			break;
 		}
 		return result;
 	}

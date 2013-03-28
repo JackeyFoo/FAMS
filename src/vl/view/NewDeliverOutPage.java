@@ -152,47 +152,47 @@ public class NewDeliverOutPage extends MyDialog{
 		leftpanel01.add(assetid);
 		
 		/****************出库ID*************/
-		JPanel leftpanel05 = new JPanel();	
-		leftpanel.add(leftpanel05);
+		JPanel leftpanel02 = new JPanel();	
+		leftpanel.add(leftpanel02);
 		
 		JLabel deliveroutlabel = new JLabel("出库ID(系统自动生成):  ");	
 		deliveroutid = new JLabel(new DecimalFormat("00000000").format(DeliverOutDAO.getID()));
 		
-		leftpanel05.add(deliveroutlabel);
-		leftpanel05.add(deliveroutid);
+		leftpanel02.add(deliveroutlabel);
+		leftpanel02.add(deliveroutid);
 		
 		/***************领用部门**************/
-		JPanel leftpanel02 = new JPanel();	
-		leftpanel.add(leftpanel02);
+		JPanel leftpanel03 = new JPanel();	
+		leftpanel.add(leftpanel03);
 		
 		JLabel deliverdepartmentlabel = new JLabel("领用部门(必填):  ");	
 		deliverdepartment = new JTextField();
 		deliverdepartment.setColumns(30);
 		
-		leftpanel02.add(deliverdepartmentlabel);
-		leftpanel02.add(deliverdepartment);
+		leftpanel03.add(deliverdepartmentlabel);
+		leftpanel03.add(deliverdepartment);
 		
 		/**************领用人***************/
-		JPanel leftpanel03 = new JPanel();	
-		leftpanel.add(leftpanel03);
+		JPanel leftpanel04 = new JPanel();	
+		leftpanel.add(leftpanel04);
 		
 		JLabel deliverstafflabel = new JLabel("领用人(必填):  ");	
 		deliverstaff = new JTextField();
 		deliverstaff.setColumns(30);
 		
-		leftpanel03.add(deliverstafflabel);
-		leftpanel03.add(deliverstaff);
+		leftpanel04.add(deliverstafflabel);
+		leftpanel04.add(deliverstaff);
 		
 		/****************领用日期*************/
-		JPanel leftpanel04 = new JPanel();	
-		leftpanel.add(leftpanel04);
+		JPanel leftpanel05 = new JPanel();	
+		leftpanel.add(leftpanel05);
 		
 		JLabel deliverdatelabel = new JLabel("领用日期(必填):  ");	
 		deliverdate = new JTextField();
 		deliverdate.setColumns(30);
 		
-		leftpanel04.add(deliverdatelabel);
-		leftpanel04.add(deliverdate);
+		leftpanel05.add(deliverdatelabel);
+		leftpanel05.add(deliverdate);
 		
 
 		
@@ -237,7 +237,7 @@ public class NewDeliverOutPage extends MyDialog{
 		JPanel leftpanel10 = new JPanel();
 		rightpanel.add(leftpanel10, BorderLayout.NORTH);
 
-		JLabel contractlabel = new JLabel("出库凭证(必填):  ");
+		JLabel delivercertificatelabel = new JLabel("出库凭证(必填):  ");
 		delivercertificate = new JTextField();
 		delivercertificate.setColumns(30);
 
@@ -246,7 +246,7 @@ public class NewDeliverOutPage extends MyDialog{
 		selectbutton.addActionListener(new ChooseImageActionListen(
 				NewDeliverOutPage.this));
 
-		leftpanel10.add(contractlabel);
+		leftpanel10.add(delivercertificatelabel);
 		leftpanel10.add(delivercertificate);
 		leftpanel10.add(selectbutton);
 		
@@ -287,6 +287,8 @@ public class NewDeliverOutPage extends MyDialog{
 		}else if(deliverdate.getText().equals("")){
 			return false;
 		}else if(deliveraddress.getText().equals("")){
+			return false;
+		}else if(delivercertificate.getText().equals("")){
 			return false;
 		}else{
 			return true;
