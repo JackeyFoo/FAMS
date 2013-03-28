@@ -32,7 +32,8 @@ public class AssetsDAO {
 			statement.setString(10, asset.getAssetindeliverstatus());
 			statement.setString(11, asset.getAssetrunningstatus());
 
-			return statement.execute();
+			statement.execute();
+			return true;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
