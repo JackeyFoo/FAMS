@@ -1,5 +1,3 @@
-
-
 package vl.component;
 
 import java.awt.Desktop;
@@ -21,70 +19,68 @@ public class ImagePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private BufferedImage image;
-	
+
 	private double height = 0;
 	private double width = 450;
-    private String imagpath;
-    long clickTime = 0;
+	private String imagpath;
+	private long clickTime = 0;
+
 	public ImagePanel(String path) {
-	
+
 		imagpath = path;
 		try {
-			
+
 			image = ImageIO.read(new File(path));
-			
+
 			height = image.getHeight() / (image.getWidth() / width);
-			
-			
+
+			this.addMouseListener(new MouseAdapter() {
+				public void mouseReleased(MouseEvent e) {
+
+					if (checkClickTime()) {
+						try {
+							
+							Desktop d = Desktop.getDesktop();
+							d.open(new File(imagpath));
+							
+						} catch (IOException ed) {
+							System.out.println(ed);
+						}
+
+					}
+				}
+
+			});
+
 		} catch (IOException ex) {
 			// handle exception...
 		}
 	}
-	
-	public double getheight(){
-		
+
+	public double getheight() {
+
 		return height;
 	}
-	//时间判断函数
-	public boolean checkClickTime() { 
-		
-		long nowTime = (new Date()).getTime(); 
 
-		if ( (nowTime - clickTime) < 300) { 
-			
-			clickTime = nowTime; 
-			return true; 
-			} 
-			
-		   clickTime = nowTime; 
-			return false; 
-            } 
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		
-		g.drawImage(image, 0, 0, (int)width, (int)height, null);
-		
-this.addMouseListener(new MouseAdapter(){
-	public void mouseReleased(MouseEvent e){
-	            
-				if (checkClickTime()) { 
-	        Desktop d = Desktop.getDesktop();
-		     
-	        try {
-			   
-	        	d.open(new File(imagpath));
-		         } 
-	        catch (IOException ed) {   
-		 System.out.println(ed);   
-						 }   
+	// 时间判断函数
+	public boolean checkClickTime() {
 
-	}
+		long nowTime = (new Date()).getTime();
+
+		if ((nowTime - clickTime) < 300) {
+
+			clickTime = nowTime;
+			return true;
 		}
 
-	});
+		clickTime = nowTime;
+		return false;
 	}
 
+	@Override
+	public void paintComponent(Graphics g) {
 
+		g.drawImage(image, 0, 0, (int) width, (int) height, null);
+
+	}
 }
-
