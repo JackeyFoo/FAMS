@@ -1,9 +1,15 @@
+
+
 package vl.component;
 
+import java.awt.Desktop;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -18,10 +24,11 @@ public class ImagePanel extends JPanel {
 	
 	private double height = 0;
 	private double width = 450;
-
+    private String imagpath;
+    long clickTime = 0;
 	public ImagePanel(String path) {
 	
-		
+		imagpath = path;
 		try {
 			
 			image = ImageIO.read(new File(path));
@@ -38,10 +45,46 @@ public class ImagePanel extends JPanel {
 		
 		return height;
 	}
+	//Ê±¼äÅÐ¶Ïº¯Êý
+	public boolean checkClickTime() { 
+		
+		long nowTime = (new Date()).getTime(); 
 
+		if ( (nowTime - clickTime) < 300) { 
+			
+			clickTime = nowTime; 
+			return true; 
+			} 
+			
+		   clickTime = nowTime; 
+			return false; 
+            } 
+	
 	@Override
 	public void paintComponent(Graphics g) {
+		
 		g.drawImage(image, 0, 0, (int)width, (int)height, null);
+		
+this.addMouseListener(new MouseAdapter(){
+	public void mouseReleased(MouseEvent e){
+	            
+				if (checkClickTime()) { 
+	        Desktop d = Desktop.getDesktop();
+		     
+	        try {
+			   
+	        	d.open(new File(imagpath));
+		         } 
+	        catch (IOException ed) {   
+		 System.out.println(ed);   
+						 }   
+
+	}
+		}
+
+	});
 	}
 
+
 }
+
