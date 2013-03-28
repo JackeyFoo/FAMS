@@ -24,9 +24,6 @@ import dal.model.DeliverOut;
 
 public class NewDeliverOutPage extends MyDialog{
 	
-	private JFrame jframe;
-
-	private Assets asset;
 	private DeliverOut deliverout;
 
 	private JLabel assetid;

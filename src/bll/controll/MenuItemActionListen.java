@@ -3,13 +3,11 @@ package bll.controll;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-
 import vl.view.AllAssetsDeliverOutPage;
 import vl.view.AllAssetsInStoragePage;
 import vl.view.NewAssetPage;
 import vl.view.NewDiscard;
 import vl.view.NewMaintain;
-import vl.view.NewRentOut;
 import vl.view.NewTransfer;
 
 public class MenuItemActionListen implements ActionListener {
@@ -40,7 +38,7 @@ public class MenuItemActionListen implements ActionListener {
 		}
         if(e.getActionCommand().equals("借出管理")){
 			
-			new NewRentOut(jframe);
+			
 		} 
         if(e.getActionCommand().equals("转移管理")){
 			

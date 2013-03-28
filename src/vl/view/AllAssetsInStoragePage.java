@@ -109,6 +109,16 @@ public class AllAssetsInStoragePage {
 			}
 			
 		});
+		
+		rentout.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewRentOutPage(jframe, o);
+			}
+			
+		});
 
 	}
 

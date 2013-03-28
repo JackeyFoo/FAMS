@@ -6,13 +6,15 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import vl.interfaces.MyDialog;
+import dal.interfaces.ModelObject;
+import dal.model.Assets;
 
-public class NewRentOut extends JDialog {
+public class NewRentOutPage extends MyDialog{
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,9 +28,12 @@ public class NewRentOut extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewRentOut(JFrame jframe) {
+	public NewRentOutPage(JFrame jframe, ModelObject o) {
 
 		super(jframe, "设备借出", false);
+		
+		this.jframe = jframe;
+		this.asset = (Assets) o;
 
 		setResizable(false);
 		setSize(800, 500);
@@ -41,7 +46,7 @@ public class NewRentOut extends JDialog {
 
 	}
 
-	void initDialog() {
+	public void initDialog() {
 	
 
 		contentpanel = new JPanel(); 
@@ -57,7 +62,8 @@ public class NewRentOut extends JDialog {
 		initContentPanel();
 		initControlPanel();
 	}
-	void initControlPanel(){
+	
+	public void initControlPanel(){
 		
 		JButton save = new JButton("保存");
 		JButton cancel = new JButton("取消");
@@ -70,13 +76,14 @@ public class NewRentOut extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				NewRentOut.this.dispose();
+				NewRentOutPage.this.dispose();
 			}
 			
 		});
 	}
-	//initContengpanel
-	void initContentPanel(){
+	
+	
+	public void initContentPanel(){
 	
 
 		
@@ -198,6 +205,24 @@ public class NewRentOut extends JDialog {
 		right.add(rentcontractlabel);
 		right.add(rentcontract);
 
+		
+	}
+
+	@Override
+	public void packData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isFull() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setImagePath(String txt) {
+		// TODO Auto-generated method stub
 		
 	}
 }

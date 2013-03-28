@@ -7,6 +7,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import dal.model.Assets;
+
 import vl.component.ImagePanel;
 
 public abstract class MyDialog extends JDialog {
@@ -17,6 +19,8 @@ public abstract class MyDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	protected JPanel  rightpanel01;
 	protected File[] files;
+	protected JFrame jframe;
+	protected Assets asset;
 	
 	public MyDialog(JFrame jframe, String str, boolean b){
 		super(jframe, str, b);
