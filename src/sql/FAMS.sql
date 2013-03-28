@@ -53,7 +53,7 @@ CREATE TABLE DeliverOut
 	DeliverAddress varchar(200) NOT NULL, --存在地址，100字以内
 	DeliverRemark varchar(200), --备注，100字以内
 	DeliverCertificate ntext NOT NULL, --出库凭证，图片路径
-	DeliverRecordIsNew varchar(10) NOT NULL, --记录是否最新，newest:最新，no:否
+	DeliverRecordIsNew varchar(10) NOT NULL, --记录状态，newest:最新，no:否
 	ReturnDate varchar(200), --归还日期
 	ReturnStaff varchar(200), --归还人员 200字以内
 	

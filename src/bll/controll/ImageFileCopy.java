@@ -24,7 +24,7 @@ public class ImageFileCopy {
 
 			String parentpath = System.getProperty("user.dir") + File.separator
 					+ "data" + File.separator + path + File.separator
-					+ o.getID();
+					+ o.getFormatID();
 
 			File outparentdir = new File(parentpath);
 			outparentdir.mkdirs();

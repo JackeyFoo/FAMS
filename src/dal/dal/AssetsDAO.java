@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 
 
 import dal.model.Assets;
@@ -42,7 +41,7 @@ public class AssetsDAO {
 		}
 	}
 
-	public static String getID() {
+	public static int getID() {
 		int id = -1;
 		
 		try {
@@ -71,10 +70,10 @@ public class AssetsDAO {
 			e.printStackTrace();
 		}
 
-		return new DecimalFormat("00000000").format(id + 1);
+		return id + 1;
 	}
 	
-	public static Assets[] getAll(){
+	public static Assets[] getAllInStorage(){
 		
 		try {
 			
@@ -86,7 +85,7 @@ public class AssetsDAO {
 					.createStatement();
 			
 			ResultSet result = select
-					.executeQuery("SELECT COUNT(*) FROM Assets");
+					.executeQuery("SELECT COUNT(*) FROM Assets WHERE AssetInDeliverStatus='ø‚÷–'");
 			
 			while (result.next()) {
 				size = result.getInt(1);
@@ -95,13 +94,13 @@ public class AssetsDAO {
 			assets = new Assets[size];
 					
 			result = select
-					.executeQuery("SELECT * FROM Assets");
+					.executeQuery("SELECT * FROM Assets WHERE AssetInDeliverStatus='ø‚÷–'");
 
 			while (result.next() && i < size) { // process results one row at a time
 				
 				assets[i] = new Assets();
 				
-				assets[i].setAssetid(result.getInt(1) + "");
+				assets[i].setAssetid(result.getInt(1));
 				assets[i].setAssettype(result.getString(2));
 				assets[i].setAssetname(result.getString(3));
 				assets[i].setAssetbrand(result.getString(4));
@@ -127,6 +126,30 @@ public class AssetsDAO {
 			e.printStackTrace();
 			
 			return null;
+		}
+		
+	}
+	
+	public static boolean deliverOut(int assetid){
+		
+		try {
+
+			String sql = "update Assets set AssetInDeliverStatus='≥ˆø‚' "
+					+ "where AssetID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
+			
+			statement.setInt(1, assetid);
+
+			statement.execute();
+			
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return false;
 		}
 		
 	}

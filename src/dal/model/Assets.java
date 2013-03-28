@@ -1,10 +1,12 @@
 package dal.model;
 
+import java.text.DecimalFormat;
+
 import dal.interfaces.ModelObject;
 
 public class Assets implements ModelObject {
 
-	private String assetid = null;
+	private int assetid;
 	private String assettype = null;
 	private String assetname = null;
 	private String assetbrand = null;
@@ -39,11 +41,11 @@ public class Assets implements ModelObject {
 		this.assetrunningstatus = assetrunningstatus;
 	}
 
-	public String getAssetid() {
+	public int getAssetid() {
 		return assetid;
 	}
 
-	public void setAssetid(String assetid) {
+	public void setAssetid(int assetid) {
 		this.assetid = assetid;
 	}
 
@@ -136,9 +138,9 @@ public class Assets implements ModelObject {
 	}
 
 	@Override
-	public String getID() {
+	public String getFormatID() {
 		// TODO Auto-generated method stub
-		return this.assetid;
+		return new DecimalFormat("00000000").format(assetid);
 	}
 
 	@Override
@@ -148,7 +150,7 @@ public class Assets implements ModelObject {
 
 		switch (i) {
 		case 0:
-			result = getAssetid();
+			result = this.getFormatID();
 			break;
 		case 1:
 			result = this.getAssettype();

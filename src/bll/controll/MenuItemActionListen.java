@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
-import vl.view.AllAssetsPage;
+import vl.view.AllAssetsDeliverOutPage;
+import vl.view.AllAssetsInStoragePage;
 import vl.view.NewAssetPage;
-import vl.view.NewDeliverOut;
 import vl.view.NewDiscard;
 import vl.view.NewMaintain;
 import vl.view.NewRentOut;
@@ -30,12 +30,12 @@ public class MenuItemActionListen implements ActionListener {
 		
         if(e.getActionCommand().equals("库存管理")){
 			
-			new AllAssetsPage(jframe);
+			new AllAssetsInStoragePage(jframe);
 		} 
         
         if(e.getActionCommand().equals("出库管理")){
 			
-			new NewDeliverOut(jframe);
+        	new AllAssetsDeliverOutPage(jframe);
         	
 		}
         if(e.getActionCommand().equals("借出管理")){

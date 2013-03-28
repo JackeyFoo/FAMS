@@ -2,29 +2,25 @@ package vl.view;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import vl.component.ImagePanel;
 import vl.interfaces.MyDialog;
 import dal.dal.AssetsDAO;
 import dal.model.Assets;
 import bll.controll.ChooseImageActionListen;
-import bll.controll.ImageFileCopy;
-
+import bll.controll.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.text.DecimalFormat;
 
-public class NewAssetPage extends JDialog implements MyDialog {
+public class NewAssetPage extends MyDialog {
 	
 	private JFrame jframe;
 
@@ -43,9 +39,9 @@ public class NewAssetPage extends JDialog implements MyDialog {
 	private JLabel assetrunningstatus;
 	private JTextField assetcontract;
 
-	private JPanel  rightpanel01;
+	//private JPanel  rightpanel01;
 	
-	private File[] files;
+	//private File[] files;
 	/**
 	 * 
 	 */
@@ -113,18 +109,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 
 					packData();
 					
-					String temp = new ImageFileCopy().copyFile(files, asset);
-					
-					asset.setAssetcontract(temp);
-					
-					AssetsDAO.insert(asset);
-
-					JOptionPane.showMessageDialog(null, "数据保存成功", "SUCCESS",
-							JOptionPane.INFORMATION_MESSAGE);
-					
-					NewAssetPage.this.dispose();
-					
-					new AllAssetsPage(jframe);
+					Controller.saveNewAssetInfo(jframe, asset, files, NewAssetPage.this);
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
@@ -156,7 +141,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		leftpanel.add(leftpanel01);
 
 		JLabel idlabel = new JLabel("资产ID(系统自动生成):  ");
-		assetid = new JLabel(AssetsDAO.getID());
+		assetid = new JLabel(new DecimalFormat("00000000").format(AssetsDAO.getID()));
 
 		leftpanel01.add(idlabel);
 		leftpanel01.add(assetid);
@@ -305,7 +290,7 @@ public class NewAssetPage extends JDialog implements MyDialog {
 
 		asset = new Assets();
 
-		asset.setAssetid(assetid.getText());
+		asset.setAssetid(Integer.parseInt(assetid.getText()));
 		asset.setAssettype(assettype.getText());
 		asset.setAssetname(assetname.getText());
 		asset.setAssetbrand(assetbrand.getText());
@@ -351,36 +336,4 @@ public class NewAssetPage extends JDialog implements MyDialog {
 		assetcontract.setText(txt);
 	}
 
-	@Override
-	public void addImageToPanel(File[] files) {
-		// TODO Auto-generated method stub
-		this.files = files;
-		
-		int h = files.length;
-		
-		int height = 0;
-		
-		rightpanel01.setPreferredSize(new Dimension(300, height));
-		
-		for(int i = 0; i < h; i++){
-			
-			ImagePanel imgpanel = new ImagePanel(files[i].getAbsolutePath());
-			
-			height += (int)imgpanel.getheight();
-			
-			rightpanel01.setPreferredSize(new Dimension(300, height));
-			
-			rightpanel01.add(imgpanel);
-		}
-		
-		rightpanel01.updateUI();
-		
-	}
-
-	@Override
-	public void removeImgae() {
-		// TODO Auto-generated method stub
-		rightpanel01.removeAll();
-		
-	}
 }

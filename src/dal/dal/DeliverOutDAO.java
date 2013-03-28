@@ -1,21 +1,20 @@
 package dal.dal;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import dal.model.DeliverOut;
 
-
 public class DeliverOutDAO {
-	public boolean insert(DeliverOut deliverout) {
+	public static boolean insert(DeliverOut deliverout) {
 
 		try {
-			
+
 			updateNewRecord(deliverout.getAssetid());
-			
+
 			String sql = "insert into DeliverOut(AssetID, DeliverDepartment, DeliverStaff, DeliverDate,"
-					+ "DeliverAddress, DeliverRemark, DeliverCertificate, DeliverRecordIsNew, ReturnDate, "
-					+ "ReturnStaff) value(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "DeliverAddress, DeliverRemark, DeliverCertificate, DeliverRecordIsNew) values(?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -28,10 +27,12 @@ public class DeliverOutDAO {
 			statement.setString(6, deliverout.getDeliverremark());
 			statement.setString(7, deliverout.getDelivercertificate());
 			statement.setString(8, deliverout.getDeliverrecordisnew());
-			statement.setString(9, deliverout.getReturndate());
-			statement.setString(10, deliverout.getReturnstaff());
 
-			return statement.execute();
+			statement.execute();
+
+			AssetsDAO.deliverOut(deliverout.getAssetid());
+
+			return true;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -40,25 +41,112 @@ public class DeliverOutDAO {
 		}
 	}
 
-	private boolean updateNewRecord(int assetid) {
-		
-		PreparedStatement statement;
+	private static boolean updateNewRecord(int assetid) {
+
 		try {
 
-			String sql = "update DeliverOut set DeliverRecordIsNew='no' " +
-					"where DeliverRecordIsNew='newest'";
-			
-			statement = SQLDBConnect.getSQLDBConection()
+			String sql = "update DeliverOut set DeliverRecordIsNew='否' "
+					+ "where AssetID=? AND DeliverRecordIsNew='最新'";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
-			
-			return statement.execute();
-			
+
+			statement.setInt(1, assetid);
+
+			statement.execute();
+
+			return true;
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 			return false;
 		}
+	}
+
+	public static int getID() {
+		int id = -1;
+
+		try {
+
+			Statement select = SQLDBConnect.getSQLDBConection()
+					.createStatement();
+
+			ResultSet result = select
+					.executeQuery("SELECT IDENT_CURRENT('DeliverOut')");
+
+			while (result.next()) { // process results one row at a time
+				id = result.getInt(1);
+			}
+
+			if (id == 1) {
+				result = select.executeQuery("SELECT * FROM DeliverOut");
+
+				if (!result.next()) {
+					id = 0;
+				}
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return id + 1;
+	}
+
+	public static DeliverOut[] getAllDeliverOut() {
+
+		try {
+
+			DeliverOut[] deliverouts;
+			int size = 0;
+			int i = 0;
+
+			Statement select = SQLDBConnect.getSQLDBConection()
+					.createStatement();
+
+			ResultSet result = select
+					.executeQuery("SELECT COUNT(*) FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID and Assets.AssetInDeliverStatus='出库'");
+
+			while (result.next()) {
+				size = result.getInt(1);
+			}
+
+			deliverouts = new DeliverOut[size];
+
+			result = select
+					.executeQuery("SELECT DeliverOut.* FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID and Assets.AssetInDeliverStatus='出库'");
+
+			while (result.next() && i < size) { // process results one row at a
+												// time
+
+				deliverouts[i] = new DeliverOut();
+
+				deliverouts[i].setDeliveroutid(result.getInt(1));
+				deliverouts[i].setAssetid(result.getInt(2));
+				deliverouts[i].setDeliverdepartment(result.getString(3));
+				deliverouts[i].setDeliverstaff(result.getString(4));
+				deliverouts[i].setDeliverdate(result.getString(5));
+				deliverouts[i].setDeliveraddress(result.getString(6));
+				deliverouts[i].setDeliverremark(result.getString(7));
+				deliverouts[i].setDelivercertificate(result.getString(8));
+				deliverouts[i].setDeliverrecordisnew(result.getString(9));
+
+				i++;
+			}
+
+			return deliverouts;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
 	}
 
 }
