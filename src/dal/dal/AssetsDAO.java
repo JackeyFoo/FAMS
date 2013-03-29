@@ -271,4 +271,29 @@ public class AssetsDAO {
 		}
 
 	}
+	
+	public static boolean discard(int assetid) {
+
+		try {
+
+			String sql = "update Assets set AssetRunningStatus='±¨·Ï' "
+					+ "where AssetID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, assetid);
+
+			statement.execute();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return false;
+		}
+
+	}
 }

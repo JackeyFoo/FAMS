@@ -136,7 +136,6 @@ CREATE TABLE Discard
 	DiscardID Decimal(9) NOT NULL IDENTITY, --报废ID
 	AssetID Decimal(9) NOT NULL, --资产ID，外键
 	DiscardDepartment varchar(200) NOT NULL, --报废部门，100字以内
-	PreDiscardDate varchar(200) NOT NULL, --预报废时间
 	DiscardDate varchar(200) NOT NULL, --报废时间
 	DiscardReason varchar(200) NOT NULL, --报废原因
 	DiscardCertificate ntext NOT NULL, --报废凭证，图片路径

@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import vl.view.AllAssetsDeliverOutPage;
+import vl.view.AllAssetsDiscardPage;
 import vl.view.AllAssetsInStoragePage;
 import vl.view.AllAssetsMaintainPage;
 import vl.view.AllAssetsRentOutPage;
 import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
-import vl.view.NewDiscard;
 
 public class MenuItemActionListen implements ActionListener {
 	
@@ -54,7 +54,7 @@ public class MenuItemActionListen implements ActionListener {
 		} 
         if(e.getActionCommand().equals("±®∑œπ‹¿Ì")){
 			
-			new NewDiscard(jframe);
+			new AllAssetsDiscardPage(jframe);
 		} 
 	}
 

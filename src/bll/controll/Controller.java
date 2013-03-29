@@ -12,16 +12,19 @@ import vl.view.AllAssetsRentOutPage;
 import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
 import vl.view.NewDeliverOutPage;
+import vl.view.NewDiscardPage;
 import vl.view.NewMaintainPage;
 import vl.view.NewRentOutPage;
 import vl.view.NewTransferPage;
 import dal.dal.AssetsDAO;
 import dal.dal.DeliverOutDAO;
+import dal.dal.DiscardDAO;
 import dal.dal.MaintainDAO;
 import dal.dal.RentOutDAO;
 import dal.dal.TransferDAO;
 import dal.model.Assets;
 import dal.model.DeliverOut;
+import dal.model.Discard;
 import dal.model.Maintain;
 import dal.model.RentOut;
 import dal.model.Transfer;
@@ -128,6 +131,28 @@ public class Controller {
 
 			new AllAssetsMaintainPage(jframe);
 			
+		} else {
+			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+	
+	public static void saveNewDiscardInfo(JFrame jframe,
+			Discard discard, File[] files, NewDiscardPage page) {
+
+		String temp = new ImageFileCopy().copyFile(files, discard);
+
+		discard.setDiscardcertificate(temp);
+
+		if (DiscardDAO.insert(discard)) {
+
+			JOptionPane.showMessageDialog(null, "数据保存成功", "SUCCESS",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			page.dispose();
+
+			//new AllAssetsTransferPage(jframe);
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);

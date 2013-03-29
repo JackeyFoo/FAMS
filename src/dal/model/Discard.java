@@ -1,13 +1,24 @@
 package dal.model;
 
+import java.text.DecimalFormat;
 
-public class Discard {
-	private int assetid = 0;
+import dal.interfaces.ModelObject;
+
+
+public class Discard implements ModelObject {
+	
+	private int assetid;
+	private int discardid;
+
 	private String discarddepartment = null;
 	private String prediscarddate = null;
 	private String discarddate = null;
 	private String discardreason = null;
 	private String discardcertificate = null;
+	
+	public Discard(){
+		
+	}
 	
 	public Discard(int assetid, String discarddepartment,
 			String prediscarddate, String discarddate, String discardreason,
@@ -20,6 +31,16 @@ public class Discard {
 		this.discardreason = discardreason;
 		this.discardcertificate = discardcertificate;
 	}
+	
+	
+	public int getDiscardid() {
+		return discardid;
+	}
+
+	public void setDiscardid(int discardid) {
+		this.discardid = discardid;
+	}
+
 	
 	public int getAssetid() {
 		return assetid;
@@ -56,6 +77,48 @@ public class Discard {
 	}
 	public void setDiscardcertificate(String discardcertificate) {
 		this.discardcertificate = discardcertificate;
+	}
+
+	@Override
+	public String getFormatID() {
+		// TODO Auto-generated method stub
+		return new DecimalFormat("00000000").format(discardid);
+	}
+
+	@Override
+	public String getFormatAssetid() {
+		// TODO Auto-generated method stub
+		return new DecimalFormat("00000000").format(assetid);
+	}
+	
+
+	@Override
+	public String getValue(int i) {
+		// TODO Auto-generated method stub
+		String result = "";
+
+		switch (i) {
+		case 0:
+			result = this.getFormatID();
+			break;
+		case 1:
+			result = this.getFormatAssetid();
+			break;
+		case 2:
+			result = this.getDiscarddepartment();
+			break;
+		case 3:
+			result = this.getDiscarddate();
+			break;
+		case 4:
+			result = this.getDiscardreason();
+			break;
+/*		case 5:
+			result = this.getDiscardcertificate();
+			break;
+	*/
+		}
+		return result;
 	}
 
 	

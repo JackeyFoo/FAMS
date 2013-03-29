@@ -2,12 +2,17 @@ package vl.view;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import vl.interfaces.MyTable;
+import dal.dal.AssetsDAO;
 import dal.dal.MaintainDAO;
 import dal.interfaces.ModelObject;
+import dal.model.Assets;
 
 
 public class AllAssetsMaintainPage extends MyTable {
@@ -32,7 +37,7 @@ public class AllAssetsMaintainPage extends MyTable {
 
 	public void initPopMenu(JPopupMenu popupmenu, final ModelObject o) {
 
-		//final Assets assets = AssetsDAO.getAsset(o.getAssetid());
+		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
 		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 维修完毕");
@@ -42,5 +47,15 @@ public class AllAssetsMaintainPage extends MyTable {
 		popupmenu.addSeparator();
 		popupmenu.add(maintain);
 		popupmenu.add(discard);
+		
+		discard.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewDiscardPage(jframe, assets);
+			}
+			
+		});
 	}
 }

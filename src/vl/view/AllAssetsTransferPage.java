@@ -63,6 +63,15 @@ public class AllAssetsTransferPage extends MyTable{
 			
 		});
 		
+		discard.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewDiscardPage(jframe, assets);
+			}
+			
+		});
 
 	}
 }
