@@ -7,18 +7,22 @@ import javax.swing.JOptionPane;
 
 import vl.view.AllAssetsDeliverOutPage;
 import vl.view.AllAssetsInStoragePage;
+import vl.view.AllAssetsMaintainPage;
 import vl.view.AllAssetsRentOutPage;
 import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
 import vl.view.NewDeliverOutPage;
+import vl.view.NewMaintainPage;
 import vl.view.NewRentOutPage;
 import vl.view.NewTransferPage;
 import dal.dal.AssetsDAO;
 import dal.dal.DeliverOutDAO;
+import dal.dal.MaintainDAO;
 import dal.dal.RentOutDAO;
 import dal.dal.TransferDAO;
 import dal.model.Assets;
 import dal.model.DeliverOut;
+import dal.model.Maintain;
 import dal.model.RentOut;
 import dal.model.Transfer;
 
@@ -112,4 +116,22 @@ public class Controller {
 
 	}
 
+	public static void saveNewMaintainInfo(JFrame jframe,
+			Maintain maintain, NewMaintainPage page) {
+
+		if (MaintainDAO.insert(maintain)) {
+
+			JOptionPane.showMessageDialog(null, "数据保存成功", "SUCCESS",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			page.dispose();
+
+			new AllAssetsMaintainPage(jframe);
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
 }

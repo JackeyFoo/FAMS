@@ -118,9 +118,9 @@ CREATE TABLE Maintain
 	MaintainHandler varchar(200) NOT NULL, --经办人，100字以内
 	DownRemark varchar(200), --故障情况，100字以内
 	DownPhenomenon varchar(200), --故障现象，100字以内
-	MaintainProcess varchar(200) NOT NULL, --维修过程，100字以内
-	DeviceStatus varchar(200) NOT NULL, --设备状况
-	MaintainCost Decimal(9, 2) NOT NULL, --维修费用
+	MaintainProcess varchar(200), --维修过程，100字以内
+	DeviceStatus varchar(200), --设备状况
+	MaintainCost Decimal(9, 2), --维修费用
 	MaintainRecordIsNew varchar(10) NOT NULL, --记录是否最新，newest:最新，no:否
 
 	PRIMARY KEY (MaintainID),

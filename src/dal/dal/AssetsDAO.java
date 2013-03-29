@@ -84,7 +84,7 @@ public class AssetsDAO {
 					.createStatement();
 
 			ResultSet result = select
-					.executeQuery("SELECT COUNT(*) FROM Assets WHERE AssetInDeliverStatus='库中'");
+					.executeQuery("SELECT COUNT(*) FROM Assets WHERE AssetInDeliverStatus='库中' AND AssetRunningStatus='正常'");
 
 			while (result.next()) {
 				size = result.getInt(1);
@@ -93,7 +93,7 @@ public class AssetsDAO {
 			assets = new Assets[size];
 
 			result = select
-					.executeQuery("SELECT * FROM Assets WHERE AssetInDeliverStatus='库中'");
+					.executeQuery("SELECT * FROM Assets WHERE AssetInDeliverStatus='库中' AND AssetRunningStatus='正常'");
 
 			while (result.next() && i < size) { // process results one row at a
 												// time
@@ -227,6 +227,31 @@ public class AssetsDAO {
 		try {
 
 			String sql = "update Assets set AssetInDeliverStatus='转移' "
+					+ "where AssetID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, assetid);
+
+			statement.execute();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return false;
+		}
+
+	}
+
+	public static boolean maintain(int assetid) {
+
+		try {
+
+			String sql = "update Assets set AssetRunningStatus='维修' "
 					+ "where AssetID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()

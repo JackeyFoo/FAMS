@@ -1,17 +1,28 @@
 package dal.model;
 
+import java.text.DecimalFormat;
 
-public class Maintain {
+import dal.interfaces.ModelObject;
+
+
+public class Maintain implements ModelObject{
+	
 	private int assetid = 0;
+	private int maintainid;
+	
 	private String maintaindepartment = null;
 	private String downdate = null;
-	private String maintanhandler = null;
+	private String maintainhandler = null;
 	private String downremark = null;
 	private String downphenomenon = null;
 	private String maintainprocess = null;
 	private String maintainrecordisnew = null;
-	private int maintaincost = 0;
+	private double maintaincost = 0;
 	private String devicestatus = null;	
+	
+	public Maintain(){
+		
+	}
 	
 	public Maintain(int assetid, String maintaindepartment, String downdate,
 			String maintanhandler, String downremark, String downphenomenon,
@@ -21,7 +32,7 @@ public class Maintain {
 		this.assetid = assetid;
 		this.maintaindepartment = maintaindepartment;
 		this.downdate = downdate;
-		this.maintanhandler = maintanhandler;
+		this.maintainhandler = maintanhandler;
 		this.downremark = downremark;
 		this.downphenomenon = downphenomenon;
 		this.maintainprocess = maintainprocess;
@@ -30,6 +41,14 @@ public class Maintain {
 		this.devicestatus = devicestatus;
 	}
 	
+	public int getMaintainid() {
+		return maintainid;
+	}
+
+	public void setMaintainid(int maintainid) {
+		this.maintainid = maintainid;
+	}
+
 	public int getAssetid() {
 		return assetid;
 	}
@@ -48,11 +67,11 @@ public class Maintain {
 	public void setDowndate(String downdate) {
 		this.downdate = downdate;
 	}
-	public String getMaintanhandler() {
-		return maintanhandler;
+	public String getMaintainhandler() {
+		return maintainhandler;
 	}
-	public void setMaintanhandler(String maintanhandler) {
-		this.maintanhandler = maintanhandler;
+	public void setMaintainhandler(String maintanhandler) {
+		this.maintainhandler = maintanhandler;
 	}
 	public String getDownremark() {
 		return downremark;
@@ -79,10 +98,10 @@ public class Maintain {
 	public void setMaintainrecordisnew(String maintainrecordisnew) {
 		this.maintainrecordisnew = maintainrecordisnew;
 	}
-	public int getMaintaincost() {
+	public double getMaintaincost() {
 		return maintaincost;
 	}
-	public void setMaintaincost(int maintaincost) {
+	public void setMaintaincost(double maintaincost) {
 		this.maintaincost = maintaincost;
 	}
 	public String getDevicestatus() {
@@ -90,6 +109,63 @@ public class Maintain {
 	}
 	public void setDevicestatus(String devicestatus) {
 		this.devicestatus = devicestatus;
+	}
+
+	@Override
+	public String getFormatID() {
+		// TODO Auto-generated method stub
+		return new DecimalFormat("00000000").format(maintainid);
+	}
+
+	@Override
+	public String getFormatAssetid() {
+		// TODO Auto-generated method stub
+		return new DecimalFormat("00000000").format(assetid);
+	}
+
+
+	@Override
+	public String getValue(int i) {
+		// TODO Auto-generated method stub
+		String result = "";
+
+		switch (i) {
+		case 0:
+			result = this.getFormatID();
+			break;
+		case 1:
+			result = this.getFormatAssetid();
+			break;
+		case 2:
+			result = this.getMaintaindepartment();
+			break;
+		case 3:
+			result = this.getDowndate();
+			break;
+		case 4:
+			result = this.getMaintainhandler();
+			break;
+		case 5:
+			result = this.getDownremark();
+			break;
+		case 6:
+			result = this.getDownphenomenon();
+			break;
+		case 7:
+			result = this.getMaintainprocess();
+			break;
+		case 8:
+			result = this.getDevicestatus();
+			break;
+		case 9:
+			result = this.getMaintaincost() + "";
+			break;
+		case 10:
+			result = this.getMaintainrecordisnew();
+			break;
+
+		}
+		return result;
 	}
 
 }

@@ -41,19 +41,20 @@ public class AllAssetsDeliverOutPage extends MyTable{
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
 		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移");
+		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
 		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 申请维修");
 		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 申请报废");
-		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
+		
 
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
 		popupmenu.add(transfer);
+		popupmenu.add(returned);
 		popupmenu.addSeparator();
 		popupmenu.add(maintain);
-		popupmenu.addSeparator();
 		popupmenu.add(discard);
-		popupmenu.addSeparator();
-		popupmenu.add(returned);
+
+		
 		
 		transfer.addActionListener(new ActionListener(){
 
@@ -61,6 +62,16 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				new NewTransferPage(jframe, assets);
+			}
+			
+		});
+		
+		maintain.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewMaintainPage(jframe, assets);
 			}
 			
 		});

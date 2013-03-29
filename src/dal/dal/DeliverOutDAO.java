@@ -108,7 +108,7 @@ public class DeliverOutDAO {
 					.createStatement();
 
 			ResultSet result = select
-					.executeQuery("SELECT COUNT(*) FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID and Assets.AssetInDeliverStatus='出库'");
+					.executeQuery("SELECT COUNT(*) FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID AND Assets.AssetInDeliverStatus='出库' AND Assets.AssetRunningStatus='正常'");
 
 			while (result.next()) {
 				size = result.getInt(1);
@@ -117,7 +117,7 @@ public class DeliverOutDAO {
 			deliverouts = new DeliverOut[size];
 
 			result = select
-					.executeQuery("SELECT DeliverOut.* FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID and Assets.AssetInDeliverStatus='出库'");
+					.executeQuery("SELECT DeliverOut.* FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID AND Assets.AssetInDeliverStatus='出库' AND Assets.AssetRunningStatus='正常'");
 
 			while (result.next() && i < size) { // process results one row at a
 												// time

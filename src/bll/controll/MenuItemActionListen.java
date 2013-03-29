@@ -5,11 +5,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import vl.view.AllAssetsDeliverOutPage;
 import vl.view.AllAssetsInStoragePage;
+import vl.view.AllAssetsMaintainPage;
 import vl.view.AllAssetsRentOutPage;
 import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
 import vl.view.NewDiscard;
-import vl.view.NewMaintain;
 
 public class MenuItemActionListen implements ActionListener {
 	
@@ -40,14 +40,17 @@ public class MenuItemActionListen implements ActionListener {
         if(e.getActionCommand().equals("借出管理")){
 			
         	new AllAssetsRentOutPage(jframe);
+        	
 		} 
         if(e.getActionCommand().equals("转移管理")){
 			
         	new AllAssetsTransferPage(jframe);
+        	
 		} 
         if(e.getActionCommand().equals("维修管理")){
 			
-			new NewMaintain(jframe);
+			new AllAssetsMaintainPage(jframe);
+			
 		} 
         if(e.getActionCommand().equals("报废管理")){
 			

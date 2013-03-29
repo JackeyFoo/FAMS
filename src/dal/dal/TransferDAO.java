@@ -6,14 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import dal.model.Transfer;
 
-
 public class TransferDAO {
-	
+
 	public static boolean insert(Transfer transfer) {
 
 		try {
 			updateNewRecord(transfer.getAssetid());
-			
+
 			String sql = "insert into Transfer(AssetID, TransferDepartment, TransferDate, TransferHandler,"
 					+ "TransferRemark, TransferCertificate, TransferStatus, TransferRecordIsNew) "
 					+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -31,9 +30,9 @@ public class TransferDAO {
 			statement.setString(8, transfer.getTransferrecordisnew());
 
 			statement.execute();
-			
+
 			AssetsDAO.transfer(transfer.getAssetid());
-			
+
 			return true;
 
 		} catch (SQLException e) {
@@ -42,32 +41,31 @@ public class TransferDAO {
 			return false;
 		}
 	}
-	
+
 	private static boolean updateNewRecord(int assetid) {
-		
+
 		PreparedStatement statement;
 		try {
 
 			String sql = "update Transfer set TransferRecordIsNew='否' "
 					+ "where AssetID=? AND TransferRecordIsNew='最新'";
-			
-			statement = SQLDBConnect.getSQLDBConection()
-					.prepareStatement(sql);
-			
+
+			statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
+
 			statement.setInt(1, assetid);
 
 			statement.execute();
 
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 			return false;
 		}
 	}
-	
+
 	public static int getID() {
 		int id = -1;
 
@@ -98,7 +96,7 @@ public class TransferDAO {
 
 		return id + 1;
 	}
-	
+
 	public static Transfer[] getAllTransfer() {
 
 		try {
@@ -111,7 +109,7 @@ public class TransferDAO {
 					.createStatement();
 
 			ResultSet result = select
-					.executeQuery("SELECT COUNT(*) FROM Transfer, Assets WHERE Assets.AssetID = Transfer.AssetID and Assets.AssetInDeliverStatus='转移'");
+					.executeQuery("SELECT COUNT(*) FROM Transfer, Assets WHERE Assets.AssetID = Transfer.AssetID and Assets.AssetInDeliverStatus='转移' AND Assets.AssetRunningStatus='正常'");
 
 			while (result.next()) {
 				size = result.getInt(1);
@@ -120,7 +118,7 @@ public class TransferDAO {
 			transfers = new Transfer[size];
 
 			result = select
-					.executeQuery("SELECT Transfer.* FROM Transfer, Assets WHERE Assets.AssetID = Transfer.AssetID and Assets.AssetInDeliverStatus='转移'");
+					.executeQuery("SELECT Transfer.* FROM Transfer, Assets WHERE Assets.AssetID = Transfer.AssetID and Assets.AssetInDeliverStatus='转移' AND Assets.AssetRunningStatus='正常'");
 
 			while (result.next() && i < size) { // process results one row at a
 												// time
