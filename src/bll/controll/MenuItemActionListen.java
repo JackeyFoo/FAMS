@@ -6,10 +6,10 @@ import javax.swing.JFrame;
 import vl.view.AllAssetsDeliverOutPage;
 import vl.view.AllAssetsInStoragePage;
 import vl.view.AllAssetsRentOutPage;
+import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
 import vl.view.NewDiscard;
 import vl.view.NewMaintain;
-import vl.view.NewTransfer;
 
 public class MenuItemActionListen implements ActionListener {
 	
@@ -43,7 +43,7 @@ public class MenuItemActionListen implements ActionListener {
 		} 
         if(e.getActionCommand().equals("转移管理")){
 			
-        	new NewTransfer(jframe);
+        	new AllAssetsTransferPage(jframe);
 		} 
         if(e.getActionCommand().equals("维修管理")){
 			

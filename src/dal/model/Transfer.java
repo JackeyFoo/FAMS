@@ -1,8 +1,15 @@
 package dal.model;
 
+import java.text.DecimalFormat;
 
-public class Transfer {
-	private int assetid = 0;
+import dal.interfaces.ModelObject;
+
+
+public class Transfer implements ModelObject {
+	
+
+	private int transferid;
+	private int assetid;
 	private String transferdepartment = null;
 	private String transferdate = null;
 	private String transferhandler = null;
@@ -10,6 +17,10 @@ public class Transfer {
 	private String transferrecordisnew = null;
 	private String transfercertificate = null;
 	private String transferstatus = null;	
+	
+	public Transfer(){
+		
+	}
 	
 	public Transfer(int assetid, String transferdepartment,
 			String transferdate, String transferhandler, String transferremark,
@@ -26,6 +37,15 @@ public class Transfer {
 		this.transferstatus = transferstatus;
 	}
 	
+	
+	public int getTransferid() {
+		return transferid;
+	}
+
+
+	public void setTransferid(int transferid) {
+		this.transferid = transferid;
+	}
 	
 	public int getAssetid() {
 		return assetid;
@@ -74,6 +94,61 @@ public class Transfer {
 	}
 	public void setTransferstatus(String transferstatus) {
 		this.transferstatus = transferstatus;
+	}
+
+
+	@Override
+	public String getFormatID() {
+		// TODO Auto-generated method stub
+		return new DecimalFormat("00000000").format(transferid);
+	}
+
+
+	@Override
+	public String getValue(int i) {
+		// TODO Auto-generated method stub
+		String result = "";
+
+		switch (i) {
+		case 0:
+			result = this.getFormatID();
+			break;
+		case 1:
+			result = this.getFormatAssetid();
+			break;
+		case 2:
+			result = this.getTransferdepartment();
+			break;
+		case 3:
+			result = this.getTransferdate();
+			break;
+		case 4:
+			result = this.getTransferhandler();
+			break;
+		case 5:
+			result = this.getTransferremark();
+			break;
+			/*
+			 * case 6: result = this.getAssetcontract(); break;
+			 */
+		case 6:
+			result = this.getTransferstatus();
+			break;
+			/*
+			 * case 7: result = this.getAssetcontract(); break;
+			 */
+		case 7:
+			result = this.getTransferrecordisnew();
+			break;
+
+		}
+		return result;
+	}
+
+	@Override
+	public String getFormatAssetid() {
+		// TODO Auto-generated method stub
+		return new DecimalFormat("00000000").format(assetid);
 	}
 
 	

@@ -190,6 +190,12 @@ public class Assets implements ModelObject {
 		return result;
 	}
 
+	@Override
+	public String getFormatAssetid() {
+		// TODO Auto-generated method stub
+		return new DecimalFormat("00000000").format(assetid);
+	}
+
 }
 /*
  * --创建资产表 CREATE TABLE Assets ( AssetID Decimal(9) NOT NULL IDENTITY, --资产ID

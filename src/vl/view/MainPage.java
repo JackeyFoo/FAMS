@@ -71,7 +71,7 @@ public class MainPage extends JFrame {
 		menubar.setJmenu(this, "数据操作", new String[] { "资产数据导入", "资产数据导出" },
 				null, "menuitem");
 
-		menubar.setJmenu(this, "系统设置", new String[] { "资产数据导入", "资产数据导出" },
+		menubar.setJmenu(this, "系统设置", new String[] { "系统设置"},
 				null, "menuitem");
 
 		menubar.setJmenu(this, "窗口", new String[] { "终端管理窗口" }, null,

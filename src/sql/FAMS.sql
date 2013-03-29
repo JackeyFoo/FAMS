@@ -98,7 +98,7 @@ CREATE TABLE Transfer
 	TransferHandler varchar(200) NOT NULL, --经办人，100字以内
 	TransferRemark varchar(200), --备注，100字以内
 	TransferCertificate ntext NOT NULL, --转移凭证，图片路径
-	TransferStatus varchar(5), --in:局内转移，out：对外捐赠
+	TransferStatus varchar(200) NOT NULL, --in:局内转移，out：对外捐赠
 	TransferRecordIsNew varchar(10) NOT NULL, --记录是否最新，newest:最新，no:否
 
 	PRIMARY KEY (TransferID),

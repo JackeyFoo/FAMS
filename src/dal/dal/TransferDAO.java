@@ -1,20 +1,22 @@
 package dal.dal;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import dal.model.Transfer;
 
 
 public class TransferDAO {
-	public boolean insert(Transfer transfer) {
+	
+	public static boolean insert(Transfer transfer) {
 
 		try {
 			updateNewRecord(transfer.getAssetid());
 			
 			String sql = "insert into Transfer(AssetID, TransferDepartment, TransferDate, TransferHandler,"
 					+ "TransferRemark, TransferCertificate, TransferStatus, TransferRecordIsNew) "
-					+ "value(?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -28,7 +30,11 @@ public class TransferDAO {
 			statement.setString(7, transfer.getTransferstatus());
 			statement.setString(8, transfer.getTransferrecordisnew());
 
-			return statement.execute();
+			statement.execute();
+			
+			AssetsDAO.transfer(transfer.getAssetid());
+			
+			return true;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -37,18 +43,22 @@ public class TransferDAO {
 		}
 	}
 	
-	private boolean updateNewRecord(int assetid) {
+	private static boolean updateNewRecord(int assetid) {
 		
 		PreparedStatement statement;
 		try {
 
-			String sql = "update Transfer set TransferRecordIsNew='no' " +
-					"where TransferRecordIsNew='newest'";
+			String sql = "update Transfer set TransferRecordIsNew='否' "
+					+ "where AssetID=? AND TransferRecordIsNew='最新'";
 			
 			statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
 			
-			return statement.execute();
+			statement.setInt(1, assetid);
+
+			statement.execute();
+
+			return true;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -56,5 +66,89 @@ public class TransferDAO {
 			
 			return false;
 		}
+	}
+	
+	public static int getID() {
+		int id = -1;
+
+		try {
+
+			Statement select = SQLDBConnect.getSQLDBConection()
+					.createStatement();
+
+			ResultSet result = select
+					.executeQuery("SELECT IDENT_CURRENT('Transfer')");
+
+			while (result.next()) { // process results one row at a time
+				id = result.getInt(1);
+			}
+
+			if (id == 1) {
+				result = select.executeQuery("SELECT * FROM Transfer");
+
+				if (!result.next()) {
+					id = 0;
+				}
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return id + 1;
+	}
+	
+	public static Transfer[] getAllTransfer() {
+
+		try {
+
+			Transfer[] transfers;
+			int size = 0;
+			int i = 0;
+
+			Statement select = SQLDBConnect.getSQLDBConection()
+					.createStatement();
+
+			ResultSet result = select
+					.executeQuery("SELECT COUNT(*) FROM Transfer, Assets WHERE Assets.AssetID = Transfer.AssetID and Assets.AssetInDeliverStatus='转移'");
+
+			while (result.next()) {
+				size = result.getInt(1);
+			}
+
+			transfers = new Transfer[size];
+
+			result = select
+					.executeQuery("SELECT Transfer.* FROM Transfer, Assets WHERE Assets.AssetID = Transfer.AssetID and Assets.AssetInDeliverStatus='转移'");
+
+			while (result.next() && i < size) { // process results one row at a
+												// time
+
+				transfers[i] = new Transfer();
+
+				transfers[i].setTransferid((result.getInt(1)));
+				transfers[i].setAssetid(result.getInt(2));
+				transfers[i].setTransferdepartment(result.getString(3));
+				transfers[i].setTransferdate(result.getString(4));
+				transfers[i].setTransferhandler(result.getString(5));
+				transfers[i].setTransferremark(result.getString(6));
+				transfers[i].setTransfercertificate(result.getString(7));
+				transfers[i].setTransferstatus(result.getString(8));
+				transfers[i].setTransferrecordisnew(result.getString(9));
+
+				i++;
+			}
+
+			return transfers;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
 	}
 }
