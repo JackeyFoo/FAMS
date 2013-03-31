@@ -7,6 +7,7 @@ import vl.view.AllAssetsDeliverOutPage;
 import vl.view.AllAssetsDiscardPage;
 import vl.view.AllAssetsInStoragePage;
 import vl.view.AllAssetsMaintainPage;
+import vl.view.AllAssetsPage;
 import vl.view.AllAssetsRentOutPage;
 import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
@@ -55,6 +56,10 @@ public class MenuItemActionListen implements ActionListener {
         if(e.getActionCommand().equals("报废管理")){
 			
 			new AllAssetsDiscardPage(jframe);
+		} 
+        if(e.getActionCommand().equals("全部资产管理")){
+			
+			new AllAssetsPage(jframe);
 		} 
 	}
 

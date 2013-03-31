@@ -59,8 +59,8 @@ public class MainPage extends JFrame {
 
 		menubar = new Jmenubar();
 
-		menubar.setJmenu(this, "资产操作", new String[] { "添加资产", "库存管理", "出库管理",
-				"借出管理", "转移管理", "维修管理", "报废管理" }, new int[] { 1 }, "menuitem");
+		menubar.setJmenu(this, "资产操作", new String[] { "添加资产", "全部资产管理", "库存管理", "出库管理",
+				"借出管理", "转移管理", "维修管理", "报废管理" }, new int[] { 1 , 2}, "menuitem");
 
 		menubar.setJmenu(this, "资产搜索", new String[] { "资产ID搜索", "高级搜索" }, null,
 				"menuitem");
