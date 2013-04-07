@@ -11,6 +11,8 @@ import vl.view.AllAssetsPage;
 import vl.view.AllAssetsRentOutPage;
 import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
+import vl.view.NewSearchPage;
+
 
 public class MenuItemActionListen implements ActionListener {
 	
@@ -60,7 +62,14 @@ public class MenuItemActionListen implements ActionListener {
         if(e.getActionCommand().equals("全部资产管理")){
 			
 			new AllAssetsPage(jframe);
+
 		} 
+        
+		if(e.getActionCommand().equals("资产ID搜索")){
+			
+			new NewSearchPage(jframe);
+		}
+
 	}
 
 }

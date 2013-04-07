@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import dal.dal.AssetsDAO;
 import dal.interfaces.ModelObject;
+import dal.model.Assets;
 import vl.interfaces.MyTable;
 
 
@@ -33,14 +34,34 @@ public class AllAssetsInStoragePage extends MyTable{
 		jframe.validate();
 	}
 
-	public void initPopMenu(JPopupMenu popupmenu, final ModelObject o) {
 
+
+	
+	public void initPopMenu(JPopupMenu popupmenu, final ModelObject o) {
+		
+		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
+
+		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
 		JMenuItem deliverout = new JMenuItem("资产 " + o.getFormatID() + " 出库");
 		JMenuItem rentout = new JMenuItem("资产 " + o.getFormatID() + " 借出");
 
+		popupmenu.add(asset);
+		popupmenu.addSeparator();
 		popupmenu.add(deliverout);
 		popupmenu.addSeparator();
 		popupmenu.add(rentout);
+		
+		
+		asset.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewAssetDetailPage(jframe, assets);
+			}
+			
+		});
+		
 		
 		deliverout.addActionListener(new ActionListener(){
 
