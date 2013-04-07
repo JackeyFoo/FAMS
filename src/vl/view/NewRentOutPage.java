@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,8 +16,6 @@ import javax.swing.JTextField;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
 import vl.interfaces.MyDialog;
-import dal.dal.RentOutDAO;
-import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.RentOut;
 
@@ -48,12 +45,18 @@ public class NewRentOutPage extends MyDialog{
 	/**
 	 * Create the dialog.
 	 */
-	public NewRentOutPage(JFrame jframe, ModelObject o) {
+	public NewRentOutPage(JFrame jframe, Assets asset, RentOut rentout, boolean editable) {
 
 		super(jframe, "设备借出", false);
 		
 		this.jframe = jframe;
-		this.asset = (Assets) o;
+		this.asset = asset;
+		
+		if(rentout == null){
+			this.rentout = new RentOut();
+		}else{
+			this.rentout = rentout;;
+		}
 
 		setResizable(false);
 		setSize(800, 500);
@@ -155,7 +158,7 @@ public class NewRentOutPage extends MyDialog{
 		leftpanel.add(leftpanel02);
 		
 		JLabel rentoutlabel = new JLabel("出库ID(系统自动生成):  ");	
-		rentoutid = new JLabel(new DecimalFormat("00000000").format(RentOutDAO.getID()));
+		rentoutid = new JLabel(rentout.getFormatID());
 		
 		leftpanel02.add(rentoutlabel);
 		leftpanel02.add(rentoutid);
@@ -165,7 +168,7 @@ public class NewRentOutPage extends MyDialog{
 		leftpanel.add(leftpanel03);
 		
 		JLabel rentdepartmentlabel = new JLabel("租用部门(必填):  ");	
-		rentdepartment = new JTextField();
+		rentdepartment = new JTextField(rentout.getRentdepartment());
 		rentdepartment.setColumns(30);
 		
 		leftpanel03.add(rentdepartmentlabel);
@@ -176,7 +179,7 @@ public class NewRentOutPage extends MyDialog{
 		leftpanel.add(leftpanel04);
 		
 		JLabel rentstafflabel = new JLabel("领用人(必填):  ");	
-		rentstaff = new JTextField();
+		rentstaff = new JTextField(rentout.getRentstaff());
 		rentstaff.setColumns(30);
 		
 		leftpanel04.add(rentstafflabel);
@@ -187,7 +190,7 @@ public class NewRentOutPage extends MyDialog{
 		leftpanel.add(leftpanel05);
 		
 		JLabel rentdatelabel = new JLabel("租用日期(必填):  ");	
-		rentdate = new JTextField();
+		rentdate = new JTextField(rentout.getRentdate());
 		rentdate.setColumns(30);
 		
 		leftpanel05.add(rentdatelabel);
@@ -200,7 +203,7 @@ public class NewRentOutPage extends MyDialog{
 		leftpanel.add(leftpanel06);
 		
 		JLabel forecastreturndatelabel = new JLabel("预归还日期(必填):  ");	
-		forecastreturndate = new JTextField();
+		forecastreturndate = new JTextField(rentout.getForecastreturndate());
 		forecastreturndate.setColumns(30);
 		
 		leftpanel06.add(forecastreturndatelabel);
@@ -212,7 +215,7 @@ public class NewRentOutPage extends MyDialog{
 		leftpanel.add(leftpanel07);
 		
 		JLabel renthandlerlabel = new JLabel("经办人(必填):  ");	
-		renthandler = new JTextField();
+		renthandler = new JTextField(rentout.getRenthandler());
 		renthandler.setColumns(30);
 		
 		leftpanel07.add(renthandlerlabel);
@@ -224,7 +227,7 @@ public class NewRentOutPage extends MyDialog{
 		leftpanel.add(leftpanel08);
 		
 		JLabel rentremarklabel = new JLabel("备注:  ");	
-		rentremark = new JTextField();
+		rentremark = new JTextField(rentout.getRentremark());
 		rentremark.setColumns(30);
 		
 		leftpanel08.add(rentremarklabel);
@@ -235,7 +238,7 @@ public class NewRentOutPage extends MyDialog{
 		leftpanel.add(leftpanel09);
 		
 		JLabel rentrecordisnewlabel = new JLabel("记录状态:  ");	
-		rentrecordisnew = new JLabel("最新");
+		rentrecordisnew = new JLabel(rentout.getRentrecordisnew());
 		
 		leftpanel09.add(rentrecordisnewlabel);
 		leftpanel09.add(rentrecordisnew);

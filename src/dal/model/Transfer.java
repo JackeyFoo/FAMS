@@ -2,19 +2,20 @@ package dal.model;
 
 import java.text.DecimalFormat;
 
+import dal.dal.TransferDAO;
 import dal.interfaces.ModelObject;
 
 
 public class Transfer implements ModelObject {
 	
 
-	private int transferid;
+	private int transferid = 0;
 	private int assetid;
 	private String transferdepartment = null;
 	private String transferdate = null;
 	private String transferhandler = null;
 	private String transferremark = null;
-	private String transferrecordisnew = null;
+	private String transferrecordisnew = "×îÐÂ";
 	private String transfercertificate = null;
 	private String transferstatus = null;	
 	
@@ -100,7 +101,12 @@ public class Transfer implements ModelObject {
 	@Override
 	public String getFormatID() {
 		// TODO Auto-generated method stub
-		return new DecimalFormat("00000000").format(transferid);
+		if(transferid == 0){
+			return new DecimalFormat("00000000").format(TransferDAO.getID());
+		}else{
+			return new DecimalFormat("00000000").format(transferid);
+		}
+
 	}
 
 

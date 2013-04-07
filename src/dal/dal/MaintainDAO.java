@@ -11,7 +11,7 @@ public class MaintainDAO {
 
 		try {
 			updateNewRecord(maintain.getAssetid());
-			
+
 			String sql = "insert into Maintain(AssetID, MaintainDepartment, DownDate, MaintainHandler,"
 					+ "DownRemark, DownPhenomenon, MaintainProcess, DeviceStatus, MaintainCost, MaintainRecordIsNew) "
 					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -42,32 +42,31 @@ public class MaintainDAO {
 			return false;
 		}
 	}
-	
+
 	private static boolean updateNewRecord(int assetid) {
-		
+
 		PreparedStatement statement;
 		try {
 
 			String sql = "update Maintain set MaintainRecordIsNew='·ñ' "
 					+ "where AssetID=? AND MaintainRecordIsNew='×îÐÂ'";
-			
-			statement = SQLDBConnect.getSQLDBConection()
-					.prepareStatement(sql);
-			
+
+			statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
+
 			statement.setInt(1, assetid);
 
 			statement.execute();
 
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 			return false;
 		}
 	}
-	
+
 	public static int getID() {
 		int id = -1;
 
@@ -98,7 +97,7 @@ public class MaintainDAO {
 
 		return id + 1;
 	}
-	
+
 	public static Maintain[] getAllMaintain() {
 
 		try {
@@ -154,5 +153,46 @@ public class MaintainDAO {
 
 	}
 
+	public static Maintain getMaintain(int id) {
 
+		try {
+
+			Maintain maintains = new Maintain();
+			
+			String sql = "SELECT * FROM Maintain WHERE MaintainID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) { // process results one row at a
+
+				maintains.setMaintainid(result.getInt(1));
+				maintains.setAssetid(result.getInt(2));
+				maintains.setMaintaindepartment(result.getString(3));
+				maintains.setDowndate(result.getString(4));
+				maintains.setMaintainhandler(result.getString(5));
+				maintains.setDownremark(result.getString(6));
+				maintains.setDownphenomenon(result.getString(7));
+				maintains.setMaintainprocess(result.getString(8));
+				maintains.setDevicestatus(result.getString(9));
+				maintains.setMaintaincost(result.getDouble(10));
+				maintains.setMaintainrecordisnew(result.getString(11));
+
+			}
+
+			return maintains;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
+	}
 }

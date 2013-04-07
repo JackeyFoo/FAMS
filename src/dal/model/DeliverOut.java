@@ -1,13 +1,13 @@
 package dal.model;
 
 import java.text.DecimalFormat;
-
+import dal.dal.DeliverOutDAO;
 import dal.interfaces.ModelObject;
 
 public class DeliverOut implements ModelObject {
 
 	private int assetid;
-	private int deliveroutid;
+	private int deliveroutid = 0;
 
 	private String deliverdepartment = null;
 	private String deliverstaff = null;
@@ -15,7 +15,7 @@ public class DeliverOut implements ModelObject {
 	private String deliveraddress = null;
 	private String deliverremark = null;
 	private String delivercertificate = null;
-	private String deliverrecordisnew = null;
+	private String deliverrecordisnew = "×îÐÂ";
 	private String returndate = null;
 	private String returnstaff = null;
 
@@ -49,7 +49,12 @@ public class DeliverOut implements ModelObject {
 	}
 
 	public String getFormatID() {
-		return new DecimalFormat("00000000").format(deliveroutid);
+		
+		if (deliveroutid == 0) {
+			return new DecimalFormat("00000000").format(DeliverOutDAO.getID());
+		} else {
+			return new DecimalFormat("00000000").format(deliveroutid);
+		}
 	}
 
 	public int getAssetid() {

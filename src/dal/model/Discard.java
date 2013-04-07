@@ -1,14 +1,14 @@
 package dal.model;
 
 import java.text.DecimalFormat;
-
+import dal.dal.DiscardDAO;
 import dal.interfaces.ModelObject;
 
 
 public class Discard implements ModelObject {
 	
 	private int assetid;
-	private int discardid;
+	private int discardid = 0;
 
 	private String discarddepartment = null;
 	private String prediscarddate = null;
@@ -82,7 +82,11 @@ public class Discard implements ModelObject {
 	@Override
 	public String getFormatID() {
 		// TODO Auto-generated method stub
-		return new DecimalFormat("00000000").format(discardid);
+		if (discardid == 0) {
+			return new DecimalFormat("00000000").format(DiscardDAO.getID());
+		} else {
+			return new DecimalFormat("00000000").format(discardid);
+		}
 	}
 
 	@Override

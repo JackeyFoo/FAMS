@@ -72,7 +72,7 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewTransferPage(jframe, assets);
+				new NewTransferPage(jframe, assets, null, true);
 			}
 			
 		});
@@ -82,7 +82,7 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewMaintainPage(jframe, assets);
+				new NewMaintainPage(jframe, assets, null, true);
 			}
 			
 		});
@@ -92,7 +92,7 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewDiscardPage(jframe, assets);
+				new NewDiscardPage(jframe, assets, null, true);
 			}
 			
 		});

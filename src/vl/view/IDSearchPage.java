@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class NewSearchPage extends JDialog {
+public class IDSearchPage extends JDialog {
 
 	/**
 	 * 
@@ -33,7 +33,8 @@ public class NewSearchPage extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewSearchPage(JFrame jframe) {
+	public IDSearchPage(JFrame jframe) {
+		
 		super(jframe, "搜索", false);
 		this.jf = jframe;
 
@@ -67,7 +68,7 @@ public class NewSearchPage extends JDialog {
     	assetidtype.setColumns(30);
     	contentpanel.add(assetid);
     	contentpanel.add(assetidtype);
-    	
+
     }
     public void initControlPanel(){			 
     JButton search = new JButton ("查询");
@@ -84,7 +85,7 @@ public class NewSearchPage extends JDialog {
 				if(!(assetidtype.getText().equals(""))){
 					
 					new AllAssetsPage(jf,Integer.parseInt(assetidtype.getText()));
-					NewSearchPage.this.dispose();
+					IDSearchPage.this.dispose();
 					
 				}else{
 					JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
@@ -99,7 +100,7 @@ public class NewSearchPage extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				NewSearchPage.this.dispose();
+				IDSearchPage.this.dispose();
 			}
 
 		});	

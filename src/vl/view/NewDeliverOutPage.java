@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,8 +16,6 @@ import javax.swing.JTextField;
 import vl.interfaces.MyDialog;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
-import dal.dal.DeliverOutDAO;
-import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.DeliverOut;
 
@@ -54,12 +51,18 @@ public class NewDeliverOutPage extends MyDialog{
 	private JPanel contentpanel;
 	private JPanel controlpanel;
 
-	public NewDeliverOutPage(JFrame jframe, ModelObject o) {
+	public NewDeliverOutPage(JFrame jframe, Assets asset, DeliverOut deliverout, boolean editable) {
 
 		super(jframe, "设备出库", false);
 		
 		this.jframe = jframe;
-		this.asset = (Assets) o;
+		this.asset = asset;
+		
+		if(deliverout == null){
+			this.deliverout = new DeliverOut();
+		}else{
+			this.deliverout = deliverout;;
+		}
 
 		setResizable(false);
 		setSize(800, 500);
@@ -146,7 +149,7 @@ public class NewDeliverOutPage extends MyDialog{
 		
 		JLabel assetidlabel = new JLabel("资产ID:  ");
 		assetidlabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		assetid = new JLabel(asset.getFormatID());
+		assetid = new JLabel(asset.getFormatAssetid());
 		
 		leftpanel01.add(assetidlabel);
 		leftpanel01.add(assetid);
@@ -156,7 +159,7 @@ public class NewDeliverOutPage extends MyDialog{
 		leftpanel.add(leftpanel02);
 		
 		JLabel deliveroutlabel = new JLabel("出库ID(系统自动生成):  ");	
-		deliveroutid = new JLabel(new DecimalFormat("00000000").format(DeliverOutDAO.getID()));
+		deliveroutid = new JLabel(deliverout.getFormatID());
 		
 		leftpanel02.add(deliveroutlabel);
 		leftpanel02.add(deliveroutid);
@@ -166,7 +169,7 @@ public class NewDeliverOutPage extends MyDialog{
 		leftpanel.add(leftpanel03);
 		
 		JLabel deliverdepartmentlabel = new JLabel("领用部门(必填):  ");	
-		deliverdepartment = new JTextField();
+		deliverdepartment = new JTextField(deliverout.getDeliverdepartment());
 		deliverdepartment.setColumns(30);
 		
 		leftpanel03.add(deliverdepartmentlabel);
@@ -177,7 +180,7 @@ public class NewDeliverOutPage extends MyDialog{
 		leftpanel.add(leftpanel04);
 		
 		JLabel deliverstafflabel = new JLabel("领用人(必填):  ");	
-		deliverstaff = new JTextField();
+		deliverstaff = new JTextField(deliverout.getDeliverstaff());
 		deliverstaff.setColumns(30);
 		
 		leftpanel04.add(deliverstafflabel);
@@ -188,7 +191,7 @@ public class NewDeliverOutPage extends MyDialog{
 		leftpanel.add(leftpanel05);
 		
 		JLabel deliverdatelabel = new JLabel("领用日期(必填):  ");	
-		deliverdate = new JTextField();
+		deliverdate = new JTextField(deliverout.getDeliverdate());
 		deliverdate.setColumns(30);
 		
 		leftpanel05.add(deliverdatelabel);
@@ -201,7 +204,7 @@ public class NewDeliverOutPage extends MyDialog{
 		leftpanel.add(leftpanel06);
 		
 		JLabel deliveraddresslabel = new JLabel("存在地址(必填):  ");	
-		deliveraddress = new JTextField();
+		deliveraddress = new JTextField(deliverout.getDeliveraddress());
 		deliveraddress.setColumns(30);
 		
 		leftpanel06.add(deliveraddresslabel);
@@ -213,7 +216,7 @@ public class NewDeliverOutPage extends MyDialog{
 		leftpanel.add(leftpanel07);
 		
 		JLabel deliverremarklabel = new JLabel("备注:  ");	
-		deliverremark = new JTextField();
+		deliverremark = new JTextField(deliverout.getDeliverremark());
 		deliverremark.setColumns(30);
 		
 		leftpanel07.add(deliverremarklabel);
@@ -225,7 +228,7 @@ public class NewDeliverOutPage extends MyDialog{
 		leftpanel.add(leftpanel08);
 		
 		JLabel deliverrecordisnewlabel = new JLabel("记录状态:  ");	
-		deliverrecordisnew = new JLabel("最新");
+		deliverrecordisnew = new JLabel(deliverout.getDeliverrecordisnew());
 		
 		leftpanel08.add(deliverrecordisnewlabel);
 		leftpanel08.add(deliverrecordisnew);
@@ -234,7 +237,7 @@ public class NewDeliverOutPage extends MyDialog{
 
 		/**************出库凭证***************/
 		
-		JPanel leftpanel10 = new JPanel();
+		leftpanel10 = new JPanel();
 		rightpanel.add(leftpanel10, BorderLayout.NORTH);
 
 		JLabel delivercertificatelabel = new JLabel("出库凭证(必填):  ");

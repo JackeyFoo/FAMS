@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,10 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import bll.controll.Controller;
-import dal.dal.MaintainDAO;
-import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.Maintain;
 
@@ -50,12 +46,19 @@ public class NewMaintainPage extends MyDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewMaintainPage(JFrame jframe, ModelObject o) {
+	public NewMaintainPage(JFrame jframe, Assets asset, Maintain maintain, boolean editable) {
 
 		super(jframe, "设备维护", false);
 		
 		this.jframe = jframe;
-		this.asset = (Assets) o;
+		this.asset = asset;
+		
+		
+		if(maintain == null){
+			this.maintain = new Maintain();
+		}else{
+			this.maintain = maintain;;
+		}
 
 		setResizable(false);
 		setSize(400, 500);
@@ -149,7 +152,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel02);
 		
 		JLabel maintainidlabel = new JLabel("出库ID(系统自动生成):  ");	
-		maintainid = new JLabel(new DecimalFormat("00000000").format(MaintainDAO.getID()));
+		maintainid = new JLabel(maintain.getFormatID());
 		
 		leftpanel02.add(maintainidlabel);
 		leftpanel02.add(maintainid);
@@ -159,7 +162,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel03);
 		
 		JLabel maintaindepartmentlabel = new JLabel("维修部门(必填):  ");	
-		maintaindepartment = new JTextField();
+		maintaindepartment = new JTextField(maintain.getMaintaindepartment());
 		maintaindepartment.setColumns(30);
 		
 		leftpanel03.add(maintaindepartmentlabel);
@@ -170,7 +173,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel04);
 		
 		JLabel downdatelabel = new JLabel("故障日期(必填):  ");	
-		downdate = new JTextField();
+		downdate = new JTextField(maintain.getDowndate());
 		downdate.setColumns(30);
 		
 		leftpanel04.add(downdatelabel);
@@ -181,7 +184,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel05);
 		
 		JLabel maintainhandlerlabel = new JLabel("经办人(必填):  ");	
-		maintainhandler = new JTextField();
+		maintainhandler = new JTextField(maintain.getMaintainhandler());
 		maintainhandler.setColumns(30);
 		
 		leftpanel05.add(maintainhandlerlabel);
@@ -193,7 +196,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel06);
 		
 		JLabel downremarklabel = new JLabel("故障情况:  ");	
-		downremark = new JTextField();
+		downremark = new JTextField(maintain.getDownremark());
 		downremark.setColumns(30);
 		
 		leftpanel06.add(downremarklabel);
@@ -205,7 +208,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel07);
 		
 		JLabel downphenomenonlabel = new JLabel("故障现象:  ");	
-		downphenomenon = new JTextField();
+		downphenomenon = new JTextField(maintain.getDownphenomenon());
 		downphenomenon.setColumns(30);
 		
 		leftpanel07.add(downphenomenonlabel);
@@ -216,7 +219,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel08);
 		
 		JLabel maintainprocesslabel = new JLabel("维修过程:  ");	
-		maintainprocess = new JTextField();
+		maintainprocess = new JTextField(maintain.getMaintainprocess());
 		maintainprocess.setColumns(30);
 		
 		leftpanel08.add(maintainprocesslabel);
@@ -226,8 +229,8 @@ public class NewMaintainPage extends MyDialog {
 		JPanel leftpanel09 = new JPanel();	
 		leftpanel.add(leftpanel09);
 		
-		JLabel devicestatuslabel = new JLabel("维修过程:  ");	
-		devicestatus = new JTextField();
+		JLabel devicestatuslabel = new JLabel("设备状况:  ");	
+		devicestatus = new JTextField(maintain.getDevicestatus());
 		devicestatus.setColumns(30);
 		
 		leftpanel09.add(devicestatuslabel);
@@ -238,7 +241,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel10);
 		
 		JLabel maintaincostlabel = new JLabel("维修费用(RMB):  ");	
-		maintaincost = new JTextField();
+		maintaincost = new JTextField(maintain.getMaintaincost()+"");
 		maintaincost.setColumns(30);
 		
 		leftpanel10.add(maintaincostlabel);
@@ -250,7 +253,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel.add(leftpanel11);
 		
 		JLabel maintainrecordisnewlabel = new JLabel("记录状态:  ");	
-		maintainrecordisnew = new JLabel("最新");
+		maintainrecordisnew = new JLabel(maintain.getMaintainrecordisnew());
 		
 		leftpanel11.add(maintainrecordisnewlabel);
 		leftpanel11.add(maintainrecordisnew);

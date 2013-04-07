@@ -2,12 +2,13 @@ package dal.model;
 
 import java.text.DecimalFormat;
 
+import dal.dal.RentOutDAO;
 import dal.interfaces.ModelObject;
 
 
 public class RentOut implements ModelObject {
 	
-	private int rentoutid;
+	private int rentoutid = 0;
 	private int assetid;
 	
 	private String rentdepartment = null;
@@ -17,7 +18,7 @@ public class RentOut implements ModelObject {
 	private String renthandler = null;
 	private String rentremark = null;
 	private String rentcertificate = null;
-	private String rentrecordisnew = null;
+	private String rentrecordisnew = "×îÐÂ";
 	private String returndate = null;
 	private String returnstaff = null;	
 	
@@ -124,7 +125,13 @@ public class RentOut implements ModelObject {
 	@Override
 	public String getFormatID() {
 		// TODO Auto-generated method stub
-		return new DecimalFormat("00000000").format(rentoutid);
+		
+		if(rentoutid == 0){
+			return new DecimalFormat("00000000").format(RentOutDAO.getID());
+		}else{
+			return new DecimalFormat("00000000").format(rentoutid);
+		}
+
 	}
 
 	public String getFormatAssetid() {

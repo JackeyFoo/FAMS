@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,8 +16,6 @@ import javax.swing.JTextField;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
 import vl.interfaces.MyDialog;
-import dal.dal.TransferDAO;
-import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.Transfer;
 
@@ -48,12 +45,18 @@ public class NewTransferPage extends MyDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewTransferPage(JFrame jframe, ModelObject o) {
+	public NewTransferPage(JFrame jframe, Assets asset, Transfer transfer, boolean editable) {
 
 		super(jframe, "设备转移", false);
 
 		this.jframe = jframe;
-		this.asset = (Assets) o;
+		this.asset = asset;
+		
+		if(transfer == null){
+			this.transfer = new Transfer();
+		}else{
+			this.transfer = transfer;;
+		}
 
 		setResizable(false);
 		setSize(800, 500);
@@ -151,7 +154,7 @@ public class NewTransferPage extends MyDialog {
 		leftpanel.add(leftpanel02);
 		
 		JLabel transferidlabel = new JLabel("出库ID(系统自动生成):  ");	
-		transferid = new JLabel(new DecimalFormat("00000000").format(TransferDAO.getID()));
+		transferid = new JLabel(transfer.getFormatID());
 		
 		leftpanel02.add(transferidlabel);
 		leftpanel02.add(transferid);
@@ -161,7 +164,7 @@ public class NewTransferPage extends MyDialog {
 		leftpanel.add(leftpanel03);
 		
 		JLabel transferdepartmentlabel = new JLabel("转移部门(必填):  ");	
-		transferdepartment = new JTextField();
+		transferdepartment = new JTextField(transfer.getTransferdepartment());
 		transferdepartment.setColumns(30);
 		
 		leftpanel03.add(transferdepartmentlabel);
@@ -172,7 +175,7 @@ public class NewTransferPage extends MyDialog {
 		leftpanel.add(leftpanel04);
 		
 		JLabel transferdatelabel = new JLabel("转移日期(必填):  ");	
-		transferdate = new JTextField();
+		transferdate = new JTextField(transfer.getTransferdate());
 		transferdate.setColumns(30);
 		
 		leftpanel04.add(transferdatelabel);
@@ -183,7 +186,7 @@ public class NewTransferPage extends MyDialog {
 		leftpanel.add(leftpanel05);
 		
 		JLabel transferhandlerlabel = new JLabel("经办人(必填):  ");	
-		transferhandler = new JTextField();
+		transferhandler = new JTextField(transfer.getTransferhandler());
 		transferhandler.setColumns(30);
 		
 		leftpanel05.add(transferhandlerlabel);
@@ -194,8 +197,8 @@ public class NewTransferPage extends MyDialog {
 		JPanel leftpanel06 = new JPanel();	
 		leftpanel.add(leftpanel06);
 		
-		JLabel transferremarklabel = new JLabel("预归还日期(必填):  ");	
-		transferremark = new JTextField();
+		JLabel transferremarklabel = new JLabel("备注:  ");	
+		transferremark = new JTextField(transfer.getTransferremark());
 		transferremark.setColumns(30);
 		
 		leftpanel06.add(transferremarklabel);
@@ -207,7 +210,7 @@ public class NewTransferPage extends MyDialog {
 		leftpanel.add(leftpanel07);
 		
 		JLabel transferstatuslabel = new JLabel("转移情况(必填):  ");	
-		transferstatus = new JTextField();
+		transferstatus = new JTextField(transfer.getTransferstatus());
 		transferstatus.setColumns(30);
 		
 		leftpanel07.add(transferstatuslabel);
@@ -220,7 +223,7 @@ public class NewTransferPage extends MyDialog {
 		leftpanel.add(leftpanel08);
 		
 		JLabel transferrecordisnewlabel = new JLabel("记录状态:  ");	
-		transferrecordisnew = new JLabel("最新");
+		transferrecordisnew = new JLabel(transfer.getTransferrecordisnew());
 		
 		leftpanel08.add(transferrecordisnewlabel);
 		leftpanel08.add(transferrecordisnew);

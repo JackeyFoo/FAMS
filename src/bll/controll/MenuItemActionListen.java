@@ -11,7 +11,7 @@ import vl.view.AllAssetsPage;
 import vl.view.AllAssetsRentOutPage;
 import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
-import vl.view.NewSearchPage;
+import vl.view.IDSearchPage;
 
 
 public class MenuItemActionListen implements ActionListener {
@@ -67,7 +67,7 @@ public class MenuItemActionListen implements ActionListener {
         
 		if(e.getActionCommand().equals("×Ê²úIDËÑË÷")){
 			
-			new NewSearchPage(jframe);
+			new IDSearchPage(jframe);
 		}
 
 	}

@@ -53,23 +53,12 @@ public class AllAssetsTransferPage extends MyTable{
 		popupmenu.add(maintain);
 		popupmenu.add(discard);
 		
-
 		maintain.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewMaintainPage(jframe, assets);
-			}
-			
-		});
-		
-		maintain.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				new NewMaintainPage(jframe, assets);
+				new NewMaintainPage(jframe, assets, null, true);
 			}
 			
 		});
@@ -90,7 +79,7 @@ public class AllAssetsTransferPage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewDiscardPage(jframe, assets);
+				new NewDiscardPage(jframe, assets, null, true);
 			}
 			
 		});

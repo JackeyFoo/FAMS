@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -16,8 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
-import dal.dal.DiscardDAO;
-import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.Discard;
 
@@ -45,12 +42,18 @@ public class NewDiscardPage extends MyDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewDiscardPage(JFrame jframe, ModelObject o) {
+	public NewDiscardPage(JFrame jframe, Assets asset, Discard discard, boolean editable) {
 		
 		super(jframe, "设备报废", false);
 			
 		this.jframe = jframe;
-		this.asset = (Assets) o;
+		this.asset = asset;
+		
+		if(discard == null){
+			this.discard = new Discard();
+		}else{
+			this.discard = discard;;
+		}
 
 		setResizable(false);
 		setSize(800, 500);
@@ -150,7 +153,7 @@ public class NewDiscardPage extends MyDialog {
 		leftpanel.add(leftpanel02);
 		
 		JLabel discardidlabel = new JLabel("报废ID系统自动生成):  ");	
-		discardid = new JLabel(new DecimalFormat("00000000").format(DiscardDAO.getID()));
+		discardid = new JLabel(discard.getFormatID());
 		
 		leftpanel02.add(discardidlabel);
 		leftpanel02.add(discardid);
@@ -160,7 +163,7 @@ public class NewDiscardPage extends MyDialog {
 		leftpanel.add(leftpanel03);
 		
 		JLabel discarddepartmentlabel = new JLabel("报废部门(必填):  ");	
-		discarddepartment = new JTextField();
+		discarddepartment = new JTextField(discard.getDiscarddepartment());
 		discarddepartment.setColumns(30);
 		
 		leftpanel03.add(discarddepartmentlabel);
@@ -171,7 +174,7 @@ public class NewDiscardPage extends MyDialog {
 		leftpanel.add(leftpanel04);
 		
 		JLabel discarddatelabel = new JLabel("报废时间(必填):  ");	
-		discarddate = new JTextField();
+		discarddate = new JTextField(discard.getDiscarddate());
 		discarddate.setColumns(30);
 		
 		leftpanel04.add(discarddatelabel);
@@ -182,7 +185,7 @@ public class NewDiscardPage extends MyDialog {
 		leftpanel.add(leftpanel05);
 		
 		JLabel discardreasonlabel = new JLabel("报废原因(必填):  ");	
-		discardreason = new JTextField();
+		discardreason = new JTextField(discard.getDiscardreason());
 		discardreason.setColumns(30);
 		
 		leftpanel05.add(discardreasonlabel);
@@ -194,7 +197,7 @@ public class NewDiscardPage extends MyDialog {
 		rightpanel.add(leftpanel10, BorderLayout.NORTH);
 
 		JLabel discardcertificatelabel = new JLabel("报废凭证(必填):  ");
-		discardcertificate = new JTextField();
+		discardcertificate = new JTextField(discard.getDiscardcertificate());
 		discardcertificate.setColumns(30);
 
 		JButton selectbutton = new JButton("选择");

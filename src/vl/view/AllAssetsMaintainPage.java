@@ -53,7 +53,7 @@ public class AllAssetsMaintainPage extends MyTable {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewDiscardPage(jframe, assets);
+				new NewDiscardPage(jframe, assets, null, true);
 			}
 			
 		});

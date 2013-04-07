@@ -68,7 +68,7 @@ public class AllAssetsInStoragePage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewDeliverOutPage(jframe, o);
+				new NewDeliverOutPage(jframe, assets, null, true);
 			}
 			
 		});
@@ -78,7 +78,7 @@ public class AllAssetsInStoragePage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewRentOutPage(jframe, o);
+				new NewRentOutPage(jframe, assets, null, true);
 			}
 			
 		});
