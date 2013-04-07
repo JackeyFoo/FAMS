@@ -301,4 +301,10 @@ public class NewDeliverOutPage extends MyDialog{
 		delivercertificate.setText(txt);
 	}
 
+	@Override
+	public void isEditable(boolean editable) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

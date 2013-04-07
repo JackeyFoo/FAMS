@@ -27,7 +27,7 @@ public class MenuItemActionListen implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals("添加资产")){
 			
-			new NewAssetPage(jframe);
+			new NewAssetPage(jframe, null, true);
 		}
 		
         if(e.getActionCommand().equals("库存管理")){

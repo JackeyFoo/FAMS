@@ -307,4 +307,10 @@ public class NewTransferPage extends MyDialog {
 		transfercertificate.setText(txt);
 	}
 
+	@Override
+	public void isEditable(boolean editable) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

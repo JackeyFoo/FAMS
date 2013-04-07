@@ -313,4 +313,10 @@ public class NewRentOutPage extends MyDialog{
 		// TODO Auto-generated method stub
 		rentcertificate.setText(txt);
 	}
+
+	@Override
+	public void isEditable(boolean editable) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -2,11 +2,12 @@ package dal.model;
 
 import java.text.DecimalFormat;
 
+import dal.dal.AssetsDAO;
 import dal.interfaces.ModelObject;
 
 public class Assets implements ModelObject {
 
-	private int assetid;
+	private int assetid = 0;
 	private String assettype = null;
 	private String assetname = null;
 	private String assetbrand = null;
@@ -16,8 +17,8 @@ public class Assets implements ModelObject {
 	private String assetManufacturer = null;
 	private String assetdealer = null;
 	private String assetcontract = null;
-	private String assetindeliverstatus = "";
-	private String assetrunningstatus = "";
+	private String assetindeliverstatus = "¿âÖÐ";
+	private String assetrunningstatus = "Õý³£";
 
 	public Assets() {
 
@@ -140,7 +141,11 @@ public class Assets implements ModelObject {
 	@Override
 	public String getFormatID() {
 		// TODO Auto-generated method stub
-		return new DecimalFormat("00000000").format(assetid);
+		if (assetid == 0) {
+			return new DecimalFormat("00000000").format(AssetsDAO.getID());
+		} else {
+			return new DecimalFormat("00000000").format(assetid);
+		}
 	}
 
 	@Override
@@ -193,7 +198,11 @@ public class Assets implements ModelObject {
 	@Override
 	public String getFormatAssetid() {
 		// TODO Auto-generated method stub
-		return new DecimalFormat("00000000").format(assetid);
+		if (assetid == 0) {
+			return new DecimalFormat("00000000").format(AssetsDAO.getID());
+		} else {
+			return new DecimalFormat("00000000").format(assetid);
+		}
 	}
 
 }

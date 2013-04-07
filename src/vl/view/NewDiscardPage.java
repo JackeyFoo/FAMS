@@ -255,4 +255,11 @@ public class NewDiscardPage extends MyDialog {
 		discardcertificate.setText(txt);
 	}
 
+
+	@Override
+	public void isEditable(boolean editable) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

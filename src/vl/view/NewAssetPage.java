@@ -12,13 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import vl.interfaces.MyDialog;
-import dal.dal.AssetsDAO;
 import dal.model.Assets;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 
 public class NewAssetPage extends MyDialog {
 	
@@ -50,9 +48,15 @@ public class NewAssetPage extends MyDialog {
 	private JPanel contentpanel;
 	private JPanel controlpanel;
 
-	public NewAssetPage(JFrame jframe) {
+	public NewAssetPage(JFrame jframe, Assets a, boolean editable) {
 
 		super(jframe, "添加设备", false);
+		
+		if(a == null){
+			asset = new Assets();
+		}else{
+			asset = a;
+		}
 		
 		this.jframe = jframe;
 
@@ -141,7 +145,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel01);
 
 		JLabel idlabel = new JLabel("资产ID(系统自动生成):  ");
-		assetid = new JLabel(new DecimalFormat("00000000").format(AssetsDAO.getID()));
+		assetid = new JLabel(asset.getFormatAssetid());
 
 		leftpanel01.add(idlabel);
 		leftpanel01.add(assetid);
@@ -151,7 +155,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel02);
 
 		JLabel typelabel = new JLabel("资产类型(必填):  ");
-		assettype = new JTextField();
+		assettype = new JTextField(asset.getAssettype());
 		assettype.setColumns(30);
 
 		leftpanel02.add(typelabel);
@@ -162,7 +166,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel03);
 
 		JLabel namelabel = new JLabel("资产名称(必填):  ");
-		assetname = new JTextField();
+		assetname = new JTextField(asset.getAssetname());
 		assetname.setColumns(30);
 
 		leftpanel03.add(namelabel);
@@ -173,7 +177,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel04);
 
 		JLabel brandlabel = new JLabel("资产品牌(必填):  ");
-		assetbrand = new JTextField();
+		assetbrand = new JTextField(asset.getAssetbrand());
 		assetbrand.setColumns(30);
 
 		leftpanel04.add(brandlabel);
@@ -184,7 +188,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel05);
 
 		JLabel modellabel = new JLabel("资产型号(必填):  ");
-		assetmodel = new JTextField();
+		assetmodel = new JTextField(asset.getAssetmodel());
 		assetmodel.setColumns(30);
 
 		leftpanel05.add(modellabel);
@@ -195,7 +199,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel06);
 
 		JLabel nolabel = new JLabel("资产机号(必填):  ");
-		assetno = new JTextField();
+		assetno = new JTextField(asset.getAssetno());
 		assetno.setColumns(30);
 
 		leftpanel06.add(nolabel);
@@ -206,7 +210,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel07);
 
 		JLabel datelabel = new JLabel("购入日期(必填):  ");
-		assetpurchasedate = new JTextField();
+		assetpurchasedate = new JTextField(asset.getAssetpurchasedate());
 		assetpurchasedate.setColumns(30);
 
 		leftpanel07.add(datelabel);
@@ -217,7 +221,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel08);
 
 		JLabel manufacturerlabel = new JLabel("资产生产商(必填):  ");
-		assetmanufacturer = new JTextField();
+		assetmanufacturer = new JTextField(asset.getAssetManufacturer());
 		assetmanufacturer.setColumns(30);
 
 		leftpanel08.add(manufacturerlabel);
@@ -228,7 +232,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel09);
 
 		JLabel dealerlabel = new JLabel("资产经销商(必填):  ");
-		assetdealer = new JTextField();
+		assetdealer = new JTextField(asset.getAssetdealer());
 		assetdealer.setColumns(30);
 
 		leftpanel09.add(dealerlabel);
@@ -239,7 +243,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel11);
 
 		JLabel instatuslabel = new JLabel("资产位置状态:  ");
-		assetindeliverstatus = new JLabel("库中");
+		assetindeliverstatus = new JLabel(asset.getAssetindeliverstatus());
 
 		leftpanel11.add(instatuslabel);
 		leftpanel11.add(assetindeliverstatus);
@@ -249,14 +253,14 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel12);
 
 		JLabel runningstatuslabel = new JLabel("资产运行状况:  ");
-		assetrunningstatus = new JLabel("正常");
+		assetrunningstatus = new JLabel(asset.getAssetrunningstatus());
 
 		leftpanel12.add(runningstatuslabel);
 		leftpanel12.add(assetrunningstatus);
 
 		/************** 合同信息 ***************/
 
-		JPanel leftpanel10 = new JPanel();
+		leftpanel10 = new JPanel();
 		rightpanel.add(leftpanel10, BorderLayout.NORTH);
 
 		JLabel contractlabel = new JLabel("合同信息:  ");
@@ -282,13 +286,10 @@ public class NewAssetPage extends MyDialog {
 
 		rightscroll.setViewportView(rightpanel01);
 		
-
-
+		//leftpanel10.setVisible(false);
 	}
 
 	public void packData() {
-
-		asset = new Assets();
 
 		asset.setAssetid(Integer.parseInt(assetid.getText()));
 		asset.setAssettype(assettype.getText());
@@ -334,6 +335,12 @@ public class NewAssetPage extends MyDialog {
 	public void setImagePath(String txt) {
 		// TODO Auto-generated method stub
 		assetcontract.setText(txt);
+	}
+
+	@Override
+	public void isEditable(boolean editable) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

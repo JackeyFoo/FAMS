@@ -295,5 +295,11 @@ public class NewMaintainPage extends MyDialog {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void isEditable(boolean editable) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
