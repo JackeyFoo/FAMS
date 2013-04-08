@@ -38,11 +38,6 @@ public class NewDiscardPage extends MyDialog {
 	private JTextField discarddate;
 	private JTextField discardreason;
 	private JTextField discardcertificate;
-
-	private JButton cancel;
-
-	private JButton save;
-
 	/**
 	 * Create the dialog.
 	 */
@@ -56,7 +51,7 @@ public class NewDiscardPage extends MyDialog {
 
 		if (discard == null) {
 			
-			this.setTitle("设备报废");
+			this.setTitle("资产报废");
 			
 			this.discard = new Discard();
 			
@@ -116,7 +111,7 @@ public class NewDiscardPage extends MyDialog {
 
 		});
 
-		if(this.getTitle().equals("设备报废")){
+		if(this.getTitle().equals("资产报废")){
 			save.addActionListener(new ActionListener() {
 
 				@Override
@@ -314,8 +309,6 @@ public class NewDiscardPage extends MyDialog {
 			cancel.setText("确定");
 			save.setVisible(false);
 			leftpanel10.setVisible(false);
-			addImageToPanel(StrToFile.filesAnalytical(discard.getDiscardcertificate(),"<"));
-
 
 		}
 	}

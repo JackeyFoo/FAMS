@@ -4,19 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import vl.interfaces.MyTable;
+import vl.view.NewTransferPage;
 import dal.dal.AssetsDAO;
-import dal.dal.TransferDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
+import dal.model.Transfer;;
 
 public class AllAssetsTransferPage extends MyTable{
 
-	public AllAssetsTransferPage(JFrame j) {
+	public AllAssetsTransferPage(JFrame j, Transfer[] transfers) {
 		
 		col = new String[] { "转移ID", "资产ID", "转移部门", "转移日期",
 				"经办人", "备注", "转移情况", "记录状态"};
@@ -27,7 +27,7 @@ public class AllAssetsTransferPage extends MyTable{
 
 		pane.setLayout(new BorderLayout());
 
-		mo = (ModelObject[]) TransferDAO.getAllTransfer();
+		mo = transfers;
 
 		initJTable(pane);
 
@@ -41,6 +41,7 @@ public class AllAssetsTransferPage extends MyTable{
 		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
+		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移编辑");
 		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
 		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 申请维修");
 		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 申请报废");
@@ -48,20 +49,14 @@ public class AllAssetsTransferPage extends MyTable{
 
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
+		popupmenu.add(transfer);
+		popupmenu.addSeparator();
 		popupmenu.add(returned);
 		popupmenu.addSeparator();
 		popupmenu.add(maintain);
 		popupmenu.add(discard);
 		
-		maintain.addActionListener(new ActionListener(){
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				new NewMaintainPage(jframe, assets, null, true);
-			}
-			
-		});
 		
 		asset.addActionListener(new ActionListener(){
 
@@ -73,6 +68,25 @@ public class AllAssetsTransferPage extends MyTable{
 			
 		});
 		
+		transfer.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewTransferPage(jframe, assets, (Transfer) o, true);
+			}
+			
+		});
+		
+		maintain.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewMaintainPage(jframe, assets, null, true);
+			}
+			
+		});
 		
 		discard.addActionListener(new ActionListener(){
 

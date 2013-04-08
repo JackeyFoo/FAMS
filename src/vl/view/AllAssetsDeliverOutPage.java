@@ -9,13 +9,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import vl.interfaces.MyTable;
 import dal.dal.AssetsDAO;
-import dal.dal.DeliverOutDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
+import dal.model.DeliverOut;
 
 public class AllAssetsDeliverOutPage extends MyTable{
 
-	public AllAssetsDeliverOutPage(JFrame j) {
+	public AllAssetsDeliverOutPage(JFrame j, DeliverOut[] deliverouts) {
 		
 		col = new String[] { "出库ID", "资产ID", "领用部门", "领用人",
 				"领用日期", "存在地址", "备注", "记录状态", "归还日期", "归还人员"};
@@ -26,7 +26,7 @@ public class AllAssetsDeliverOutPage extends MyTable{
 
 		pane.setLayout(new BorderLayout());
 
-		mo = (ModelObject[]) DeliverOutDAO.getAllDeliverOut();
+		mo = deliverouts;
 
 		initJTable(pane);
 
@@ -40,6 +40,7 @@ public class AllAssetsDeliverOutPage extends MyTable{
 		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
+		JMenuItem deliverout = new JMenuItem("资产 " + o.getFormatID() + " 出库编辑");
 		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移");
 		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
 		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 申请维修");
@@ -47,6 +48,8 @@ public class AllAssetsDeliverOutPage extends MyTable{
 		
 
 		popupmenu.add(asset);
+		popupmenu.addSeparator();
+		popupmenu.add(deliverout);
 		popupmenu.addSeparator();
 		popupmenu.add(transfer);
 		popupmenu.add(returned);
@@ -62,6 +65,16 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				new NewAssetPage( jframe, assets ,false);
+			}
+			
+		});	
+		
+		deliverout.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewDeliverOutPage( jframe, assets, (DeliverOut) o, true);
 			}
 			
 		});		

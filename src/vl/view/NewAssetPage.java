@@ -51,9 +51,6 @@ public class NewAssetPage extends MyDialog {
 	private JPanel contentpanel;
 	private JPanel controlpanel;
 
-	private JButton save;
-
-	private JButton cancel;
 
 	public NewAssetPage(JFrame jframe, Assets a, boolean editable) {
 		
@@ -61,7 +58,7 @@ public class NewAssetPage extends MyDialog {
 
 		if(a == null){
 
-			this.setTitle("添加设备");
+			this.setTitle("添加资产");
 
 			asset = new Assets();
 
@@ -122,7 +119,7 @@ public class NewAssetPage extends MyDialog {
 
 		});
 
-		if(this.getTitle().equals("添加设备")){
+		if(this.getTitle().equals("添加资产")){
 			
 			save.addActionListener(new ActionListener() {
 

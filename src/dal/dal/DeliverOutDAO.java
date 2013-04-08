@@ -180,5 +180,69 @@ public class DeliverOutDAO {
 		}
 
 	}
+	
+	public static DeliverOut[] getDeliverOutHistory(int id) {
+
+		try {
+
+			DeliverOut[] deliverouts;
+			int size = 0;
+			int i = 0;
+			
+			String sql = "SELECT COUNT(*) FROM DeliverOut WHERE AssetID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				size = result.getInt(1);
+			}
+
+			deliverouts = new DeliverOut[size];
+
+			sql = "SELECT * FROM DeliverOut WHERE AssetID=?";
+			
+			statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+			
+			statement.setInt(1, id);
+			
+			result = statement.executeQuery();
+			
+			while (result.next() && i < size) { // process results one row at a
+												// time
+
+				deliverouts[i] = new DeliverOut();
+
+				deliverouts[i].setDeliveroutid(result.getInt(1));
+				deliverouts[i].setAssetid(result.getInt(2));
+				deliverouts[i].setDeliverdepartment(result.getString(3));
+				deliverouts[i].setDeliverstaff(result.getString(4));
+				deliverouts[i].setDeliverdate(result.getString(5));
+				deliverouts[i].setDeliveraddress(result.getString(6));
+				deliverouts[i].setDeliverremark(result.getString(7));
+				deliverouts[i].setDelivercertificate(result.getString(8));
+				deliverouts[i].setDeliverrecordisnew(result.getString(9));
+				deliverouts[i].setReturndate(result.getString(10));
+				deliverouts[i].setReturnstaff(result.getString(11));
+
+				i++;
+			}
+
+			return deliverouts;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
+	}
 
 }

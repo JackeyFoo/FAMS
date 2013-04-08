@@ -180,4 +180,66 @@ public class TransferDAO {
 		}
 
 	}
+	
+	public static Transfer[] getTransferHistory(int id) {
+
+		try {
+
+			Transfer[] transfers;
+			int size = 0;
+			int i = 0;
+			
+			String sql = "SELECT COUNT(*) FROM Transfer WHERE AssetID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				size = result.getInt(1);
+			}
+
+			transfers = new Transfer[size];
+
+			sql = "SELECT * FROM Transfer WHERE AssetID=?";
+			
+			statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+			
+			statement.setInt(1, id);
+			
+			result = statement.executeQuery();
+
+			while (result.next() && i < size) { // process results one row at a
+												// time
+
+				transfers[i] = new Transfer();
+
+				transfers[i].setTransferid((result.getInt(1)));
+				transfers[i].setAssetid(result.getInt(2));
+				transfers[i].setTransferdepartment(result.getString(3));
+				transfers[i].setTransferdate(result.getString(4));
+				transfers[i].setTransferhandler(result.getString(5));
+				transfers[i].setTransferremark(result.getString(6));
+				transfers[i].setTransfercertificate(result.getString(7));
+				transfers[i].setTransferstatus(result.getString(8));
+				transfers[i].setTransferrecordisnew(result.getString(9));
+
+				i++;
+			}
+
+			return transfers;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
+	}
 }

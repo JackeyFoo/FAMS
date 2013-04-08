@@ -187,13 +187,15 @@ public class MaintainDAO {
 
 	}
 
-	public static Maintain getMaintain(int id) {
+	public static Maintain[] getMaintainHistory(int id) {
 
 		try {
 
-			Maintain maintains = new Maintain();
+			Maintain[] maintains;
+			int size = 0;
+			int i = 0;
 			
-			String sql = "SELECT * FROM Maintain WHERE MaintainID=?";
+			String sql = "SELECT COUNT(*) FROM Maintain WHERE AssetID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -202,20 +204,39 @@ public class MaintainDAO {
 
 			ResultSet result = statement.executeQuery();
 
-			while (result.next()) { // process results one row at a
+			while (result.next()) {
+				size = result.getInt(1);
+			}
 
-				maintains.setMaintainid(result.getInt(1));
-				maintains.setAssetid(result.getInt(2));
-				maintains.setMaintaindepartment(result.getString(3));
-				maintains.setDowndate(result.getString(4));
-				maintains.setMaintainhandler(result.getString(5));
-				maintains.setDownremark(result.getString(6));
-				maintains.setDownphenomenon(result.getString(7));
-				maintains.setMaintainprocess(result.getString(8));
-				maintains.setDevicestatus(result.getString(9));
-				maintains.setMaintaincost(result.getDouble(10));
-				maintains.setMaintainrecordisnew(result.getString(11));
+			maintains = new Maintain[size];
 
+			sql = "SELECT * FROM Maintain WHERE AssetID=?";
+			
+			statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+			
+			statement.setInt(1, id);
+			
+			result = statement.executeQuery();
+
+			while (result.next() && i < size) { // process results one row at a
+												// time
+
+				maintains[i] = new Maintain();
+
+				maintains[i].setMaintainid(result.getInt(1));
+				maintains[i].setAssetid(result.getInt(2));
+				maintains[i].setMaintaindepartment(result.getString(3));
+				maintains[i].setDowndate(result.getString(4));
+				maintains[i].setMaintainhandler(result.getString(5));
+				maintains[i].setDownremark(result.getString(6));
+				maintains[i].setDownphenomenon(result.getString(7));
+				maintains[i].setMaintainprocess(result.getString(8));
+				maintains[i].setDevicestatus(result.getString(9));
+				maintains[i].setMaintaincost(result.getDouble(10));
+				maintains[i].setMaintainrecordisnew(result.getString(11));
+
+				i++;
 			}
 
 			return maintains;

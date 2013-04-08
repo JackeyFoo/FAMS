@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
+import bll.controll.StrToFile;
 import vl.interfaces.MyDialog;
 import dal.model.Assets;
 import dal.model.Transfer;
@@ -26,7 +27,7 @@ public class NewTransferPage extends MyDialog {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Transfer transfer;
 
 	private JPanel contentpanel;
@@ -45,17 +46,30 @@ public class NewTransferPage extends MyDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewTransferPage(JFrame jframe, Assets asset, Transfer transfer, boolean editable) {
+	public NewTransferPage(JFrame jframe, Assets asset, Transfer transfer,
+			boolean editable) {
 
-		super(jframe, "设备转移", false);
+		super(jframe, false);
 
 		this.jframe = jframe;
 		this.asset = asset;
-		
-		if(transfer == null){
+
+		if (transfer == null) {
+			this.setTitle("资产转移");
+			
 			this.transfer = new Transfer();
-		}else{
-			this.transfer = transfer;;
+			
+		} else {
+			
+			if(editable){
+				this.setTitle("资产转移编辑");
+			}else{
+				this.setTitle("资产转移详情");
+			}
+
+			
+			this.transfer = transfer;
+	
 		}
 
 		setResizable(false);
@@ -86,8 +100,8 @@ public class NewTransferPage extends MyDialog {
 
 	public void initControlPanel() {
 
-		JButton save = new JButton("保存");
-		JButton cancel = new JButton("取消");
+		save = new JButton("保存");
+		cancel = new JButton("取消");
 
 		controlpanel.add(save);
 		controlpanel.add(cancel);
@@ -102,25 +116,49 @@ public class NewTransferPage extends MyDialog {
 
 		});
 
-		save.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				if (isFull()) {
+		
+		if (this.getTitle().equals("资产转移")) {
+			save.addActionListener(new ActionListener() {
 
-					packData();
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					if (isFull()) {
 
-					 Controller.saveNewTransferInfo(jframe, transfer, files,
-					 NewTransferPage.this);
+						packData();
 
-				} else {
-					JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
+						Controller.saveNewTransferInfo(jframe, transfer, files,
+								NewTransferPage.this);
+
+					} else {
+						JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
-			}
 
-		});
+			});
+		} else if (this.getTitle().equals("资产转移编辑")) {
+			save.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					if (isFull()) {
+
+						packData();
+
+						Controller.updateTransferInfo(jframe, transfer, files,
+								NewTransferPage.this);
+
+					} else {
+						JOptionPane.showMessageDialog(null, "请填写必要的数据",
+								"ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+
+			});
+		}
 	}
 
 	public void initContentPanel() {
@@ -137,100 +175,96 @@ public class NewTransferPage extends MyDialog {
 		contentpanel.add(leftpanel);
 		contentpanel.add(rightpanel);
 
-		/****************资产ID:*************/
-		JPanel leftpanel01 = new JPanel();	
+		/**************** 资产ID: *************/
+		JPanel leftpanel01 = new JPanel();
 		leftpanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		leftpanel.add(leftpanel01);
-		
+
 		JLabel assetidlabel = new JLabel("资产ID:  ");
 		assetidlabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		assetid = new JLabel(asset.getFormatID());
-		
+
 		leftpanel01.add(assetidlabel);
 		leftpanel01.add(assetid);
-		
-		/****************转移ID*************/
-		JPanel leftpanel02 = new JPanel();	
+
+		/**************** 转移ID *************/
+		JPanel leftpanel02 = new JPanel();
 		leftpanel.add(leftpanel02);
-		
-		JLabel transferidlabel = new JLabel("出库ID(系统自动生成):  ");	
+
+		JLabel transferidlabel = new JLabel("出库ID(系统自动生成):  ");
 		transferid = new JLabel(transfer.getFormatID());
-		
+
 		leftpanel02.add(transferidlabel);
 		leftpanel02.add(transferid);
-		
-		/***************转移部门**************/
-		JPanel leftpanel03 = new JPanel();	
+
+		/*************** 转移部门 **************/
+		JPanel leftpanel03 = new JPanel();
 		leftpanel.add(leftpanel03);
-		
-		JLabel transferdepartmentlabel = new JLabel("转移部门(必填):  ");	
+
+		JLabel transferdepartmentlabel = new JLabel("转移部门(必填):  ");
 		transferdepartment = new JTextField(transfer.getTransferdepartment());
 		transferdepartment.setColumns(30);
-		
+
 		leftpanel03.add(transferdepartmentlabel);
 		leftpanel03.add(transferdepartment);
-		
-		/**************转移日期***************/
-		JPanel leftpanel04 = new JPanel();	
+
+		/************** 转移日期 ***************/
+		JPanel leftpanel04 = new JPanel();
 		leftpanel.add(leftpanel04);
-		
-		JLabel transferdatelabel = new JLabel("转移日期(必填):  ");	
+
+		JLabel transferdatelabel = new JLabel("转移日期(必填):  ");
 		transferdate = new JTextField(transfer.getTransferdate());
 		transferdate.setColumns(30);
-		
+
 		leftpanel04.add(transferdatelabel);
 		leftpanel04.add(transferdate);
-		
-		/****************经办人*************/
-		JPanel leftpanel05 = new JPanel();	
+
+		/**************** 经办人 *************/
+		JPanel leftpanel05 = new JPanel();
 		leftpanel.add(leftpanel05);
-		
-		JLabel transferhandlerlabel = new JLabel("经办人(必填):  ");	
+
+		JLabel transferhandlerlabel = new JLabel("经办人(必填):  ");
 		transferhandler = new JTextField(transfer.getTransferhandler());
 		transferhandler.setColumns(30);
-		
+
 		leftpanel05.add(transferhandlerlabel);
 		leftpanel05.add(transferhandler);
-		
-		
-		/**************备注***************/
-		JPanel leftpanel06 = new JPanel();	
+
+		/************** 备注 ***************/
+		JPanel leftpanel06 = new JPanel();
 		leftpanel.add(leftpanel06);
-		
-		JLabel transferremarklabel = new JLabel("备注:  ");	
+
+		JLabel transferremarklabel = new JLabel("备注:  ");
 		transferremark = new JTextField(transfer.getTransferremark());
 		transferremark.setColumns(30);
-		
+
 		leftpanel06.add(transferremarklabel);
 		leftpanel06.add(transferremark);
-		
-		
-		/**************转移情况***************/
-		JPanel leftpanel07 = new JPanel();	
+
+		/************** 转移情况 ***************/
+		JPanel leftpanel07 = new JPanel();
 		leftpanel.add(leftpanel07);
-		
-		JLabel transferstatuslabel = new JLabel("转移情况(必填):  ");	
+
+		JLabel transferstatuslabel = new JLabel("转移情况(必填):  ");
 		transferstatus = new JTextField(transfer.getTransferstatus());
 		transferstatus.setColumns(30);
-		
+
 		leftpanel07.add(transferstatuslabel);
 		leftpanel07.add(transferstatus);
 
-		
-		
-		/**************记录状态***************/
-		JPanel leftpanel08 = new JPanel();	
+		/************** 记录状态 ***************/
+		JPanel leftpanel08 = new JPanel();
 		leftpanel.add(leftpanel08);
-		
-		JLabel transferrecordisnewlabel = new JLabel("记录状态:  ");	
+
+		JLabel transferrecordisnewlabel = new JLabel("记录状态:  ");
 		transferrecordisnew = new JLabel(transfer.getTransferrecordisnew());
-		
+
 		leftpanel08.add(transferrecordisnewlabel);
 		leftpanel08.add(transferrecordisnew);
 
-		/**************出库凭证***************/
-		
-		JPanel leftpanel10 = new JPanel();
+		/************** 出库凭证 ***************/
+
+		leftpanel10 = new JPanel();
 		rightpanel.add(leftpanel10, BorderLayout.NORTH);
 
 		JLabel transfercertificatelabel = new JLabel("出库凭证(必填):  ");
@@ -245,16 +279,21 @@ public class NewTransferPage extends MyDialog {
 		leftpanel10.add(transfercertificatelabel);
 		leftpanel10.add(transfercertificate);
 		leftpanel10.add(selectbutton);
-		
+
 		rightpanel01 = new JPanel();
-		
-		JScrollPane rightscroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+
+		JScrollPane rightscroll = new JScrollPane(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		rightpanel01.setLayout(new BoxLayout(rightpanel01, BoxLayout.PAGE_AXIS));
+
+		rightpanel01
+				.setLayout(new BoxLayout(rightpanel01, BoxLayout.PAGE_AXIS));
 		rightpanel.add(rightscroll, BorderLayout.CENTER);
 
 		rightscroll.setViewportView(rightpanel01);
+
+		addImageToPanel(StrToFile.filesAnalytical(
+				transfer.getTransfercertificate(), "<"));
 
 	}
 
@@ -262,7 +301,7 @@ public class NewTransferPage extends MyDialog {
 	public void packData() {
 		// TODO Auto-generated method stub
 		transfer = new Transfer();
-		
+
 		transfer.setAssetid(asset.getAssetid());
 		transfer.setTransferid(Integer.parseInt(transferid.getText()));
 		transfer.setTransferdepartment(transferdepartment.getText());
@@ -277,30 +316,30 @@ public class NewTransferPage extends MyDialog {
 	@Override
 	public boolean isFull() {
 		// TODO Auto-generated method stub
-		if(transferdepartment.getText().equals("")){
-			
+		if (transferdepartment.getText().equals("")) {
+
 			return false;
-			
-		}else if(transferdate.getText().equals("")){
-			
+
+		} else if (transferdate.getText().equals("")) {
+
 			return false;
-			
-		}else if(transferhandler.getText().equals("")){
-			
+
+		} else if (transferhandler.getText().equals("")) {
+
 			return false;
-			
-		}else if(transferstatus.getText().equals("")){
-			
+
+		} else if (transferstatus.getText().equals("")) {
+
 			return false;
-			
-		}else if(transfercertificate.getText().equals("")){
-			
+
+		} else if (transfercertificate.getText().equals("")) {
+
 			return false;
-			
-		}else{
-			
+
+		} else {
+
 			return true;
-			
+
 		}
 	}
 
@@ -313,7 +352,21 @@ public class NewTransferPage extends MyDialog {
 	@Override
 	public void isEditable(boolean editable) {
 		// TODO Auto-generated method stub
-		
+		if (editable) {
+
+		} else {
+
+			transferdepartment.setEditable(false);
+			transferdate.setEditable(false);
+			transferhandler.setEditable(false);
+			transferremark.setEditable(false);
+			transferstatus.setEditable(false);
+			transfercertificate.setEditable(false);
+
+			cancel.setText("确定");
+			save.setVisible(false);
+			leftpanel10.setVisible(false);
+		}
 	}
 
 }

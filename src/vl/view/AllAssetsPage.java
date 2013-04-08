@@ -9,6 +9,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import vl.interfaces.MyTable;
 import dal.dal.AssetsDAO;
+import dal.dal.DeliverOutDAO;
+import dal.dal.MaintainDAO;
+import dal.dal.RentOutDAO;
+import dal.dal.TransferDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
 
@@ -104,11 +108,15 @@ public class AllAssetsPage extends MyTable {
 
 			if (assets.getAssetindeliverstatus().equals("出库")) {
 
+				JMenuItem deliverout = new JMenuItem("资产 " + o.getFormatID()
+						+ " 出库历史");
 				JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID()
 						+ " 转移");
 				JMenuItem returned = new JMenuItem("资产 " + o.getFormatID()
 						+ " 出库归还");
 
+				popupmenu.addSeparator();
+				popupmenu.add(deliverout);
 				popupmenu.addSeparator();
 				popupmenu.add(transfer);
 				popupmenu.add(returned);
@@ -123,23 +131,64 @@ public class AllAssetsPage extends MyTable {
 
 				});
 
+				deliverout.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						new AllAssetsDeliverOutPage(jframe, DeliverOutDAO
+								.getDeliverOutHistory(assets.getAssetid()));
+					}
+
+				});
+
 			}
 
 			else if (assets.getAssetindeliverstatus().equals("借出")) {
 
+				JMenuItem rentout = new JMenuItem("资产 " + o.getFormatID()
+						+ " 借出历史");
 				JMenuItem returned = new JMenuItem("资产 " + o.getFormatID()
 						+ " 借出归还");
 
 				popupmenu.addSeparator();
+				popupmenu.add(rentout);
+				popupmenu.addSeparator();
 				popupmenu.add(returned);
+
+				rentout.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						new AllAssetsRentOutPage(jframe, RentOutDAO
+								.getRentOutHistory(assets.getAssetid()));
+					}
+
+				});
 
 			} else if (assets.getAssetindeliverstatus().equals("转移")) {
 
+				JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID()
+						+ " 转移历史");
 				JMenuItem returned = new JMenuItem("资产 " + o.getFormatID()
 						+ " 转移归还");
 
 				popupmenu.addSeparator();
+				popupmenu.add(transfer);
+				popupmenu.addSeparator();
 				popupmenu.add(returned);
+
+				transfer.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						new AllAssetsTransferPage(jframe, TransferDAO
+								.getTransferHistory(assets.getAssetid()));
+					}
+
+				});
 
 			}
 
@@ -177,13 +226,28 @@ public class AllAssetsPage extends MyTable {
 			} else if (assets.getAssetrunningstatus().equals("维修")) {
 
 				JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID()
+						+ " 维修历史");
+				JMenuItem maintained = new JMenuItem("资产 " + o.getFormatID()
 						+ " 维修完毕");
 				JMenuItem discard = new JMenuItem("资产 " + o.getFormatID()
 						+ " 申请报废");
 
 				popupmenu.addSeparator();
 				popupmenu.add(maintain);
+				popupmenu.addSeparator();
+				popupmenu.add(maintained);
 				popupmenu.add(discard);
+
+				maintain.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						new AllAssetsMaintainPage(jframe, MaintainDAO
+								.getMaintainHistory(assets.getAssetid()));
+					}
+
+				});
 
 				discard.addActionListener(new ActionListener() {
 

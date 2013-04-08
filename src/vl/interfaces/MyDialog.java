@@ -3,6 +3,7 @@ package vl.interfaces;
 import java.awt.Dimension;
 import java.io.File;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,6 +20,8 @@ public abstract class MyDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	protected JPanel rightpanel01;
 	protected JPanel leftpanel10;
+	protected JButton cancel;
+	protected JButton save;
 	protected File[] files;
 	protected JFrame jframe;
 	protected Assets asset;

@@ -91,7 +91,7 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsDeliverOutPage(jframe);
+			new AllAssetsDeliverOutPage(jframe, DeliverOutDAO.getAllDeliverOut());
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
@@ -113,7 +113,7 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsDeliverOutPage(jframe);
+			new AllAssetsDeliverOutPage(jframe, DeliverOutDAO.getAllDeliverOut());
 		} else {
 			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
@@ -135,7 +135,7 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsRentOutPage(jframe);
+			new AllAssetsRentOutPage(jframe, RentOutDAO.getAllRentOut());
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
@@ -157,7 +157,7 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsRentOutPage(jframe);
+			new AllAssetsRentOutPage(jframe, RentOutDAO.getAllRentOut());
 		} else {
 			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
@@ -179,7 +179,7 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsTransferPage(jframe);
+			new AllAssetsTransferPage(jframe, TransferDAO.getAllTransfer());
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
@@ -201,7 +201,7 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsTransferPage(jframe);
+			new AllAssetsTransferPage(jframe, TransferDAO.getAllTransfer());
 		} else {
 			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
@@ -219,7 +219,7 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsMaintainPage(jframe);
+			new AllAssetsMaintainPage(jframe,  MaintainDAO.getAllMaintain());
 			
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
@@ -238,7 +238,7 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsMaintainPage(jframe);
+			new AllAssetsMaintainPage(jframe,  MaintainDAO.getAllMaintain());
 			
 		} else {
 			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",

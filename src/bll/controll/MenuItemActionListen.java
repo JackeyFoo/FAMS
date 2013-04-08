@@ -3,6 +3,11 @@ package bll.controll;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+
+import dal.dal.DeliverOutDAO;
+import dal.dal.MaintainDAO;
+import dal.dal.RentOutDAO;
+import dal.dal.TransferDAO;
 import vl.view.AllAssetsDeliverOutPage;
 import vl.view.AllAssetsDiscardPage;
 import vl.view.AllAssetsInStoragePage;
@@ -37,22 +42,22 @@ public class MenuItemActionListen implements ActionListener {
         
         if(e.getActionCommand().equals("出库管理")){
 			
-        	new AllAssetsDeliverOutPage(jframe);
+        	new AllAssetsDeliverOutPage(jframe, DeliverOutDAO.getAllDeliverOut());
         	
 		}
         if(e.getActionCommand().equals("借出管理")){
 			
-        	new AllAssetsRentOutPage(jframe);
+        	new AllAssetsRentOutPage(jframe, RentOutDAO.getAllRentOut());
         	
 		} 
         if(e.getActionCommand().equals("转移管理")){
 			
-        	new AllAssetsTransferPage(jframe);
+        	new AllAssetsTransferPage(jframe, TransferDAO.getAllTransfer());
         	
 		} 
         if(e.getActionCommand().equals("维修管理")){
 			
-			new AllAssetsMaintainPage(jframe);
+			new AllAssetsMaintainPage(jframe,  MaintainDAO.getAllMaintain());
 			
 		} 
         if(e.getActionCommand().equals("报废管理")){

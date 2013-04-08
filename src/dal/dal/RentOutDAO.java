@@ -193,4 +193,70 @@ public class RentOutDAO {
 
 	}
 
+	
+	public static RentOut[] getRentOutHistory(int id) {
+
+		try {
+
+			RentOut[] rentouts;
+			int size = 0;
+			int i = 0;
+
+			
+			String sql = "SELECT COUNT(*) FROM RentOut WHERE AssetID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				size = result.getInt(1);
+			}
+
+			rentouts = new RentOut[size];
+
+			sql = "SELECT * FROM RentOut WHERE AssetID=?";
+			
+			statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+			
+			statement.setInt(1, id);
+			
+			result = statement.executeQuery();
+
+			while (result.next() && i < size) { // process results one row at a
+												// time
+
+				rentouts[i] = new RentOut();
+
+				rentouts[i].setRentoutid(result.getInt(1));
+				rentouts[i].setAssetid(result.getInt(2));
+				rentouts[i].setRentdepartment(result.getString(3));
+				rentouts[i].setRentstaff(result.getString(4));
+				rentouts[i].setRentdate(result.getString(5));
+				rentouts[i].setForecastreturndate(result.getString(6));
+				rentouts[i].setRenthandler(result.getString(7));
+				rentouts[i].setRentremark(result.getString(8));
+				rentouts[i].setRentcertificate(result.getString(9));
+				rentouts[i].setRentrecordisnew(result.getString(10));
+				rentouts[i].setReturndate(result.getString(11));
+				rentouts[i].setReturnstaff(result.getString(12));
+
+				i++;
+			}
+
+			return rentouts;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
+	}
 }
