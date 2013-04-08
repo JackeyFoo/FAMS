@@ -356,6 +356,7 @@ public class NewAssetPage extends MyDialog {
 
 			
 		}else{
+			
 			assettype.setEditable(false);
 			assetname.setEditable(false);
 			assetbrand.setEditable(false);
@@ -364,6 +365,7 @@ public class NewAssetPage extends MyDialog {
 			assetpurchasedate.setEditable(false);
 			assetmanufacturer.setEditable(false);
 			assetdealer.setEditable(false);
+			
 			cancel.setText("È·¶¨");
 			save.setVisible(false);
 			leftpanel10.setVisible(false);

@@ -13,6 +13,7 @@ import dal.dal.AssetsDAO;
 import dal.dal.DiscardDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
+import dal.model.Discard;
 
 public class AllAssetsDiscardPage extends MyTable{
 
@@ -35,13 +36,16 @@ public class AllAssetsDiscardPage extends MyTable{
 	}
 
 	@Override
-	public void initPopMenu(JPopupMenu popupmenu, ModelObject o) {
+	public void initPopMenu(JPopupMenu popupmenu, final ModelObject o) {
 		// TODO Auto-generated method stub
 		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
 		
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
+		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 报废详情");
 
 		popupmenu.add(asset);
+		popupmenu.addSeparator();
+		popupmenu.add(discard);
 		
 		asset.addActionListener(new ActionListener(){
 
@@ -52,6 +56,18 @@ public class AllAssetsDiscardPage extends MyTable{
 			}
 			
 		});
+		
+		discard.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewDiscardPage(jframe, assets, (Discard) o, false);
+			}
+			
+		});
 	}
+	
+
 
 }
