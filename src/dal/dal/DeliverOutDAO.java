@@ -13,8 +13,8 @@ public class DeliverOutDAO {
 
 			updateNewRecord(deliverout.getAssetid());
 
-			String sql = "insert into DeliverOut(AssetID, DeliverDepartment, DeliverStaff, DeliverDate,"
-					+ "DeliverAddress, DeliverRemark, DeliverCertificate, DeliverRecordIsNew) values(?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO DeliverOut(AssetID, DeliverDepartment, DeliverStaff, DeliverDate,"
+					+ "DeliverAddress, DeliverRemark, DeliverCertificate, DeliverRecordIsNew) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -31,6 +31,36 @@ public class DeliverOutDAO {
 			statement.execute();
 
 			AssetsDAO.deliverOut(deliverout.getAssetid());
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean update(DeliverOut deliverout) {
+
+		try {
+
+			String sql = "UPDATE DeliverOut SET DeliverDepartment=?, DeliverStaff=?, DeliverDate=?,"
+					+ "DeliverAddress=?, DeliverRemark=?, DeliverCertificate=?, DeliverRecordIsNew=? WHERE DeliverOutID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setString(1, deliverout.getDeliverdepartment());
+			statement.setString(2, deliverout.getDeliverstaff());
+			statement.setString(3, deliverout.getDeliverdate());
+			statement.setString(4, deliverout.getDeliveraddress());
+			statement.setString(5, deliverout.getDeliverremark());
+			statement.setString(6, deliverout.getDelivercertificate());
+			statement.setString(7, deliverout.getDeliverrecordisnew());
+			statement.setInt(8, deliverout.getDeliveroutid());
+			
+			statement.execute();
 
 			return true;
 

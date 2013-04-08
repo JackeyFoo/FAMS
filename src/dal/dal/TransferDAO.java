@@ -42,6 +42,37 @@ public class TransferDAO {
 		}
 	}
 
+	public static boolean update(Transfer transfer) {
+
+		try {
+
+			String sql = "UPDATE Transfer SET TransferDepartment=?, TransferDate=?, TransferHandler=?,"
+					+ "TransferRemark=?, TransferCertificate=?, TransferStatus=?, TransferRecordIsNew=? "
+					+ "WHERE TransferID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setString(1, transfer.getTransferdepartment());
+			statement.setString(2, transfer.getTransferdate());
+			statement.setString(3, transfer.getTransferhandler());
+			statement.setString(4, transfer.getTransferremark());
+			statement.setString(5, transfer.getTransfercertificate());
+			statement.setString(6, transfer.getTransferstatus());
+			statement.setString(7, transfer.getTransferrecordisnew());
+			statement.setInt(8, transfer.getAssetid());
+
+			statement.execute();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	private static boolean updateNewRecord(int assetid) {
 
 		PreparedStatement statement;

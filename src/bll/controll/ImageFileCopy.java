@@ -38,15 +38,19 @@ public class ImageFileCopy {
 
 					resultpath += (outfile.getAbsolutePath() + "<");
 
-					FileChannel fcin = new FileInputStream(file).getChannel();
+					if(!outfile.exists()){
+						
+						FileChannel fcin = new FileInputStream(file).getChannel();
 
-					FileChannel fcout = new FileOutputStream(outfile)
-							.getChannel();
-					
-					fcin.transferTo(0, fcin.size(), fcout);
+						FileChannel fcout = new FileOutputStream(outfile)
+								.getChannel();
+						
+						fcin.transferTo(0, fcin.size(), fcout);
 
-					fcin.close();
-					fcout.close();
+						fcin.close();
+						fcout.close();
+					}	
+
 				}
 
 			}

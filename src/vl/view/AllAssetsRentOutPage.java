@@ -46,6 +46,7 @@ public class AllAssetsRentOutPage extends MyTable {
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
 		popupmenu.add(returned);
+		
 		asset.addActionListener(new ActionListener(){
 
 			@Override

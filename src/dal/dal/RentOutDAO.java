@@ -46,6 +46,42 @@ public class RentOutDAO {
 		}
 	}
 	
+	
+	public static boolean update(RentOut rentout) {
+		
+		try {
+			
+			String sql = "UPDATE RentOut SET RentDepartment=?, RentStaff=?, RentDate=?,"
+				+ "ForeCastReturnDate=?, RentHandler=?, RentRemark=?, RentCertificate=?, RentRecordIsNew=?, ReturnDate=?, "
+				+ "ReturnStaff=? WHERE RentOutID=?";
+			
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+			
+			
+			statement.setString(1, rentout.getRentdepartment());
+			statement.setString(2, rentout.getRentstaff());
+			statement.setString(3, rentout.getRentdate());
+			statement.setString(4, rentout.getForecastreturndate());
+			statement.setString(5, rentout.getRenthandler());
+			statement.setString(6, rentout.getRentremark());
+			statement.setString(7, rentout.getRentcertificate());
+			statement.setString(8, rentout.getRentrecordisnew());
+			statement.setString(9, rentout.getReturndate());
+			statement.setString(10, rentout.getReturndate());
+			statement.setInt(11, rentout.getRentoutid());
+			
+			statement.execute();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	private static boolean updateNewRecord(int assetid) {
 		
 		try {

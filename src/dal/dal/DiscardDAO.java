@@ -38,6 +38,32 @@ public class DiscardDAO {
 		}
 	}
 	
+	public static boolean update(Discard discard) {
+
+		try {
+			String sql = "UPDATE Discard SET DiscardDepartment=?, DiscardDate=?,"
+					+ "DiscardReason=?, DiscardCertificate=? WHERE DiscardID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setString(1, discard.getDiscarddepartment());
+			statement.setString(2, discard.getDiscarddate());
+			statement.setString(3, discard.getDiscardreason());
+			statement.setString(4, discard.getDiscardcertificate());
+			statement.setInt(4, discard.getDiscardid());
+
+			statement.execute();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	
 	public static int getID() {
 		int id = -1;

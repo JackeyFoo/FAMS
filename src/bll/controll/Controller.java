@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import vl.view.AllAssetsDeliverOutPage;
 import vl.view.AllAssetsInStoragePage;
 import vl.view.AllAssetsMaintainPage;
+import vl.view.AllAssetsPage;
 import vl.view.AllAssetsRentOutPage;
 import vl.view.AllAssetsTransferPage;
 import vl.view.NewAssetPage;
@@ -52,6 +53,28 @@ public class Controller {
 		}
 
 	}
+	
+	public static void updateAssetInfo(JFrame jframe, Assets asset,
+			File[] files, NewAssetPage page) {
+
+		String temp = new ImageFileCopy().copyFile(files, asset);
+
+		asset.setAssetcontract(temp);
+
+		if (AssetsDAO.update(asset)) {
+
+			JOptionPane.showMessageDialog(null, "数据更新成功", "SUCCESS",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			page.dispose();
+
+			new AllAssetsPage(jframe);
+		} else {
+			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
 
 	public static void saveNewDeliverOutInfo(JFrame jframe,
 			DeliverOut deliverout, File[] files, NewDeliverOutPage page) {
@@ -70,6 +93,28 @@ public class Controller {
 			new AllAssetsDeliverOutPage(jframe);
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+	
+	public static void updateDeliverOutInfo(JFrame jframe,
+			DeliverOut deliverout, File[] files, NewDeliverOutPage page) {
+
+		String temp = new ImageFileCopy().copyFile(files, deliverout);
+
+		deliverout.setDelivercertificate(temp);
+
+		if (DeliverOutDAO.update(deliverout)) {
+
+			JOptionPane.showMessageDialog(null, "数据更新成功", "SUCCESS",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			page.dispose();
+
+			new AllAssetsDeliverOutPage(jframe);
+		} else {
+			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
 		}
 
@@ -97,6 +142,28 @@ public class Controller {
 
 	}
 	
+	public static void updateRentOutInfo(JFrame jframe,
+			RentOut rentout, File[] files, NewRentOutPage page) {
+
+		String temp = new ImageFileCopy().copyFile(files, rentout);
+
+		rentout.setRentcertificate(temp);
+
+		if (RentOutDAO.update(rentout)) {
+
+			JOptionPane.showMessageDialog(null, "数据更新成功", "SUCCESS",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			page.dispose();
+
+			new AllAssetsRentOutPage(jframe);
+		} else {
+			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+	
 	public static void saveNewTransferInfo(JFrame jframe,
 			Transfer transfer, File[] files, NewTransferPage page) {
 
@@ -114,6 +181,28 @@ public class Controller {
 			new AllAssetsTransferPage(jframe);
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+	
+	public static void updateTransferInfo(JFrame jframe,
+			Transfer transfer, File[] files, NewTransferPage page) {
+
+		String temp = new ImageFileCopy().copyFile(files, transfer);
+
+		transfer.setTransfercertificate(temp);
+
+		if (TransferDAO.update(transfer)) {
+
+			JOptionPane.showMessageDialog(null, "数据更新成功", "SUCCESS",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			page.dispose();
+
+			new AllAssetsTransferPage(jframe);
+		} else {
+			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
 		}
 
@@ -138,6 +227,25 @@ public class Controller {
 
 	}
 	
+	public static void updateMaintainInfo(JFrame jframe,
+			Maintain maintain, NewMaintainPage page) {
+
+		if (MaintainDAO.update(maintain)) {
+
+			JOptionPane.showMessageDialog(null, "数据更新成功", "SUCCESS",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			page.dispose();
+
+			new AllAssetsMaintainPage(jframe);
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+	
 	public static void saveNewDiscardInfo(JFrame jframe,
 			Discard discard, File[] files, NewDiscardPage page) {
 
@@ -155,6 +263,28 @@ public class Controller {
 			//new AllAssetsTransferPage(jframe);
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
+					JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+	
+	public static void updateDiscardInfo(JFrame jframe,
+			Discard discard, File[] files, NewDiscardPage page) {
+
+		String temp = new ImageFileCopy().copyFile(files, discard);
+
+		discard.setDiscardcertificate(temp);
+
+		if (DiscardDAO.update(discard)) {
+
+			JOptionPane.showMessageDialog(null, "数据更新成功", "SUCCESS",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			page.dispose();
+
+			//new AllAssetsTransferPage(jframe);
+		} else {
+			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
 		}
 

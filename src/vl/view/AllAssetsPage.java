@@ -69,6 +69,92 @@ public class AllAssetsPage  extends MyTable{
 			}
 			
 		});
+		
+		if(assets.getAssetindeliverstatus().equals("库中")){
+			
+			JMenuItem deliverout = new JMenuItem("资产 " + o.getFormatID() + " 出库");
+			JMenuItem rentout = new JMenuItem("资产 " + o.getFormatID() + " 借出");
+			
+			popupmenu.addSeparator();
+			popupmenu.add(deliverout);
+			popupmenu.addSeparator();
+			popupmenu.add(rentout);
+			
+			deliverout.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					new NewDeliverOutPage(jframe, assets, null, true);
+				}
+				
+			});
+			
+			rentout.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					new NewRentOutPage(jframe, assets, null, true);
+				}
+				
+			});
+			
+		}else if(assets.getAssetindeliverstatus().equals("出库")){
+			
+			JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移");
+			JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
+			JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 申请维修");
+			JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 申请报废");
+			
+			popupmenu.addSeparator();
+			popupmenu.add(transfer);
+			popupmenu.add(returned);
+			popupmenu.addSeparator();
+			popupmenu.add(maintain);
+			popupmenu.add(discard);
+			
+			transfer.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					new NewTransferPage(jframe, assets, null, true);
+				}
+				
+			});
+			
+			maintain.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					new NewMaintainPage(jframe, assets, null, true);
+				}
+				
+			});
+			
+			discard.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					new NewDiscardPage(jframe, assets, null, true);
+				}
+				
+			});
+			
+			
+		}else if(assets.getAssetindeliverstatus().equals("借出")){
+			
+			JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
+			
+			popupmenu.addSeparator();
+			popupmenu.add(returned);
+			
+		}else if(assets.getAssetindeliverstatus().equals("库中")){
+			
+		}
 
 	}
 }

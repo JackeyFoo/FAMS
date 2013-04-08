@@ -122,24 +122,50 @@ public class NewAssetPage extends MyDialog {
 
 		});
 
-		save.addActionListener(new ActionListener() {
+		if(this.getTitle().equals("添加设备")){
+			
+			save.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				if (isFull()) {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					if (isFull()) {
 
-					packData();
-					
-					Controller.saveNewAssetInfo(jframe, asset, files, NewAssetPage.this);
-					
-				} else {
-					JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
+						packData();
+						
+						Controller.saveNewAssetInfo(jframe, asset, files, NewAssetPage.this);
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
-			}
 
-		});
+			});
+			
+		}else if(this.getTitle().equals("资产编辑")){
+			
+			save.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					if (isFull()) {
+
+						packData();
+						
+						Controller.updateAssetInfo(jframe, asset, files, NewAssetPage.this);
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
+
+			});
+			
+		}
+
 
 	}
 

@@ -42,6 +42,40 @@ public class MaintainDAO {
 			return false;
 		}
 	}
+	
+	public static boolean update(Maintain maintain) {
+
+		try {
+
+			String sql = "UPDATE Maintain SET MaintainDepartment=?, DownDate=?, MaintainHandler=?,"
+					+ "DownRemark=?, DownPhenomenon=?, MaintainProcess=?, DeviceStatus=?, MaintainCost=?, MaintainRecordIsNew=? "
+					+ "WHERE MaintainID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			
+			statement.setString(1, maintain.getMaintaindepartment());
+			statement.setString(2, maintain.getDowndate());
+			statement.setString(3, maintain.getMaintainhandler());
+			statement.setString(4, maintain.getDownremark());
+			statement.setString(5, maintain.getDownphenomenon());
+			statement.setString(6, maintain.getMaintainprocess());
+			statement.setString(7, maintain.getDevicestatus());
+			statement.setDouble(8, maintain.getMaintaincost());
+			statement.setString(9, maintain.getMaintainrecordisnew());
+			statement.setInt(10, maintain.getAssetid());
+
+			statement.execute();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	private static boolean updateNewRecord(int assetid) {
 
