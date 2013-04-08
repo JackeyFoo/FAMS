@@ -56,12 +56,23 @@ public class NewAssetPage extends MyDialog {
 	private JButton cancel;
 
 	public NewAssetPage(JFrame jframe, Assets a, boolean editable) {
-
-		super(jframe, "添加设备", false);
 		
+		super(jframe, false);
+
 		if(a == null){
+
+			this.setTitle("添加设备");
+
 			asset = new Assets();
+
 		}else{
+
+			if(editable){
+				this.setTitle("资产编辑");
+			}else{
+				this.setTitle("资产详情");
+			}
+
 			asset = a;
 		}
 		

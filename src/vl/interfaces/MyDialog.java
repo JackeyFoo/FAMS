@@ -23,8 +23,12 @@ public abstract class MyDialog extends JDialog {
 	protected JFrame jframe;
 	protected Assets asset;
 
-	public MyDialog(JFrame jframe, String str, boolean b) {
-		super(jframe, str, b);
+	public MyDialog(JFrame jframe, boolean b) {
+		super(jframe, b);
+	}
+
+	public MyDialog(JFrame jframe, String title, boolean b) {
+		super(jframe, title, b);
 	}
 
 	public abstract void initDialog();
