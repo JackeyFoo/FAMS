@@ -12,7 +12,7 @@ public class Assets implements ModelObject {
 	private String assetname = null;
 	private String assetbrand = null;
 	private String assetmodel = null;
-	private int assetno = 0;
+	private int assetno = 1;
 	private String assetpurchasedate = null;
 	private String assetManufacturer = null;
 	private String assetdealer = null;

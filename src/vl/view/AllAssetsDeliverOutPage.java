@@ -61,7 +61,7 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewAssetDetailPage(jframe, assets);
+				new NewAssetPage( jframe, assets ,false);
 			}
 			
 		});		

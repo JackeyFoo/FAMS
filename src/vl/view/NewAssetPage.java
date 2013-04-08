@@ -15,8 +15,11 @@ import vl.interfaces.MyDialog;
 import dal.model.Assets;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
+import bll.controll.StrToFile;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 public class NewAssetPage extends MyDialog {
 	
@@ -48,6 +51,10 @@ public class NewAssetPage extends MyDialog {
 	private JPanel contentpanel;
 	private JPanel controlpanel;
 
+	private JButton save;
+
+	private JButton cancel;
+
 	public NewAssetPage(JFrame jframe, Assets a, boolean editable) {
 
 		super(jframe, "添加设备", false);
@@ -66,7 +73,7 @@ public class NewAssetPage extends MyDialog {
 		setVisible(true);
 		setLayout(new BorderLayout());
 		initDialog();
-
+		isEditable(editable);
 		setVisible(true);
 
 	}
@@ -88,8 +95,8 @@ public class NewAssetPage extends MyDialog {
 
 	public void initControlPanel() {
 
-		JButton save = new JButton("保存");
-		JButton cancel = new JButton("取消");
+		save = new JButton("保存");
+		cancel = new JButton("取消");
 
 		controlpanel.add(save);
 		controlpanel.add(cancel);
@@ -199,7 +206,7 @@ public class NewAssetPage extends MyDialog {
 		leftpanel.add(leftpanel06);
 
 		JLabel nolabel = new JLabel("资产机号(必填):  ");
-		assetno = new JTextField(asset.getAssetno());
+		assetno = new JTextField(asset.getAssetno() + "");
 		assetno.setColumns(30);
 
 		leftpanel06.add(nolabel);
@@ -278,6 +285,7 @@ public class NewAssetPage extends MyDialog {
 		
 		rightpanel01 = new JPanel();
 		
+		
 		JScrollPane rightscroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
@@ -285,6 +293,9 @@ public class NewAssetPage extends MyDialog {
 		rightpanel.add(rightscroll, BorderLayout.CENTER);
 
 		rightscroll.setViewportView(rightpanel01);
+		
+		StrToFile.filesAnalytical(asset.getAssetcontract(),";");
+		addImageToPanel(StrToFile.filesAnalytical(asset.getAssetcontract(),"<"));
 		
 		//leftpanel10.setVisible(false);
 	}
@@ -337,10 +348,30 @@ public class NewAssetPage extends MyDialog {
 		assetcontract.setText(txt);
 	}
 
+
 	@Override
-	public void isEditable(boolean editable) {
+	public void isEditable(boolean editablejudge) {
 		// TODO Auto-generated method stub
+		if(editablejudge){
+
+			
+		}else{
+			assettype.setEditable(false);
+			assetname.setEditable(false);
+			assetbrand.setEditable(false);
+			assetmodel.setEditable(false);
+			assetno.setEditable(false);
+			assetpurchasedate.setEditable(false);
+			assetmanufacturer.setEditable(false);
+			assetdealer.setEditable(false);
+			cancel.setText("确定");
+			save.setVisible(false);
+			leftpanel10.setVisible(false);
+
+			
+		}
 		
 	}
+
 
 }

@@ -48,6 +48,16 @@ public class AllAssetsMaintainPage extends MyTable {
 		popupmenu.add(maintain);
 		popupmenu.add(discard);
 		
+		asset.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewAssetPage( jframe, assets ,false);
+			}
+			
+		});
+		
 		discard.addActionListener(new ActionListener(){
 
 			@Override
