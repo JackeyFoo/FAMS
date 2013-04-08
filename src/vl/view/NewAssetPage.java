@@ -331,10 +331,8 @@ public class NewAssetPage extends MyDialog {
 
 		rightscroll.setViewportView(rightpanel01);
 		
-		StrToFile.filesAnalytical(asset.getAssetcontract(),";");
 		addImageToPanel(StrToFile.filesAnalytical(asset.getAssetcontract(),"<"));
-		
-		//leftpanel10.setVisible(false);
+
 	}
 
 	public void packData() {

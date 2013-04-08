@@ -173,7 +173,7 @@ public class AssetsDAO {
 					.createStatement();
 
 			ResultSet result = select
-					.executeQuery("SELECT COUNT(*) FROM Assets");
+					.executeQuery("SELECT COUNT(*) FROM Assets WHERE AssetRunningStatus <> '±¨·Ï'");
 
 			while (result.next()) {
 				size = result.getInt(1);
@@ -182,7 +182,7 @@ public class AssetsDAO {
 			assets = new Assets[size];
 
 			result = select
-					.executeQuery("SELECT * FROM Assets");
+					.executeQuery("SELECT * FROM Assets WHERE AssetRunningStatus <> '±¨·Ï'");
 
 			while (result.next() && i < size) { // process results one row at a
 												// time

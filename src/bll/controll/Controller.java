@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import vl.view.AllAssetsDeliverOutPage;
+import vl.view.AllAssetsDiscardPage;
 import vl.view.AllAssetsInStoragePage;
 import vl.view.AllAssetsMaintainPage;
 import vl.view.AllAssetsPage;
@@ -260,7 +261,7 @@ public class Controller {
 
 			page.dispose();
 
-			//new AllAssetsTransferPage(jframe);
+			new AllAssetsDiscardPage(jframe);
 		} else {
 			JOptionPane.showMessageDialog(null, "数据保存失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);
@@ -282,7 +283,7 @@ public class Controller {
 
 			page.dispose();
 
-			//new AllAssetsTransferPage(jframe);
+			new AllAssetsDiscardPage(jframe);
 		} else {
 			JOptionPane.showMessageDialog(null, "数据更新失败", "FAILED",
 					JOptionPane.ERROR_MESSAGE);

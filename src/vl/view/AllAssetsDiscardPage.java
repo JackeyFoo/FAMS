@@ -41,7 +41,7 @@ public class AllAssetsDiscardPage extends MyTable{
 		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
 		
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
-		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 报废详情");
+		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 报废编辑");
 
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
@@ -62,7 +62,7 @@ public class AllAssetsDiscardPage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewDiscardPage(jframe, assets, (Discard) o, false);
+				new NewDiscardPage(jframe, assets, (Discard) o, true);
 			}
 			
 		});

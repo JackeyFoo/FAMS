@@ -51,7 +51,7 @@ public class DiscardDAO {
 			statement.setString(2, discard.getDiscarddate());
 			statement.setString(3, discard.getDiscardreason());
 			statement.setString(4, discard.getDiscardcertificate());
-			statement.setInt(4, discard.getDiscardid());
+			statement.setInt(5, discard.getDiscardid());
 
 			statement.execute();
 
@@ -127,9 +127,9 @@ public class DiscardDAO {
 				discards[i].setDiscardid(result.getInt(1));
 				discards[i].setAssetid(result.getInt(2));
 				discards[i].setDiscarddepartment(result.getString(3));
-				discards[i].setDiscarddate(result.getString(4));
-				discards[i].setDiscardreason(result.getString(5));
-				discards[i].setDiscardcertificate(result.getString(6));
+				discards[i].setDiscarddate(result.getString(5));
+				discards[i].setDiscardreason(result.getString(6));
+				discards[i].setDiscardcertificate(result.getString(7));
 				
 				i++;
 			}
