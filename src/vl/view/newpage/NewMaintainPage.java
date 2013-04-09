@@ -42,6 +42,7 @@ public class NewMaintainPage extends MyDialog {
 	private JTextField devicestatus;
 	private JTextField maintaincost;
 	private JLabel maintainrecordisnew;
+	private JTextField maintainfinisheddate;
 
 	/**
 	 * /** Create the dialog.
@@ -276,6 +277,17 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel10.add(maintaincostlabel);
 		leftpanel10.add(maintaincost);
 
+		/**************维修完成时间 ***************/
+		leftpanel10 = new JPanel();
+		leftpanel.add(leftpanel10);
+
+		JLabel maintainfinisheddatelabel = new JLabel("维修完成时间:  ");
+		maintainfinisheddate = new JTextField(maintain.getMaintainfinisheddate());
+		maintainfinisheddate.setColumns(30);
+
+		leftpanel10.add(maintainfinisheddatelabel);
+		leftpanel10.add(maintainfinisheddate);
+
 		/************** 记录状态 ***************/
 		JPanel leftpanel11 = new JPanel();
 		leftpanel.add(leftpanel11);
@@ -303,8 +315,7 @@ public class NewMaintainPage extends MyDialog {
 		maintain.setMaintainprocess(maintainprocess.getText());
 		maintain.setDevicestatus(devicestatus.getText());
 		maintain.setMaintaincost(Double.parseDouble(maintaincost.getText()));
-		maintain.setMaintainrecordisnew(maintainrecordisnew.getText());
-
+		maintain.setMaintainfinisheddate(maintainfinisheddate.getText());
 	}
 
 	@Override

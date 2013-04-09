@@ -13,8 +13,8 @@ public class MaintainDAO {
 			updateNewRecord(maintain.getAssetid());
 
 			String sql = "insert into Maintain(AssetID, MaintainDepartment, DownDate, MaintainHandler,"
-					+ "DownRemark, DownPhenomenon, MaintainProcess, DeviceStatus, MaintainCost, MaintainRecordIsNew) "
-					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "DownRemark, DownPhenomenon, MaintainProcess, DeviceStatus, MaintainCost, MaintainRecordIsNew, MaintainFinishedDate) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -29,6 +29,7 @@ public class MaintainDAO {
 			statement.setString(8, maintain.getDevicestatus());
 			statement.setDouble(9, maintain.getMaintaincost());
 			statement.setString(10, maintain.getMaintainrecordisnew());
+			statement.setString(11, maintain.getMaintainfinisheddate());
 
 			statement.execute();
 
@@ -42,19 +43,18 @@ public class MaintainDAO {
 			return false;
 		}
 	}
-	
+
 	public static boolean update(Maintain maintain) {
 
 		try {
 
 			String sql = "UPDATE Maintain SET MaintainDepartment=?, DownDate=?, MaintainHandler=?,"
-					+ "DownRemark=?, DownPhenomenon=?, MaintainProcess=?, DeviceStatus=?, MaintainCost=? "
+					+ "DownRemark=?, DownPhenomenon=?, MaintainProcess=?, DeviceStatus=?, MaintainCost=?, MaintainFinishedDate=? "
 					+ "WHERE MaintainID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
 
-			
 			statement.setString(1, maintain.getMaintaindepartment());
 			statement.setString(2, maintain.getDowndate());
 			statement.setString(3, maintain.getMaintainhandler());
@@ -63,7 +63,8 @@ public class MaintainDAO {
 			statement.setString(6, maintain.getMaintainprocess());
 			statement.setString(7, maintain.getDevicestatus());
 			statement.setDouble(8, maintain.getMaintaincost());
-			statement.setInt(9, maintain.getMaintainid());
+			statement.setString(9, maintain.getMaintainfinisheddate());
+			statement.setInt(10, maintain.getMaintainid());
 
 			statement.execute();
 
@@ -170,6 +171,7 @@ public class MaintainDAO {
 				maintains[i].setDevicestatus(result.getString(9));
 				maintains[i].setMaintaincost(result.getDouble(10));
 				maintains[i].setMaintainrecordisnew(result.getString(11));
+				maintains[i].setMaintainfinisheddate(result.getString(12));
 
 				i++;
 			}
@@ -193,7 +195,7 @@ public class MaintainDAO {
 			Maintain[] maintains;
 			int size = 0;
 			int i = 0;
-			
+
 			String sql = "SELECT COUNT(*) FROM Maintain WHERE AssetID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
@@ -210,12 +212,11 @@ public class MaintainDAO {
 			maintains = new Maintain[size];
 
 			sql = "SELECT * FROM Maintain WHERE AssetID=?";
-			
-			statement = SQLDBConnect.getSQLDBConection()
-					.prepareStatement(sql);
-			
+
+			statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
+
 			statement.setInt(1, id);
-			
+
 			result = statement.executeQuery();
 
 			while (result.next() && i < size) { // process results one row at a
@@ -234,6 +235,7 @@ public class MaintainDAO {
 				maintains[i].setDevicestatus(result.getString(9));
 				maintains[i].setMaintaincost(result.getDouble(10));
 				maintains[i].setMaintainrecordisnew(result.getString(11));
+				maintains[i].setMaintainfinisheddate(result.getString(12));
 
 				i++;
 			}

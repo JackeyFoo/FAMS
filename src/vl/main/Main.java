@@ -14,7 +14,7 @@ public class Main {
 				try {
 					
 					System.out.println(System.currentTimeMillis());
-					MainPage frame = new MainPage(100, 100, 1000, 600);
+					MainPage frame = new MainPage(100, 100, 1100, 600);
 					frame.setVisible(true);
 					System.out.println(System.currentTimeMillis());
 					

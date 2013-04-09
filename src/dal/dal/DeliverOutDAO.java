@@ -14,7 +14,7 @@ public class DeliverOutDAO {
 			updateNewRecord(deliverout.getAssetid());
 
 			String sql = "INSERT INTO DeliverOut(AssetID, DeliverDepartment, DeliverStaff, DeliverDate,"
-					+ "DeliverAddress, DeliverRemark, DeliverCertificate, DeliverRecordIsNew) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "DeliverAddress, DeliverRemark, DeliverCertificate, DeliverRecordIsNew, ReturnDate, ReturnStaff) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -27,6 +27,8 @@ public class DeliverOutDAO {
 			statement.setString(6, deliverout.getDeliverremark());
 			statement.setString(7, deliverout.getDelivercertificate());
 			statement.setString(8, deliverout.getDeliverrecordisnew());
+			statement.setString(9, deliverout.getReturndate());
+			statement.setString(10, deliverout.getReturnstaff());
 
 			statement.execute();
 
@@ -40,13 +42,13 @@ public class DeliverOutDAO {
 			return false;
 		}
 	}
-	
+
 	public static boolean update(DeliverOut deliverout) {
 
 		try {
 
 			String sql = "UPDATE DeliverOut SET DeliverDepartment=?, DeliverStaff=?, DeliverDate=?,"
-					+ "DeliverAddress=?, DeliverRemark=?, DeliverCertificate=? WHERE DeliverOutID=?";
+					+ "DeliverAddress=?, DeliverRemark=?, DeliverCertificate=?, ReturnDate=?, ReturnStaff=? WHERE DeliverOutID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -57,8 +59,10 @@ public class DeliverOutDAO {
 			statement.setString(4, deliverout.getDeliveraddress());
 			statement.setString(5, deliverout.getDeliverremark());
 			statement.setString(6, deliverout.getDelivercertificate());
-			statement.setInt(7, deliverout.getDeliveroutid());
-			
+			statement.setString(7, deliverout.getReturndate());
+			statement.setString(8, deliverout.getReturnstaff());
+			statement.setInt(9, deliverout.getDeliveroutid());
+
 			statement.execute();
 
 			return true;
@@ -179,7 +183,7 @@ public class DeliverOutDAO {
 		}
 
 	}
-	
+
 	public static DeliverOut[] getDeliverOutHistory(int id) {
 
 		try {
@@ -187,7 +191,7 @@ public class DeliverOutDAO {
 			DeliverOut[] deliverouts;
 			int size = 0;
 			int i = 0;
-			
+
 			String sql = "SELECT COUNT(*) FROM DeliverOut WHERE AssetID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
@@ -204,14 +208,13 @@ public class DeliverOutDAO {
 			deliverouts = new DeliverOut[size];
 
 			sql = "SELECT * FROM DeliverOut WHERE AssetID=?";
-			
-			statement = SQLDBConnect.getSQLDBConection()
-					.prepareStatement(sql);
-			
+
+			statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
+
 			statement.setInt(1, id);
-			
+
 			result = statement.executeQuery();
-			
+
 			while (result.next() && i < size) { // process results one row at a
 												// time
 

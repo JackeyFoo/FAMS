@@ -33,7 +33,8 @@ public class NewDeliverOutPage extends MyDialog {
 	private JTextField deliverremark;
 	private JTextField delivercertificate;
 	private JLabel deliverrecordisnew;
-
+	private JTextField returndate;
+	private JTextField returnstaff;
 	/**
 	 * Launch the application.
 	 */
@@ -246,6 +247,29 @@ public class NewDeliverOutPage extends MyDialog {
 
 		leftpanel07.add(deliverremarklabel);
 		leftpanel07.add(deliverremark);
+		
+
+		/**************** 归还日期 *************/
+		JPanel leftpanel11 = new JPanel();
+		leftpanel.add(leftpanel11);
+
+		JLabel returndatelabel = new JLabel("归还日期 :  ");
+		returndate = new JTextField(deliverout.getReturndate());
+		returndate.setColumns(30);
+
+		leftpanel11.add(returndatelabel);
+		leftpanel11.add(returndate);
+		
+		/************** 归还人员 ***************/
+		JPanel leftpanel12 = new JPanel();
+		leftpanel.add(leftpanel12);
+
+		JLabel returnstafflabel = new JLabel("归还人员:  ");
+		returnstaff = new JTextField(deliverout.getReturnstaff());
+		returnstaff.setColumns(30);
+
+		leftpanel12.add(returnstafflabel);
+		leftpanel12.add(returnstaff);
 
 		/************** 记录状态 ***************/
 		JPanel leftpanel08 = new JPanel();
@@ -304,6 +328,8 @@ public class NewDeliverOutPage extends MyDialog {
 		deliverout.setDeliveraddress(deliveraddress.getText());
 		deliverout.setDeliverremark(deliverremark.getText());
 		deliverout.setDeliverrecordisnew(deliverrecordisnew.getText());
+		deliverout.setReturndate(returndate.getText());
+		deliverout.setReturnstaff(returnstaff.getText());
 	}
 
 	@Override

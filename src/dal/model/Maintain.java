@@ -9,7 +9,6 @@ public class Maintain implements ModelObject {
 
 	private int assetid;
 	private int maintainid = 0;
-
 	private String maintaindepartment = null;
 	private String downdate = null;
 	private String maintainhandler = null;
@@ -19,27 +18,32 @@ public class Maintain implements ModelObject {
 	private String maintainrecordisnew = "×îÐÂ";
 	private double maintaincost = 0;
 	private String devicestatus = null;
+	private String maintainfinisheddate = null;
 
 	public Maintain() {
 
 	}
+	
 
 	public Maintain(int assetid, String maintaindepartment, String downdate,
-			String maintanhandler, String downremark, String downphenomenon,
+			String maintainhandler, String downremark, String downphenomenon,
 			String maintainprocess, String maintainrecordisnew,
-			int maintaincost, String devicestatus) {
+			double maintaincost, String devicestatus,
+			String maintainfinisheddate) {
 		super();
 		this.assetid = assetid;
 		this.maintaindepartment = maintaindepartment;
 		this.downdate = downdate;
-		this.maintainhandler = maintanhandler;
+		this.maintainhandler = maintainhandler;
 		this.downremark = downremark;
 		this.downphenomenon = downphenomenon;
 		this.maintainprocess = maintainprocess;
 		this.maintainrecordisnew = maintainrecordisnew;
 		this.maintaincost = maintaincost;
 		this.devicestatus = devicestatus;
+		this.maintainfinisheddate = maintainfinisheddate;
 	}
+
 
 	public int getMaintainid() {
 		return maintainid;
@@ -128,6 +132,15 @@ public class Maintain implements ModelObject {
 	public void setDevicestatus(String devicestatus) {
 		this.devicestatus = devicestatus;
 	}
+	
+	public String getMaintainfinisheddate() {
+		return maintainfinisheddate;
+	}
+
+	public void setMaintainfinisheddate(String maintainfinisheddate) {
+		this.maintainfinisheddate = maintainfinisheddate;
+	}
+
 
 	@Override
 	public String getFormatID() {
@@ -185,6 +198,10 @@ public class Maintain implements ModelObject {
 			break;
 		case 10:
 			result = this.getMaintainrecordisnew();
+			break;
+			
+		case 11:
+			result = this.getMaintainfinisheddate();
 			break;
 
 		}

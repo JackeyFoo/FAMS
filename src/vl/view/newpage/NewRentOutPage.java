@@ -38,7 +38,8 @@ public class NewRentOutPage extends MyDialog {
 	private JTextField rentremark;
 	private JLabel rentrecordisnew;
 	private JTextField rentcertificate;
-
+	private JTextField returndate;
+	private JTextField returnstaff;	
 	/**
 	 * Launch the application.
 	 */
@@ -258,6 +259,28 @@ public class NewRentOutPage extends MyDialog {
 
 		leftpanel08.add(rentremarklabel);
 		leftpanel08.add(rentremark);
+		
+		/**************** 归还日期 *************/
+		JPanel leftpanel11 = new JPanel();
+		leftpanel.add(leftpanel11);
+
+		JLabel returndatelabel = new JLabel("归还日期 :  ");
+		returndate = new JTextField(rentout.getReturndate());
+		returndate.setColumns(30);
+
+		leftpanel11.add(returndatelabel);
+		leftpanel11.add(returndate);
+		
+		/************** 归还人员 ***************/
+		JPanel leftpanel12 = new JPanel();
+		leftpanel.add(leftpanel12);
+
+		JLabel returnstafflabel = new JLabel("归还人员:  ");
+		returnstaff = new JTextField(rentout.getReturnstaff());
+		returnstaff.setColumns(30);
+
+		leftpanel12.add(returnstafflabel);
+		leftpanel12.add(returnstaff);
 
 		/************** 记录状态 ***************/
 		JPanel leftpanel09 = new JPanel();
@@ -317,6 +340,8 @@ public class NewRentOutPage extends MyDialog {
 		rentout.setRenthandler(renthandler.getText());
 		rentout.setRentremark(rentremark.getText());
 		rentout.setRentrecordisnew(rentrecordisnew.getText());
+		rentout.setReturndate(returndate.getText());
+		rentout.setReturnstaff(returnstaff.getText());
 	}
 
 	@Override

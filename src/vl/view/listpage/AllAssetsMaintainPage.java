@@ -22,7 +22,7 @@ public class AllAssetsMaintainPage extends MyTable {
 	public AllAssetsMaintainPage(JFrame j, Maintain[] maintains) {
 
 		col = new String[] { "维修ID", "资产ID", "维修部门", "故障日期", "经办人", "故障情况",
-				"故障现象", "维修过程", "设备状况", "维修费用", "记录状态" };
+				"故障现象", "维修过程", "设备状况", "维修费用", "记录状态", "维修完毕时间" };
 
 		this.jframe = j;
 

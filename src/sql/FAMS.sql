@@ -122,6 +122,7 @@ CREATE TABLE Maintain
 	DeviceStatus varchar(200), --设备状况
 	MaintainCost Decimal(9, 2), --维修费用
 	MaintainRecordIsNew varchar(10) NOT NULL, --记录是否最新，newest:最新，no:否
+	MaintainFinishedDate varchar(200),
 
 	PRIMARY KEY (MaintainID),
 	FOREIGN KEY (AssetID) REFERENCES Assets(AssetID)
