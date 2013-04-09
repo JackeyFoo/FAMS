@@ -7,9 +7,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import bll.controll.NWEDialog;
 
 import vl.interfaces.MyDialog;
 import vl.view.listpage.AllAssetsPage;
@@ -74,7 +75,7 @@ public class IDSearchPage extends MyDialog {
 	}
 
 	public void initControlPanel() {
-		
+
 		JButton search = new JButton("查询");
 		JButton cancel = new JButton("关闭");
 		controlpanel.add(search);
@@ -88,13 +89,20 @@ public class IDSearchPage extends MyDialog {
 
 				if (!(assetidtype.getText().equals(""))) {
 
-					new AllAssetsPage(jf, Integer.parseInt(assetidtype
-							.getText()));
-					IDSearchPage.this.dispose();
+					try {
+
+						int id = Integer.parseInt(assetidtype.getText());
+
+						new AllAssetsPage(jf, id);
+
+						IDSearchPage.this.dispose();
+
+					} catch (Exception e) {
+						NWEDialog.inputError();
+					}
 
 				} else {
-					JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
+					NWEDialog.necessaryDataError();
 				}
 			}
 
@@ -120,10 +128,10 @@ public class IDSearchPage extends MyDialog {
 	@Override
 	public boolean isFull() {
 		// TODO Auto-generated method stub
-		
-//		if(assetidtype.getText()){
-//			
-//		}
+
+		// if(assetidtype.getText()){
+		//
+		// }
 		return false;
 	}
 
