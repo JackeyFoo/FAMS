@@ -44,13 +44,16 @@ public class AllAssetsTransferPage extends MyTable{
 		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
-		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移编辑");
+		JMenuItem transferedit = new JMenuItem("资产 " + o.getFormatID() + " 转移编辑");
+		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移");
 		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
 		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 申请维修");
 		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 申请报废");
 		
 
 		popupmenu.add(asset);
+		popupmenu.addSeparator();
+		popupmenu.add(transferedit);
 		popupmenu.addSeparator();
 		popupmenu.add(transfer);
 		popupmenu.addSeparator();
@@ -72,12 +75,22 @@ public class AllAssetsTransferPage extends MyTable{
 			
 		});
 		
-		transfer.addActionListener(new ActionListener(){
+		transferedit.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				new NewTransferPage(jframe, assets, (Transfer) o, true);
+			}
+			
+		});
+		
+		transfer.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewTransferPage(jframe, assets, null, true);
 			}
 			
 		});

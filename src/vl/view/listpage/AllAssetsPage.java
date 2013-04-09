@@ -128,17 +128,17 @@ public class AllAssetsPage extends MyTable {
 
 				JMenuItem deliverout = new JMenuItem("资产 " + o.getFormatID()
 						+ " 出库历史");
-				JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID()
-						+ " 转移");
 				JMenuItem returned = new JMenuItem("资产 " + o.getFormatID()
 						+ " 出库归还");
-
+				JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID()
+						+ " 转移");
+				
 				popupmenu.addSeparator();
 				popupmenu.add(deliverout);
 				popupmenu.addSeparator();
-				popupmenu.add(transfer);
-				popupmenu.addSeparator();
 				popupmenu.add(returned);
+				popupmenu.addSeparator();
+				popupmenu.add(transfer);
 
 				transfer.addActionListener(new ActionListener() {
 
@@ -189,6 +189,8 @@ public class AllAssetsPage extends MyTable {
 			} else if (assets.getAssetindeliverstatus().equals("转移")) {
 
 				JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID()
+						+ " 转移");
+				JMenuItem transferhis = new JMenuItem("资产 " + o.getFormatID()
 						+ " 转移历史");
 				JMenuItem returned = new JMenuItem("资产 " + o.getFormatID()
 						+ " 转移归还");
@@ -196,9 +198,21 @@ public class AllAssetsPage extends MyTable {
 				popupmenu.addSeparator();
 				popupmenu.add(transfer);
 				popupmenu.addSeparator();
+				popupmenu.add(transferhis);
+				popupmenu.addSeparator();
 				popupmenu.add(returned);
-
+				
 				transfer.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						new NewTransferPage(jframe, assets, null, true);
+					}
+
+				});
+
+				transferhis.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
