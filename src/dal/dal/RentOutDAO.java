@@ -52,7 +52,7 @@ public class RentOutDAO {
 		try {
 			
 			String sql = "UPDATE RentOut SET RentDepartment=?, RentStaff=?, RentDate=?,"
-				+ "ForeCastReturnDate=?, RentHandler=?, RentRemark=?, RentCertificate=?, RentRecordIsNew=?, ReturnDate=?, "
+				+ "ForeCastReturnDate=?, RentHandler=?, RentRemark=?, RentCertificate=?, ReturnDate=?, "
 				+ "ReturnStaff=? WHERE RentOutID=?";
 			
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
@@ -66,10 +66,9 @@ public class RentOutDAO {
 			statement.setString(5, rentout.getRenthandler());
 			statement.setString(6, rentout.getRentremark());
 			statement.setString(7, rentout.getRentcertificate());
-			statement.setString(8, rentout.getRentrecordisnew());
+			statement.setString(8, rentout.getReturndate());
 			statement.setString(9, rentout.getReturndate());
-			statement.setString(10, rentout.getReturndate());
-			statement.setInt(11, rentout.getRentoutid());
+			statement.setInt(10, rentout.getRentoutid());
 			
 			statement.execute();
 			

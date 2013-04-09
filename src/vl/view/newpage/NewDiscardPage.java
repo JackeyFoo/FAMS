@@ -1,4 +1,4 @@
-package vl.view;
+package vl.view.newpage;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -9,12 +9,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
+import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 import dal.model.Assets;
 import dal.model.Discard;
@@ -38,6 +38,7 @@ public class NewDiscardPage extends MyDialog {
 	private JTextField discarddate;
 	private JTextField discardreason;
 	private JTextField discardcertificate;
+
 	/**
 	 * Create the dialog.
 	 */
@@ -50,21 +51,21 @@ public class NewDiscardPage extends MyDialog {
 		this.asset = asset;
 
 		if (discard == null) {
-			
+
 			this.setTitle("资产报废");
-			
+
 			this.discard = new Discard();
-			
+
 		} else {
 
-			if(editable){
+			if (editable) {
 				this.setTitle("资产报废编辑");
-			}else{
+			} else {
 				this.setTitle("资产报废详情");
 			}
 
 			this.discard = discard;
-		
+
 		}
 
 		setResizable(false);
@@ -111,7 +112,7 @@ public class NewDiscardPage extends MyDialog {
 
 		});
 
-		if(this.getTitle().equals("资产报废")){
+		if (this.getTitle().equals("资产报废")) {
 			save.addActionListener(new ActionListener() {
 
 				@Override
@@ -125,13 +126,12 @@ public class NewDiscardPage extends MyDialog {
 								NewDiscardPage.this);
 
 					} else {
-						JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
-								JOptionPane.ERROR_MESSAGE);
+						NWEDialog.necessaryDataError();
 					}
 				}
 
 			});
-		}else if(this.getTitle().equals("资产报废编辑")){
+		} else if (this.getTitle().equals("资产报废编辑")) {
 			save.addActionListener(new ActionListener() {
 
 				@Override
@@ -145,8 +145,7 @@ public class NewDiscardPage extends MyDialog {
 								NewDiscardPage.this);
 
 					} else {
-						JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
-								JOptionPane.ERROR_MESSAGE);
+						NWEDialog.necessaryDataError();
 					}
 				}
 
@@ -280,8 +279,14 @@ public class NewDiscardPage extends MyDialog {
 			return false;
 		} else if (discardreason.getText().equals("")) {
 			return false;
-		} else if (discardcertificate.getText().equals("")) {
-			return false;
+		} else if (discard.getDiscardcertificate() == null) {
+			
+			if (discardcertificate.getText().equals("")) {
+				return false;
+			} else {
+				return true;
+			}
+			
 		} else {
 			return true;
 		}
@@ -296,15 +301,13 @@ public class NewDiscardPage extends MyDialog {
 	@Override
 	public void isEditable(boolean editable) {
 		// TODO Auto-generated method stub
-		if(editable){
+		if (editable) {
 
-
-		}else{
+		} else {
 
 			discarddepartment.setEditable(false);
 			discarddate.setEditable(false);
 			discardreason.setEditable(false);
-
 
 			cancel.setText("确定");
 			save.setVisible(false);

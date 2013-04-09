@@ -48,7 +48,7 @@ public class MaintainDAO {
 		try {
 
 			String sql = "UPDATE Maintain SET MaintainDepartment=?, DownDate=?, MaintainHandler=?,"
-					+ "DownRemark=?, DownPhenomenon=?, MaintainProcess=?, DeviceStatus=?, MaintainCost=?, MaintainRecordIsNew=? "
+					+ "DownRemark=?, DownPhenomenon=?, MaintainProcess=?, DeviceStatus=?, MaintainCost=? "
 					+ "WHERE MaintainID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
@@ -63,8 +63,7 @@ public class MaintainDAO {
 			statement.setString(6, maintain.getMaintainprocess());
 			statement.setString(7, maintain.getDevicestatus());
 			statement.setDouble(8, maintain.getMaintaincost());
-			statement.setString(9, maintain.getMaintainrecordisnew());
-			statement.setInt(10, maintain.getAssetid());
+			statement.setInt(9, maintain.getMaintainid());
 
 			statement.execute();
 

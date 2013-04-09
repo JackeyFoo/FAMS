@@ -1,4 +1,4 @@
-package vl.view;
+package vl.view.newpage;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -7,7 +7,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -15,6 +14,7 @@ import vl.interfaces.MyDialog;
 import dal.model.Assets;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
+import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 
 import java.awt.event.ActionEvent;
@@ -133,8 +133,7 @@ public class NewAssetPage extends MyDialog {
 						Controller.saveNewAssetInfo(jframe, asset, files, NewAssetPage.this);
 						
 					} else {
-						JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
-								JOptionPane.ERROR_MESSAGE);
+						NWEDialog.necessaryDataError();
 					}
 				}
 
@@ -154,8 +153,7 @@ public class NewAssetPage extends MyDialog {
 						Controller.updateAssetInfo(jframe, asset, files, NewAssetPage.this);
 						
 					} else {
-						JOptionPane.showMessageDialog(null, "请填写必要的数据", "ERROR",
-								JOptionPane.ERROR_MESSAGE);
+						NWEDialog.necessaryDataError();
 					}
 				}
 

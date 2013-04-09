@@ -46,7 +46,7 @@ public class DeliverOutDAO {
 		try {
 
 			String sql = "UPDATE DeliverOut SET DeliverDepartment=?, DeliverStaff=?, DeliverDate=?,"
-					+ "DeliverAddress=?, DeliverRemark=?, DeliverCertificate=?, DeliverRecordIsNew=? WHERE DeliverOutID=?";
+					+ "DeliverAddress=?, DeliverRemark=?, DeliverCertificate=? WHERE DeliverOutID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -57,8 +57,7 @@ public class DeliverOutDAO {
 			statement.setString(4, deliverout.getDeliveraddress());
 			statement.setString(5, deliverout.getDeliverremark());
 			statement.setString(6, deliverout.getDelivercertificate());
-			statement.setString(7, deliverout.getDeliverrecordisnew());
-			statement.setInt(8, deliverout.getDeliveroutid());
+			statement.setInt(7, deliverout.getDeliveroutid());
 			
 			statement.execute();
 

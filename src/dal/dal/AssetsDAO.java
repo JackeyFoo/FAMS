@@ -220,7 +220,7 @@ public class AssetsDAO {
 	public static Assets getAsset(int id) {
 
 		try {
-			Assets asset = new Assets();
+			Assets asset = null;
 
 			String sql = "SELECT * FROM Assets WHERE AssetID=?";
 
@@ -233,7 +233,8 @@ public class AssetsDAO {
 
 			while (result.next()) { // process results one row at a
 									// time
-
+				asset = new Assets();
+				
 				asset.setAssetid(result.getInt(1));
 				asset.setAssettype(result.getString(2));
 				asset.setAssetname(result.getString(3));

@@ -47,8 +47,7 @@ public class TransferDAO {
 		try {
 
 			String sql = "UPDATE Transfer SET TransferDepartment=?, TransferDate=?, TransferHandler=?,"
-					+ "TransferRemark=?, TransferCertificate=?, TransferStatus=?, TransferRecordIsNew=? "
-					+ "WHERE TransferID=?";
+					+ "TransferRemark=?, TransferCertificate=?, TransferStatus=? WHERE TransferID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
@@ -59,8 +58,7 @@ public class TransferDAO {
 			statement.setString(4, transfer.getTransferremark());
 			statement.setString(5, transfer.getTransfercertificate());
 			statement.setString(6, transfer.getTransferstatus());
-			statement.setString(7, transfer.getTransferrecordisnew());
-			statement.setInt(8, transfer.getAssetid());
+			statement.setInt(7, transfer.getTransferid());
 
 			statement.execute();
 

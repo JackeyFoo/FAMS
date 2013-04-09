@@ -1,25 +1,28 @@
-package vl.view;
+package vl.view.listpage;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import vl.interfaces.MyTable;
+import vl.view.newpage.NewAssetPage;
+import vl.view.newpage.NewDiscardPage;
 import dal.dal.AssetsDAO;
+import dal.dal.DiscardDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
-import vl.interfaces.MyTable;
+import dal.model.Discard;
 
+public class AllAssetsDiscardPage extends MyTable{
 
-public class AllAssetsInStoragePage extends MyTable{
-	
-
-	public AllAssetsInStoragePage(JFrame j) {
+	public AllAssetsDiscardPage(JFrame j) {
 		
-		col = new String[] { "资产ID", "资产类型", "资产名称", "资产品牌",
-				"资产型号", "资产机号", "资产购入日期", "资产生产商", "资产经销商", "资产库存状态", "资产运行状态" };
+		col = new String[] { "报废ID", "资产ID", "报废部门", "报废时间",
+				"报废原因"};
 		
 		this.jframe = j;
 
@@ -27,30 +30,24 @@ public class AllAssetsInStoragePage extends MyTable{
 
 		pane.setLayout(new BorderLayout());
 
-		mo = (ModelObject[]) AssetsDAO.getAllInStorage();
+		mo = (ModelObject[]) DiscardDAO.getAllDiscard();
 
 		initJTable(pane);
 
 		jframe.validate();
 	}
 
-
-
-	
+	@Override
 	public void initPopMenu(JPopupMenu popupmenu, final ModelObject o) {
-		
+		// TODO Auto-generated method stub
 		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
-
+		
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
-		JMenuItem deliverout = new JMenuItem("资产 " + o.getFormatID() + " 出库");
-		JMenuItem rentout = new JMenuItem("资产 " + o.getFormatID() + " 借出");
+		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 报废编辑");
 
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
-		popupmenu.add(deliverout);
-		popupmenu.addSeparator();
-		popupmenu.add(rentout);
-		
+		popupmenu.add(discard);
 		
 		asset.addActionListener(new ActionListener(){
 
@@ -62,27 +59,17 @@ public class AllAssetsInStoragePage extends MyTable{
 			
 		});
 		
-		
-		deliverout.addActionListener(new ActionListener(){
+		discard.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewDeliverOutPage(jframe, assets, null, true);
+				new NewDiscardPage(jframe, assets, (Discard) o, true);
 			}
 			
 		});
-		
-		rentout.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				new NewRentOutPage(jframe, assets, null, true);
-			}
-			
-		});
-
 	}
+	
+
 
 }

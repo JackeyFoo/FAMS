@@ -8,15 +8,15 @@ import dal.dal.DeliverOutDAO;
 import dal.dal.MaintainDAO;
 import dal.dal.RentOutDAO;
 import dal.dal.TransferDAO;
-import vl.view.AllAssetsDeliverOutPage;
-import vl.view.AllAssetsDiscardPage;
-import vl.view.AllAssetsInStoragePage;
-import vl.view.AllAssetsMaintainPage;
-import vl.view.AllAssetsPage;
-import vl.view.AllAssetsRentOutPage;
-import vl.view.AllAssetsTransferPage;
-import vl.view.NewAssetPage;
-import vl.view.IDSearchPage;
+import vl.view.listpage.AllAssetsDeliverOutPage;
+import vl.view.listpage.AllAssetsDiscardPage;
+import vl.view.listpage.AllAssetsInStoragePage;
+import vl.view.listpage.AllAssetsMaintainPage;
+import vl.view.listpage.AllAssetsPage;
+import vl.view.listpage.AllAssetsRentOutPage;
+import vl.view.listpage.AllAssetsTransferPage;
+import vl.view.newpage.NewAssetPage;
+import vl.view.searchpage.IDSearchPage;
 
 
 public class MenuItemActionListen implements ActionListener {

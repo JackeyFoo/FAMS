@@ -1,4 +1,4 @@
-package vl.view;
+package vl.view.listpage;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -12,6 +12,8 @@ import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.RentOut;
 import vl.interfaces.MyTable;
+import vl.view.newpage.NewAssetPage;
+import vl.view.newpage.NewRentOutPage;
 
 public class AllAssetsRentOutPage extends MyTable {
 

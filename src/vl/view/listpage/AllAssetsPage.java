@@ -1,4 +1,4 @@
-package vl.view;
+package vl.view.listpage;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -7,7 +7,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+
+import bll.controll.NWEDialog;
 import vl.interfaces.MyTable;
+import vl.view.newpage.NewAssetPage;
+import vl.view.newpage.NewDeliverOutPage;
+import vl.view.newpage.NewDiscardPage;
+import vl.view.newpage.NewMaintainPage;
+import vl.view.newpage.NewRentOutPage;
+import vl.view.newpage.NewTransferPage;
 import dal.dal.AssetsDAO;
 import dal.dal.DeliverOutDAO;
 import dal.dal.MaintainDAO;
@@ -30,6 +38,10 @@ public class AllAssetsPage extends MyTable {
 		pane.setLayout(new BorderLayout());
 
 		mo = (ModelObject[]) AssetsDAO.getAll();
+		
+		if(mo == null){
+			
+		}
 
 		initJTable(pane);
 
@@ -46,8 +58,14 @@ public class AllAssetsPage extends MyTable {
 		Container pane = jframe.getContentPane();
 
 		pane.setLayout(new BorderLayout());
-
-		mo = (ModelObject[]) new Assets[] { AssetsDAO.getAsset(id) };
+		
+		Assets asset = AssetsDAO.getAsset(id);
+		
+		if(asset == null){
+			NWEDialog.searchWarning();
+		}
+				
+		mo = (ModelObject[]) new Assets[] { asset };
 
 		initJTable(pane);
 
@@ -119,6 +137,7 @@ public class AllAssetsPage extends MyTable {
 				popupmenu.add(deliverout);
 				popupmenu.addSeparator();
 				popupmenu.add(transfer);
+				popupmenu.addSeparator();
 				popupmenu.add(returned);
 
 				transfer.addActionListener(new ActionListener() {
@@ -201,6 +220,7 @@ public class AllAssetsPage extends MyTable {
 
 				popupmenu.addSeparator();
 				popupmenu.add(maintain);
+				popupmenu.addSeparator();
 				popupmenu.add(discard);
 
 				maintain.addActionListener(new ActionListener() {
@@ -236,6 +256,7 @@ public class AllAssetsPage extends MyTable {
 				popupmenu.add(maintain);
 				popupmenu.addSeparator();
 				popupmenu.add(maintained);
+				popupmenu.addSeparator();
 				popupmenu.add(discard);
 
 				maintain.addActionListener(new ActionListener() {

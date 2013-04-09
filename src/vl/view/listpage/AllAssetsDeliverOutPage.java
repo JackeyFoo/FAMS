@@ -1,4 +1,4 @@
-package vl.view;
+package vl.view.listpage;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -8,18 +8,22 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import vl.interfaces.MyTable;
-import vl.view.NewTransferPage;
+import vl.view.newpage.NewAssetPage;
+import vl.view.newpage.NewDeliverOutPage;
+import vl.view.newpage.NewDiscardPage;
+import vl.view.newpage.NewMaintainPage;
+import vl.view.newpage.NewTransferPage;
 import dal.dal.AssetsDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
-import dal.model.Transfer;;
+import dal.model.DeliverOut;
 
-public class AllAssetsTransferPage extends MyTable{
+public class AllAssetsDeliverOutPage extends MyTable{
 
-	public AllAssetsTransferPage(JFrame j, Transfer[] transfers) {
+	public AllAssetsDeliverOutPage(JFrame j, DeliverOut[] deliverouts) {
 		
-		col = new String[] { "转移ID", "资产ID", "转移部门", "转移日期",
-				"经办人", "备注", "转移情况", "记录状态"};
+		col = new String[] { "出库ID", "资产ID", "领用部门", "领用人",
+				"领用日期", "存在地址", "备注", "记录状态", "归还日期", "归还人员"};
 		
 		this.jframe = j;
 
@@ -27,7 +31,7 @@ public class AllAssetsTransferPage extends MyTable{
 
 		pane.setLayout(new BorderLayout());
 
-		mo = transfers;
+		mo = deliverouts;
 
 		initJTable(pane);
 
@@ -41,7 +45,8 @@ public class AllAssetsTransferPage extends MyTable{
 		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
-		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移编辑");
+		JMenuItem deliverout = new JMenuItem("资产 " + o.getFormatID() + " 出库编辑");
+		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移");
 		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
 		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 申请维修");
 		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 申请报废");
@@ -49,15 +54,18 @@ public class AllAssetsTransferPage extends MyTable{
 
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
+		popupmenu.add(deliverout);
+		popupmenu.addSeparator();
 		popupmenu.add(transfer);
 		popupmenu.addSeparator();
 		popupmenu.add(returned);
 		popupmenu.addSeparator();
 		popupmenu.add(maintain);
+		popupmenu.addSeparator();
 		popupmenu.add(discard);
-		
 
 		
+
 		asset.addActionListener(new ActionListener(){
 
 			@Override
@@ -66,14 +74,25 @@ public class AllAssetsTransferPage extends MyTable{
 				new NewAssetPage( jframe, assets ,false);
 			}
 			
-		});
+		});	
+		
+		deliverout.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewDeliverOutPage( jframe, assets, (DeliverOut) o, true);
+			}
+			
+		});		
+
 		
 		transfer.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewTransferPage(jframe, assets, (Transfer) o, true);
+				new NewTransferPage(jframe, assets, null, true);
 			}
 			
 		});

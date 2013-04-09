@@ -1,4 +1,4 @@
-package vl.view;
+package vl.view.listpage;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -8,47 +8,59 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import vl.interfaces.MyTable;
+import vl.view.newpage.NewAssetPage;
+import vl.view.newpage.NewDiscardPage;
+import vl.view.newpage.NewMaintainPage;
+import vl.view.newpage.NewTransferPage;
 import dal.dal.AssetsDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
-import dal.model.Maintain;
+import dal.model.Transfer;;
 
+public class AllAssetsTransferPage extends MyTable{
 
-public class AllAssetsMaintainPage extends MyTable {
-
-	public AllAssetsMaintainPage(JFrame j, Maintain[] maintains) {
-
-		col = new String[] { "维修ID", "资产ID", "维修部门", "故障日期", "经办人", "故障情况",
-				"故障现象", "维修过程", "设备状况", "维修费用", "记录状态" };
-
+	public AllAssetsTransferPage(JFrame j, Transfer[] transfers) {
+		
+		col = new String[] { "转移ID", "资产ID", "转移部门", "转移日期",
+				"经办人", "备注", "转移情况", "记录状态"};
+		
 		this.jframe = j;
 
 		Container pane = jframe.getContentPane();
 
 		pane.setLayout(new BorderLayout());
 
-		mo = maintains;
+		mo = transfers;
 
 		initJTable(pane);
 
 		jframe.validate();
 	}
 
-	public void initPopMenu(JPopupMenu popupmenu, final ModelObject o) {
 
+
+	public void initPopMenu(JPopupMenu popupmenu, final ModelObject o) {
+		
 		final Assets assets = AssetsDAO.getAsset(o.getAssetid());
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
-		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 维修编辑");
-		JMenuItem maintained = new JMenuItem("资产 " + o.getFormatID() + " 维修完毕");
+		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移编辑");
+		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
+		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 申请维修");
 		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 申请报废");
+		
 
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
+		popupmenu.add(transfer);
+		popupmenu.addSeparator();
+		popupmenu.add(returned);
+		popupmenu.addSeparator();
 		popupmenu.add(maintain);
 		popupmenu.addSeparator();
-		popupmenu.add(maintained);
 		popupmenu.add(discard);
+		
+
 		
 		asset.addActionListener(new ActionListener(){
 
@@ -56,6 +68,26 @@ public class AllAssetsMaintainPage extends MyTable {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				new NewAssetPage( jframe, assets ,false);
+			}
+			
+		});
+		
+		transfer.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewTransferPage(jframe, assets, (Transfer) o, true);
+			}
+			
+		});
+		
+		maintain.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewMaintainPage(jframe, assets, null, true);
 			}
 			
 		});
@@ -69,15 +101,6 @@ public class AllAssetsMaintainPage extends MyTable {
 			}
 			
 		});
-		
-		maintain.addActionListener(new ActionListener(){
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				new NewMaintainPage(jframe, assets, (Maintain) o, true);
-			}
-			
-		});
 	}
 }

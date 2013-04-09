@@ -1,4 +1,4 @@
-package vl.view;
+package vl.view.newpage;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -9,13 +9,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import vl.interfaces.MyDialog;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
+import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 import dal.model.Assets;
 import dal.model.DeliverOut;
@@ -128,8 +128,7 @@ public class NewDeliverOutPage extends MyDialog {
 								files, NewDeliverOutPage.this);
 
 					} else {
-						JOptionPane.showMessageDialog(null, "请填写必要的数据",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+						NWEDialog.necessaryDataError();
 					}
 				}
 
@@ -148,8 +147,7 @@ public class NewDeliverOutPage extends MyDialog {
 								files, NewDeliverOutPage.this);
 
 					} else {
-						JOptionPane.showMessageDialog(null, "请填写必要的数据",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+						NWEDialog.necessaryDataError();
 					}
 				}
 
@@ -319,8 +317,12 @@ public class NewDeliverOutPage extends MyDialog {
 			return false;
 		} else if (deliveraddress.getText().equals("")) {
 			return false;
-		} else if (delivercertificate.getText().equals("")) {
-			return false;
+		} else if (deliverout.getDelivercertificate() == null) {
+			if(delivercertificate.getText().equals("")){
+				return false;
+			}else{
+				return true;
+			}
 		} else {
 			return true;
 		}

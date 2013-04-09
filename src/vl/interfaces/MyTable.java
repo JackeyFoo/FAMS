@@ -45,8 +45,6 @@ public abstract class MyTable {
 				if (SwingUtilities.isLeftMouseButton(e)
 						&& e.getClickCount() > 1) {
 
-					System.out.println("double left click");
-
 				} else if (SwingUtilities.isRightMouseButton(e)) {
 
 					JTable table = (JTable) e.getComponent();
@@ -60,7 +58,9 @@ public abstract class MyTable {
 
 					JPopupMenu popupmenu = new JPopupMenu();
 
-					initPopMenu(popupmenu, mo[row]);
+					if(mo[row] != null){
+						initPopMenu(popupmenu, mo[row]);
+					}
 
 					popupmenu.show(e.getComponent(), e.getX(), e.getY());
 

@@ -1,4 +1,4 @@
-package vl.view;
+package vl.view.newpage;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -9,12 +9,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
+import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 import vl.interfaces.MyDialog;
 import dal.model.Assets;
@@ -130,8 +130,7 @@ public class NewRentOutPage extends MyDialog {
 								NewRentOutPage.this);
 
 					} else {
-						JOptionPane.showMessageDialog(null, "请填写必要的数据",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+						NWEDialog.necessaryDataError();
 					}
 				}
 
@@ -150,8 +149,7 @@ public class NewRentOutPage extends MyDialog {
 								NewRentOutPage.this);
 
 					} else {
-						JOptionPane.showMessageDialog(null, "请填写必要的数据",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+						NWEDialog.necessaryDataError();
 					}
 				}
 
@@ -335,8 +333,14 @@ public class NewRentOutPage extends MyDialog {
 			return false;
 		} else if (renthandler.getText().equals("")) {
 			return false;
-		} else if (rentcertificate.getText().equals("")) {
-			return false;
+		} else if ((rentout.getRentcertificate() == null)) {
+			
+			if(rentcertificate.getText().equals("")){
+				return false;
+			}else{
+				return true;
+			}
+			
 		} else {
 			return true;
 		}
