@@ -8,9 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import bll.controll.NWEDialog;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 import vl.view.listpage.AllAssetsPage;
 
 public class IDSearchPage extends MyDialog {
@@ -96,11 +96,11 @@ public class IDSearchPage extends MyDialog {
 						IDSearchPage.this.dispose();
 
 					} catch (Exception e) {
-						NWEDialog.inputError();
+						NWEDialog.inputError(IDSearchPage.this);
 					}
 
 				} else {
-					NWEDialog.necessaryDataError();
+					NWEDialog.necessaryDataError(IDSearchPage.this);
 				}
 			}
 

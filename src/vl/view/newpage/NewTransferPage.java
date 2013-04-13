@@ -13,10 +13,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
-import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 import dal.model.Assets;
 import dal.model.Transfer;
 
@@ -132,7 +132,7 @@ public class NewTransferPage extends MyDialog {
 								NewTransferPage.this);
 
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewTransferPage.this);
 					}
 				}
 
@@ -151,7 +151,7 @@ public class NewTransferPage extends MyDialog {
 								NewTransferPage.this);
 
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewTransferPage.this);
 					}
 				}
 

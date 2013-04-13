@@ -2,6 +2,8 @@ package bll.controll;
 
 import java.io.File;
 import vl.interfaces.MyJFrame;
+import vl.main.Main;
+import vl.util.NWEDialog;
 import vl.view.listpage.AllAssetsDeliverOutPage;
 import vl.view.listpage.AllAssetsDiscardPage;
 import vl.view.listpage.AllAssetsInStoragePage;
@@ -39,13 +41,13 @@ public class Controller {
 
 		if (AssetsDAO.insert(asset)) {
 			
-			NWEDialog.dataSaveSuccess();
+			NWEDialog.dataSaveSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsInStoragePage(jframe);
 		} else {
-			NWEDialog.dataSaveFailed();
+			NWEDialog.dataSaveFailed(page);
 		}
 
 	}
@@ -59,13 +61,13 @@ public class Controller {
 
 		if (AssetsDAO.update(asset)) {
 
-			NWEDialog.dataUpdateSuccess();
+			NWEDialog.dataUpdateSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsPage(jframe);
 		} else {
-			NWEDialog.dataUpdateFailed();
+			NWEDialog.dataUpdateFailed(page);
 		}
 
 	}
@@ -79,13 +81,13 @@ public class Controller {
 
 		if (DeliverOutDAO.insert(deliverout)) {
 
-			NWEDialog.dataSaveSuccess();
+			NWEDialog.dataSaveSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsDeliverOutPage(jframe, DeliverOutDAO.getAllDeliverOut());
 		} else {
-			NWEDialog.dataSaveFailed();
+			NWEDialog.dataSaveFailed(page);
 		}
 
 	}
@@ -99,13 +101,13 @@ public class Controller {
 
 		if (DeliverOutDAO.update(deliverout)) {
 
-			NWEDialog.dataUpdateSuccess();
+			NWEDialog.dataUpdateSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsDeliverOutPage(jframe, DeliverOutDAO.getAllDeliverOut());
 		} else {
-			NWEDialog.dataUpdateFailed();
+			NWEDialog.dataUpdateFailed(page);
 		}
 
 	}
@@ -119,13 +121,13 @@ public class Controller {
 
 		if (RentOutDAO.insert(rentout)) {
 
-			NWEDialog.dataSaveSuccess();
+			NWEDialog.dataSaveSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsRentOutPage(jframe, RentOutDAO.getAllRentOut());
 		} else {
-			NWEDialog.dataSaveFailed();
+			NWEDialog.dataSaveFailed(page);
 		}
 
 	}
@@ -139,13 +141,13 @@ public class Controller {
 
 		if (RentOutDAO.update(rentout)) {
 
-			NWEDialog.dataUpdateSuccess();
+			NWEDialog.dataUpdateSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsRentOutPage(jframe, RentOutDAO.getAllRentOut());
 		} else {
-			NWEDialog.dataUpdateFailed();
+			NWEDialog.dataUpdateFailed(page);
 		}
 
 	}
@@ -159,13 +161,13 @@ public class Controller {
 
 		if (TransferDAO.insert(transfer)) {
 
-			NWEDialog.dataSaveSuccess();
+			NWEDialog.dataSaveSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsTransferPage(jframe, TransferDAO.getAllTransfer());
 		} else {
-			NWEDialog.dataSaveFailed();
+			NWEDialog.dataSaveFailed(page);
 		}
 
 	}
@@ -179,13 +181,13 @@ public class Controller {
 
 		if (TransferDAO.update(transfer)) {
 
-			NWEDialog.dataUpdateSuccess();
+			NWEDialog.dataUpdateSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsTransferPage(jframe, TransferDAO.getAllTransfer());
 		} else {
-			NWEDialog.dataUpdateFailed();
+			NWEDialog.dataUpdateFailed(page);
 		}
 
 	}
@@ -195,14 +197,14 @@ public class Controller {
 
 		if (MaintainDAO.insert(maintain)) {
 
-			NWEDialog.dataSaveSuccess();
+			NWEDialog.dataSaveSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsMaintainPage(jframe,  MaintainDAO.getAllMaintain());
 			
 		} else {
-			NWEDialog.dataSaveFailed();
+			NWEDialog.dataSaveFailed(page);
 		}
 
 	}
@@ -212,14 +214,14 @@ public class Controller {
 
 		if (MaintainDAO.update(maintain)) {
 
-			NWEDialog.dataUpdateSuccess();
+			NWEDialog.dataUpdateSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsMaintainPage(jframe,  MaintainDAO.getAllMaintain());
 			
 		} else {
-			NWEDialog.dataUpdateFailed();
+			NWEDialog.dataUpdateFailed(page);
 		}
 
 	}
@@ -233,13 +235,13 @@ public class Controller {
 
 		if (DiscardDAO.insert(discard)) {
 
-			NWEDialog.dataSaveSuccess();
+			NWEDialog.dataSaveSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsDiscardPage(jframe);
 		} else {
-			NWEDialog.dataSaveFailed();
+			NWEDialog.dataSaveFailed(page);
 		}
 
 	}
@@ -253,18 +255,26 @@ public class Controller {
 
 		if (DiscardDAO.update(discard)) {
 
-			NWEDialog.dataUpdateSuccess();
+			NWEDialog.dataUpdateSuccess(page);
 
 			page.dispose();
 
 			new AllAssetsDiscardPage(jframe);
 		} else {
-			NWEDialog.dataUpdateFailed();
+			NWEDialog.dataUpdateFailed(page);
 		}
 
 	}
 	
-	public static void showScanResult(){
+	public static void showScanResult(String msg){
+		if(NWEDialog.showScan(msg)){
+			new AllAssetsPage(Main.mainpage, Integer.parseInt(msg));
+		}
+	}
+	
+	public static Assets getAssets(String msg){
+		Assets assets = AssetsDAO.getAsset(Integer.parseInt(msg));
 		
+		return assets;
 	}
 }

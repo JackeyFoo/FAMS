@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import bll.controll.BarcodeCreator;
-import bll.controll.NWEDialog;
 import vl.interfaces.MyJFrame;
 import vl.interfaces.MyTable;
+import vl.util.NWEDialog;
 import vl.view.newpage.NewAssetPage;
 import vl.view.newpage.NewDeliverOutPage;
 import vl.view.newpage.NewDiscardPage;
@@ -52,7 +52,7 @@ public class AllAssetsPage extends MyTable {
 		Assets asset = AssetsDAO.getAsset(id);
 		
 		if(asset == null){
-			NWEDialog.searchWarning();
+			NWEDialog.searchWarning(jframe);
 		}
 				
 		mo = (ModelObject[]) new Assets[] { asset };

@@ -13,9 +13,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import bll.controll.NWEDialog;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 
 public class AdvancedSearchPage extends MyDialog {
 
@@ -91,7 +91,7 @@ public class AdvancedSearchPage extends MyDialog {
 					// NewReturnPage.this);
 
 				} else {
-					NWEDialog.necessaryDataError();
+					NWEDialog.necessaryDataError(AdvancedSearchPage.this);
 				}
 			}
 

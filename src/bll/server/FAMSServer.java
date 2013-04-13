@@ -18,6 +18,7 @@ public class FAMSServer {
 				try {
 
 					if (serversocket != null) {
+
 						Socket clientsocket = serversocket.accept();
 
 						FAMSClient client = new FAMSClient(clientsocket);

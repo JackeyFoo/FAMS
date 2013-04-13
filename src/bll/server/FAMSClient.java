@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import bll.controll.Controller;
 
 public class FAMSClient {
 
@@ -22,6 +23,33 @@ public class FAMSClient {
 		this.clientsocket = csocket;
 
 	}
+	
+	private void getBufferedReader() {
+
+		try {
+			if (in == null) {
+				in = new BufferedReader(new InputStreamReader(
+						clientsocket.getInputStream()));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void getPrintWriter() {
+
+		try {
+			if (out == null) {
+				out = new PrintWriter(clientsocket.getOutputStream());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	public void initReadThread() {
 
@@ -30,41 +58,40 @@ public class FAMSClient {
 			public void run() {
 
 				try {
-					if (in == null) {
-						in = new BufferedReader(new InputStreamReader(
-								clientsocket.getInputStream()));
-					}
-
-					if (out == null) {
-						out = new PrintWriter(clientsocket.getOutputStream());
-					}
 					
-					if (outobject == null) {
-						outobject = new ObjectOutputStream(clientsocket.getOutputStream());
-					}
+					getBufferedReader();
 
 					if (clientsocket != null) {
 
 						do{
 
 							String cmd = in.readLine();
-
+				
 							if (cmd != null) {
-
-								System.out.println(cmd);
-
+								
 								if (cmd.startsWith("MAC:")
 										&& cmd.length() == 21) {
+									
+									getPrintWriter();
 
 									connect = true;
+									out.flush();
 									out.println("ACK");
 									out.flush();
 
 								} else if (cmd.startsWith("SCAN")) {
+									
+									System.out.println(cmd);
 
 									String msg = in.readLine();
 
-									System.out.println(msg);
+									Controller.showScanResult(msg);
+									
+								}else if (cmd.startsWith("GET")) {
+
+									String msg = in.readLine();
+
+									Controller.showScanResult(msg);
 									
 								}
 

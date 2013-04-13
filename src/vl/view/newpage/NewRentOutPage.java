@@ -13,10 +13,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
-import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 import dal.model.Assets;
 import dal.model.RentOut;
 
@@ -131,7 +131,7 @@ public class NewRentOutPage extends MyDialog {
 								NewRentOutPage.this);
 
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewRentOutPage.this);
 					}
 				}
 
@@ -150,7 +150,7 @@ public class NewRentOutPage extends MyDialog {
 								NewRentOutPage.this);
 
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewRentOutPage.this);
 					}
 				}
 

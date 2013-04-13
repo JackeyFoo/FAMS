@@ -3,7 +3,6 @@ package vl.view;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
@@ -20,6 +19,8 @@ public class MainPage extends MyJFrame {
 
 	/**
 	 * 
+	 * 
+	
 	 */
 	private static final long serialVersionUID = 1L;
 

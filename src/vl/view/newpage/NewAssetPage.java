@@ -11,15 +11,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 import dal.model.Assets;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
-import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 
 public class NewAssetPage extends MyDialog {
 
@@ -38,9 +37,9 @@ public class NewAssetPage extends MyDialog {
 	private JLabel assetrunningstatus;
 	private JTextField assetcontract;
 
-	//private JPanel  rightpanel01;
-	
-	//private File[] files;
+	// private JPanel rightpanel01;
+
+	// private File[] files;
 	/**
 	 * 
 	 */
@@ -49,28 +48,27 @@ public class NewAssetPage extends MyDialog {
 	private JPanel contentpanel;
 	private JPanel controlpanel;
 
-
 	public NewAssetPage(MyJFrame jframe, Assets a, boolean editable) {
-		
+
 		super(jframe, false);
 
-		if(a == null){
+		if (a == null) {
 
 			this.setTitle("添加资产");
 
 			asset = new Assets();
 
-		}else{
+		} else {
 
-			if(editable){
+			if (editable) {
 				this.setTitle("资产编辑");
-			}else{
+			} else {
 				this.setTitle("资产详情");
 			}
 
 			asset = a;
 		}
-		
+
 		this.jframe = jframe;
 
 		setResizable(false);
@@ -117,8 +115,8 @@ public class NewAssetPage extends MyDialog {
 
 		});
 
-		if(this.getTitle().equals("添加资产")){
-			
+		if (this.getTitle().equals("添加资产")) {
+
 			save.addActionListener(new ActionListener() {
 
 				@Override
@@ -127,18 +125,19 @@ public class NewAssetPage extends MyDialog {
 					if (isFull()) {
 
 						packData();
-						
-						Controller.saveNewAssetInfo(jframe, asset, files, NewAssetPage.this);
-						
+
+						Controller.saveNewAssetInfo(jframe, asset, files,
+								NewAssetPage.this);
+
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewAssetPage.this);
 					}
 				}
 
 			});
-			
-		}else if(this.getTitle().equals("资产编辑")){
-			
+
+		} else if (this.getTitle().equals("资产编辑")) {
+
 			save.addActionListener(new ActionListener() {
 
 				@Override
@@ -147,18 +146,18 @@ public class NewAssetPage extends MyDialog {
 					if (isFull()) {
 
 						packData();
-						
-						Controller.updateAssetInfo(jframe, asset, files, NewAssetPage.this);
-						
+
+						Controller.updateAssetInfo(jframe, asset, files,
+								NewAssetPage.this);
+
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewAssetPage.this);
 					}
 				}
 
 			});
-			
+
 		}
-
 
 	}
 
@@ -312,19 +311,21 @@ public class NewAssetPage extends MyDialog {
 		leftpanel10.add(contractlabel);
 		leftpanel10.add(assetcontract);
 		leftpanel10.add(selectbutton);
-		
+
 		rightpanel01 = new JPanel();
-		
-		
-		JScrollPane rightscroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+
+		JScrollPane rightscroll = new JScrollPane(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		rightpanel01.setLayout(new BoxLayout(rightpanel01, BoxLayout.PAGE_AXIS));
+
+		rightpanel01
+				.setLayout(new BoxLayout(rightpanel01, BoxLayout.PAGE_AXIS));
 		rightpanel.add(rightscroll, BorderLayout.CENTER);
 
 		rightscroll.setViewportView(rightpanel01);
-		
-		addImageToPanel(StrToFile.filesAnalytical(asset.getAssetcontract(),"<"));
+
+		addImageToPanel(StrToFile
+				.filesAnalytical(asset.getAssetcontract(), "<"));
 
 	}
 
@@ -366,6 +367,18 @@ public class NewAssetPage extends MyDialog {
 		} else if (assetrunningstatus.getText().equals("")) {
 			return false;
 		} else {
+
+			if (!assetno.getText().equals("")) {
+
+				try {
+					Integer.parseInt(assetno.getText());
+
+					return true;
+				} catch (Exception o) {
+					NWEDialog.inputError(NewAssetPage.this);
+					return false;
+				}
+			}
 			return true;
 		}
 	}
@@ -376,15 +389,13 @@ public class NewAssetPage extends MyDialog {
 		assetcontract.setText(txt);
 	}
 
-
 	@Override
 	public void isEditable(boolean editablejudge) {
 		// TODO Auto-generated method stub
-		if(editablejudge){
+		if (editablejudge) {
 
-			
-		}else{
-			
+		} else {
+
 			assettype.setEditable(false);
 			assetname.setEditable(false);
 			assetbrand.setEditable(false);
@@ -393,15 +404,13 @@ public class NewAssetPage extends MyDialog {
 			assetpurchasedate.setEditable(false);
 			assetmanufacturer.setEditable(false);
 			assetdealer.setEditable(false);
-			
+
 			cancel.setText("确定");
 			save.setVisible(false);
 			leftpanel10.setVisible(false);
 
-			
 		}
-		
-	}
 
+	}
 
 }

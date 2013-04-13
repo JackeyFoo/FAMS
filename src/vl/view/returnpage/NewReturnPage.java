@@ -9,10 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import bll.controll.NWEDialog;
 import dal.model.Assets;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 import dal.interfaces.ModelObject;
 
 public class NewReturnPage extends MyDialog {
@@ -89,7 +89,7 @@ public class NewReturnPage extends MyDialog {
 					// NewReturnPage.this);
 
 				} else {
-					NWEDialog.necessaryDataError();
+					NWEDialog.necessaryDataError(NewReturnPage.this);
 				}
 			}
 

@@ -3,10 +3,8 @@ package bll.controll;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 import javax.swing.AbstractButton;
 import javax.swing.JTable;
-
 import bll.server.FAMSServer;
 
 import dal.dal.DeliverOutDAO;
@@ -14,6 +12,7 @@ import dal.dal.MaintainDAO;
 import dal.dal.RentOutDAO;
 import dal.dal.TransferDAO;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 import vl.view.listpage.AllAssetsDeliverOutPage;
 import vl.view.listpage.AllAssetsDiscardPage;
 import vl.view.listpage.AllAssetsInStoragePage;
@@ -89,12 +88,12 @@ public class MenuItemActionListen implements ActionListener {
 			if (file != null && table != null) {
 
 				if (ExcelExportor.getInstance().export(table, file)) {
-					NWEDialog.exportSuccess();
+					NWEDialog.exportSuccess(jframe);
 				}
 
 			} else if (table == null) {
 
-				NWEDialog.dataNotFound();
+				NWEDialog.dataNotFound(jframe);
 
 			}
 		}

@@ -11,11 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import bll.controll.Controller;
-import bll.controll.NWEDialog;
 import dal.model.Assets;
 import dal.model.Maintain;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 
 public class NewMaintainPage extends MyDialog {
 
@@ -128,7 +128,7 @@ public class NewMaintainPage extends MyDialog {
 								NewMaintainPage.this);
 
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewMaintainPage.this);
 					}
 				}
 
@@ -147,7 +147,7 @@ public class NewMaintainPage extends MyDialog {
 								NewMaintainPage.this);
 
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewMaintainPage.this);
 					}
 				}
 
@@ -327,6 +327,17 @@ public class NewMaintainPage extends MyDialog {
 		} else if (maintainhandler.getText().equals("")) {
 			return false;
 		} else {
+			if (!maintaincost.getText().equals("")) {
+
+				try {
+					Double.parseDouble(maintaincost.getText());
+
+					return true;
+				} catch (Exception o) {
+					NWEDialog.inputError(NewMaintainPage.this);
+					return false;
+				}
+			}
 			return true;
 		}
 	}

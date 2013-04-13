@@ -9,11 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import bll.controll.NWEDialog;
 import dal.model.Assets;
 import dal.model.Maintain;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 
 public class MantainFinishedPage extends MyDialog {
 	private static final long serialVersionUID = 1L;
@@ -87,7 +87,7 @@ public class MantainFinishedPage extends MyDialog {
 					// NewReturnPage.this);
 
 				} else {
-					NWEDialog.necessaryDataError();
+					NWEDialog.necessaryDataError(MantainFinishedPage.this);
 				}
 			}
 

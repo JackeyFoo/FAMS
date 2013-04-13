@@ -13,9 +13,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
+import vl.util.NWEDialog;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
-import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 import dal.model.Assets;
 import dal.model.DeliverOut;
@@ -129,7 +129,7 @@ public class NewDeliverOutPage extends MyDialog {
 								files, NewDeliverOutPage.this);
 
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewDeliverOutPage.this);
 					}
 				}
 
@@ -148,7 +148,7 @@ public class NewDeliverOutPage extends MyDialog {
 								files, NewDeliverOutPage.this);
 
 					} else {
-						NWEDialog.necessaryDataError();
+						NWEDialog.necessaryDataError(NewDeliverOutPage.this);
 					}
 				}
 

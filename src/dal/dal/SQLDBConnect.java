@@ -8,7 +8,7 @@ public class SQLDBConnect {
 	private static Connection con;
 	
 	private final static String drivename = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private final static String dburl = "jdbc:sqlserver://localhost:1433; DatabaseName=FAMS";
+	private final static String dburl = "jdbc:sqlserver://localhost:1434; DatabaseName=FAMS";
 	
 	private final static String dbname = "sa";
 	private final static String dbpwd = "123456";

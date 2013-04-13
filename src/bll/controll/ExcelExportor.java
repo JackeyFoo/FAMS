@@ -14,6 +14,8 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 
+import vl.util.NWEDialog;
+
 public class ExcelExportor {
 
 	private static ExcelExportor exportor;
