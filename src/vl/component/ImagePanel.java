@@ -39,9 +39,8 @@ public class ImagePanel extends JPanel {
 
 					if (checkClickTime()) {
 						try {
-							
-							Desktop d = Desktop.getDesktop();
-							d.open(new File(imagpath));
+
+							Desktop.getDesktop().open(new File(imagpath));
 							
 						} catch (IOException ed) {
 							System.out.println(ed);

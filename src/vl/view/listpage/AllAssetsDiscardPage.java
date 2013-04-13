@@ -1,13 +1,10 @@
 package vl.view.listpage;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import vl.interfaces.MyJFrame;
 import vl.interfaces.MyTable;
 import vl.view.newpage.NewAssetPage;
 import vl.view.newpage.NewDiscardPage;
@@ -19,20 +16,16 @@ import dal.model.Discard;
 
 public class AllAssetsDiscardPage extends MyTable{
 
-	public AllAssetsDiscardPage(JFrame j) {
+	public AllAssetsDiscardPage(MyJFrame j) {
 		
 		col = new String[] { "报废ID", "资产ID", "报废部门", "报废时间",
 				"报废原因"};
 		
 		this.jframe = j;
 
-		Container pane = jframe.getContentPane();
-
-		pane.setLayout(new BorderLayout());
-
 		mo = (ModelObject[]) DiscardDAO.getAllDiscard();
 
-		initJTable(pane);
+		initJTable();
 
 		jframe.validate();
 	}

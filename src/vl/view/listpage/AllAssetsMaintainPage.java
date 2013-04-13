@@ -1,16 +1,15 @@
 package vl.view.listpage;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import vl.interfaces.MyJFrame;
 import vl.interfaces.MyTable;
 import vl.view.newpage.NewAssetPage;
 import vl.view.newpage.NewDiscardPage;
 import vl.view.newpage.NewMaintainPage;
+import vl.view.returnpage.MantainFinishedPage;
 import dal.dal.AssetsDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
@@ -19,20 +18,16 @@ import dal.model.Maintain;
 
 public class AllAssetsMaintainPage extends MyTable {
 
-	public AllAssetsMaintainPage(JFrame j, Maintain[] maintains) {
+	public AllAssetsMaintainPage(MyJFrame j, Maintain[] maintains) {
 
 		col = new String[] { "维修ID", "资产ID", "维修部门", "故障日期", "经办人", "故障情况",
 				"故障现象", "维修过程", "设备状况", "维修费用", "记录状态", "维修完毕时间" };
 
 		this.jframe = j;
 
-		Container pane = jframe.getContentPane();
-
-		pane.setLayout(new BorderLayout());
-
 		mo = maintains;
 
-		initJTable(pane);
+		initJTable();
 
 		jframe.validate();
 	}
@@ -82,5 +77,16 @@ public class AllAssetsMaintainPage extends MyTable {
 			}
 			
 		});
+		
+		maintained.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new MantainFinishedPage(jframe, assets, (Maintain) o);
+			}
+			
+		}); 
+		
 	}
 }

@@ -1,8 +1,7 @@
 package bll.controll;
 
 import java.io.File;
-
-import javax.swing.JFrame;
+import vl.interfaces.MyJFrame;
 import vl.view.listpage.AllAssetsDeliverOutPage;
 import vl.view.listpage.AllAssetsDiscardPage;
 import vl.view.listpage.AllAssetsInStoragePage;
@@ -31,7 +30,7 @@ import dal.model.Transfer;
 
 public class Controller {
 
-	public static void saveNewAssetInfo(JFrame jframe, Assets asset,
+	public static void saveNewAssetInfo(MyJFrame jframe, Assets asset,
 			File[] files, NewAssetPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, asset);
@@ -51,7 +50,7 @@ public class Controller {
 
 	}
 	
-	public static void updateAssetInfo(JFrame jframe, Assets asset,
+	public static void updateAssetInfo(MyJFrame jframe, Assets asset,
 			File[] files, NewAssetPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, asset);
@@ -71,7 +70,7 @@ public class Controller {
 
 	}
 
-	public static void saveNewDeliverOutInfo(JFrame jframe,
+	public static void saveNewDeliverOutInfo(MyJFrame jframe,
 			DeliverOut deliverout, File[] files, NewDeliverOutPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, deliverout);
@@ -91,7 +90,7 @@ public class Controller {
 
 	}
 	
-	public static void updateDeliverOutInfo(JFrame jframe,
+	public static void updateDeliverOutInfo(MyJFrame jframe,
 			DeliverOut deliverout, File[] files, NewDeliverOutPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, deliverout);
@@ -111,7 +110,7 @@ public class Controller {
 
 	}
 	
-	public static void saveNewRentOutInfo(JFrame jframe,
+	public static void saveNewRentOutInfo(MyJFrame jframe,
 			RentOut rentout, File[] files, NewRentOutPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, rentout);
@@ -131,7 +130,7 @@ public class Controller {
 
 	}
 	
-	public static void updateRentOutInfo(JFrame jframe,
+	public static void updateRentOutInfo(MyJFrame jframe,
 			RentOut rentout, File[] files, NewRentOutPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, rentout);
@@ -151,7 +150,7 @@ public class Controller {
 
 	}
 	
-	public static void saveNewTransferInfo(JFrame jframe,
+	public static void saveNewTransferInfo(MyJFrame jframe,
 			Transfer transfer, File[] files, NewTransferPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, transfer);
@@ -171,7 +170,7 @@ public class Controller {
 
 	}
 	
-	public static void updateTransferInfo(JFrame jframe,
+	public static void updateTransferInfo(MyJFrame jframe,
 			Transfer transfer, File[] files, NewTransferPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, transfer);
@@ -191,7 +190,7 @@ public class Controller {
 
 	}
 
-	public static void saveNewMaintainInfo(JFrame jframe,
+	public static void saveNewMaintainInfo(MyJFrame jframe,
 			Maintain maintain, NewMaintainPage page) {
 
 		if (MaintainDAO.insert(maintain)) {
@@ -208,7 +207,7 @@ public class Controller {
 
 	}
 	
-	public static void updateMaintainInfo(JFrame jframe,
+	public static void updateMaintainInfo(MyJFrame jframe,
 			Maintain maintain, NewMaintainPage page) {
 
 		if (MaintainDAO.update(maintain)) {
@@ -225,7 +224,7 @@ public class Controller {
 
 	}
 	
-	public static void saveNewDiscardInfo(JFrame jframe,
+	public static void saveNewDiscardInfo(MyJFrame jframe,
 			Discard discard, File[] files, NewDiscardPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, discard);
@@ -245,7 +244,7 @@ public class Controller {
 
 	}
 	
-	public static void updateDiscardInfo(JFrame jframe,
+	public static void updateDiscardInfo(MyJFrame jframe,
 			Discard discard, File[] files, NewDiscardPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, discard);
@@ -263,5 +262,9 @@ public class Controller {
 			NWEDialog.dataUpdateFailed();
 		}
 
+	}
+	
+	public static void showScanResult(){
+		
 	}
 }

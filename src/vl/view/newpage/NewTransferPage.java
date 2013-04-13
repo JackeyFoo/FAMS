@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,6 +16,7 @@ import bll.controll.Controller;
 import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 import vl.interfaces.MyDialog;
+import vl.interfaces.MyJFrame;
 import dal.model.Assets;
 import dal.model.Transfer;
 
@@ -46,7 +46,7 @@ public class NewTransferPage extends MyDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewTransferPage(JFrame jframe, Assets asset, Transfer transfer,
+	public NewTransferPage(MyJFrame jframe, Assets asset, Transfer transfer,
 			boolean editable) {
 
 		super(jframe, false);

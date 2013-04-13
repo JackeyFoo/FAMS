@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,6 +19,7 @@ import dal.model.Assets;
 import dal.model.Discard;
 
 import vl.interfaces.MyDialog;
+import vl.interfaces.MyJFrame;
 
 public class NewDiscardPage extends MyDialog {
 
@@ -42,7 +42,7 @@ public class NewDiscardPage extends MyDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewDiscardPage(JFrame jframe, Assets asset, Discard discard,
+	public NewDiscardPage(MyJFrame jframe, Assets asset, Discard discard,
 			boolean editable) {
 
 		super(jframe, false);

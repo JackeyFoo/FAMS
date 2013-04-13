@@ -5,12 +5,12 @@ import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import vl.interfaces.MyDialog;
+import vl.interfaces.MyJFrame;
 import dal.model.Assets;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
@@ -22,8 +22,6 @@ import java.awt.event.ActionListener;
 
 
 public class NewAssetPage extends MyDialog {
-	
-	private JFrame jframe;
 
 	private Assets asset;
 
@@ -52,7 +50,7 @@ public class NewAssetPage extends MyDialog {
 	private JPanel controlpanel;
 
 
-	public NewAssetPage(JFrame jframe, Assets a, boolean editable) {
+	public NewAssetPage(MyJFrame jframe, Assets a, boolean editable) {
 		
 		super(jframe, false);
 

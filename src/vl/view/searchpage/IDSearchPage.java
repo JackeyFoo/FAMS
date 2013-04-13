@@ -5,14 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import bll.controll.NWEDialog;
-
 import vl.interfaces.MyDialog;
+import vl.interfaces.MyJFrame;
 import vl.view.listpage.AllAssetsPage;
 
 public class IDSearchPage extends MyDialog {
@@ -22,7 +20,7 @@ public class IDSearchPage extends MyDialog {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	private JFrame jf;
+	private MyJFrame jf;
 	private JLabel assetid;
 	private JTextField assetidtype;
 	private JPanel contentpanel;
@@ -36,7 +34,7 @@ public class IDSearchPage extends MyDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public IDSearchPage(JFrame jframe) {
+	public IDSearchPage(MyJFrame jframe) {
 
 		super(jframe, "ËÑË÷", false);
 		this.jf = jframe;

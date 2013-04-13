@@ -1,17 +1,22 @@
 package vl.view;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
 import util.Utility;
 import vl.component.Jmenubar;
+import vl.interfaces.MyJFrame;
+import vl.view.terminalpage.TerminalPage;
 
-public class MainPage extends JFrame {
 
-	private Jmenubar menubar;
+public class MainPage extends MyJFrame {
 
 	/**
 	 * 
@@ -36,6 +41,8 @@ public class MainPage extends JFrame {
 
 			initMenuBar();
 
+			initSplitPane();
+			
 			Utility.initDataDir();
 	
 
@@ -55,7 +62,7 @@ public class MainPage extends JFrame {
 
 	}
 
-	public void initMenuBar() {
+	private void initMenuBar() {
 
 		menubar = new Jmenubar();
 
@@ -71,7 +78,7 @@ public class MainPage extends JFrame {
 		menubar.setJmenu(this, "数据操作", new String[] { "资产数据导入", "资产数据导出" },
 				null, "menuitem");
 
-		menubar.setJmenu(this, "系统设置", new String[] { "系统设置"},
+		menubar.setJmenu(this, "系统", new String[] { "系统设置", "启动服务器"},
 				null, "menuitem");
 
 		menubar.setJmenu(this, "窗口", new String[] { "终端管理窗口" }, null,
@@ -82,4 +89,30 @@ public class MainPage extends JFrame {
 		MainPage.this.setJMenuBar(menubar);
 
 	}
+	
+	private void initSplitPane(){
+		
+		Container pane = this.getContentPane();
+
+		pane.setLayout(new BorderLayout());
+		
+		splitpane = new JSplitPane();
+
+		pane.add(splitpane);
+		
+		splitpane.setResizeWeight(0.8);
+		
+		splitpane.setLeftComponent(null);	
+		splitpane.setRightComponent(null);
+		
+		initTerminalPage();
+	}	
+	
+	private void initTerminalPage(){
+		
+		terminalpane = new TerminalPage("终端管理", new ImageIcon(".\\src\\img\\terminal.png"));
+		
+	}
+
+	 
 }

@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import vl.interfaces.MyDialog;
+import vl.interfaces.MyJFrame;
 import bll.controll.ChooseImageActionListen;
 import bll.controll.Controller;
 import bll.controll.NWEDialog;
@@ -48,7 +48,7 @@ public class NewDeliverOutPage extends MyDialog {
 	private JPanel contentpanel;
 	private JPanel controlpanel;
 
-	public NewDeliverOutPage(JFrame jframe, Assets asset,
+	public NewDeliverOutPage(MyJFrame jframe, Assets asset,
 			DeliverOut deliverout, boolean editable) {
 
 		super(jframe, "×Ê²ú³ö¿â", false);

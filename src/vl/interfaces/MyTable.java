@@ -1,30 +1,22 @@
 package vl.interfaces;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
-
 import dal.interfaces.ModelObject;
-
 import vl.util.JTableModelValue;
 
 public abstract class MyTable {
 	
-	protected JFrame jframe;
+	protected MyJFrame jframe;
 	protected String[] col;
 	protected ModelObject[] mo;
 	
-	public void initJTable(Container pane) {
-
-		pane.removeAll();
+	public void initJTable() {
 
 		JTableModelValue values = new JTableModelValue(mo, col);
 
@@ -36,8 +28,6 @@ public abstract class MyTable {
 		JScrollPane scrollpane = new JScrollPane(table,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-		pane.add(scrollpane, BorderLayout.CENTER);
 
 		table.addMouseListener(new MouseAdapter() {
 
@@ -67,8 +57,12 @@ public abstract class MyTable {
 				}
 			}
 		});
+		
+		jframe.setTable(table);
+		jframe.setMainPane(scrollpane);
 
 	}
 	
 	public abstract void initPopMenu(JPopupMenu popupmenu, final ModelObject o);
+	
 }

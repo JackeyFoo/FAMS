@@ -1,18 +1,17 @@
 package vl.view.listpage;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import vl.interfaces.MyJFrame;
 import vl.interfaces.MyTable;
 import vl.view.newpage.NewAssetPage;
 import vl.view.newpage.NewDeliverOutPage;
 import vl.view.newpage.NewDiscardPage;
 import vl.view.newpage.NewMaintainPage;
 import vl.view.newpage.NewTransferPage;
+import vl.view.returnpage.NewReturnPage;
 import dal.dal.AssetsDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
@@ -20,20 +19,16 @@ import dal.model.DeliverOut;
 
 public class AllAssetsDeliverOutPage extends MyTable{
 
-	public AllAssetsDeliverOutPage(JFrame j, DeliverOut[] deliverouts) {
+	public AllAssetsDeliverOutPage(MyJFrame j, DeliverOut[] deliverouts) {
 		
 		col = new String[] { "出库ID", "资产ID", "领用部门", "领用人",
 				"领用日期", "存在地址", "备注", "记录状态", "归还日期", "归还人员"};
 		
 		this.jframe = j;
 
-		Container pane = jframe.getContentPane();
-
-		pane.setLayout(new BorderLayout());
-
 		mo = deliverouts;
 
-		initJTable(pane);
+		initJTable();
 
 		jframe.validate();
 	}
@@ -113,6 +108,16 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				new NewDiscardPage(jframe, assets, null, true);
+			}
+			
+		});
+		
+		returned.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new NewReturnPage(jframe, assets, null);
 			}
 			
 		});

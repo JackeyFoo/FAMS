@@ -2,14 +2,10 @@ package vl.interfaces;
 
 import java.awt.Dimension;
 import java.io.File;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import dal.model.Assets;
-
 import vl.component.ImagePanel;
 
 public abstract class MyDialog extends JDialog {
@@ -23,14 +19,14 @@ public abstract class MyDialog extends JDialog {
 	protected JButton cancel;
 	protected JButton save;
 	protected File[] files;
-	protected JFrame jframe;
+	protected MyJFrame jframe;
 	protected Assets asset;
 
-	public MyDialog(JFrame jframe, boolean b) {
+	public MyDialog(MyJFrame jframe, boolean b) {
 		super(jframe, b);
 	}
 
-	public MyDialog(JFrame jframe, String title, boolean b) {
+	public MyDialog(MyJFrame jframe, String title, boolean b) {
 		super(jframe, title, b);
 	}
 

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,6 +16,7 @@ import bll.controll.Controller;
 import bll.controll.NWEDialog;
 import bll.controll.StrToFile;
 import vl.interfaces.MyDialog;
+import vl.interfaces.MyJFrame;
 import dal.model.Assets;
 import dal.model.RentOut;
 
@@ -47,7 +47,7 @@ public class NewRentOutPage extends MyDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NewRentOutPage(JFrame jframe, Assets asset, RentOut rentout,
+	public NewRentOutPage(MyJFrame jframe, Assets asset, RentOut rentout,
 			boolean editable) {
 
 		super(jframe, "×Ê²ú½è³ö", false);

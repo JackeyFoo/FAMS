@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -15,8 +14,8 @@ import bll.controll.Controller;
 import bll.controll.NWEDialog;
 import dal.model.Assets;
 import dal.model.Maintain;
-
 import vl.interfaces.MyDialog;
+import vl.interfaces.MyJFrame;
 
 public class NewMaintainPage extends MyDialog {
 
@@ -47,7 +46,7 @@ public class NewMaintainPage extends MyDialog {
 	/**
 	 * /** Create the dialog.
 	 */
-	public NewMaintainPage(JFrame jframe, Assets asset, Maintain maintain,
+	public NewMaintainPage(MyJFrame jframe, Assets asset, Maintain maintain,
 			boolean editable) {
 
 		super(jframe, "×Ê²úÎ¬»¤", false);

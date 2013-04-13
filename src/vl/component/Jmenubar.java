@@ -1,11 +1,10 @@
 package vl.component;
 
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+import vl.interfaces.MyJFrame;
 import bll.controll.MenuItemActionListen;
 
 public class Jmenubar extends JMenuBar {
@@ -20,7 +19,7 @@ public class Jmenubar extends JMenuBar {
 		// setFont();
 	}
 
-	public void setJmenu(JFrame jframe, final String arg, final String args[],
+	public void setJmenu(MyJFrame jframe, final String arg, final String args[],
 			final int argc[], final String itemclassname) {
 
 		Jmenu jmenu = new Jmenu(arg);
@@ -45,12 +44,12 @@ class Jmenu extends JMenu {
 		setText(text);
 	}
 
-	public void setJmenu(JFrame jframe, String args[], int argc[], String itemclassname) {
+	public void setJmenu(MyJFrame jframe, String args[], int argc[], String itemclassname) {
 
 		for (int i = 0, j = 0; i < args.length; i++) {
 
 			if (itemclassname == "checkboxitem") {
-				Jcheckboxmenuitem item = new Jcheckboxmenuitem(args[i]);
+				Jcheckboxmenuitem item = new Jcheckboxmenuitem(jframe, args[i]);
 
 				this.add(item);
 			} else if (itemclassname == "menuitem") {
@@ -75,7 +74,7 @@ class Jmenuitem extends JMenuItem {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Jmenuitem(JFrame jframe, String text) {
+	public Jmenuitem(MyJFrame jframe, String text) {
 		super();
 		// setFont(font);
 		setText(text + "   ");
@@ -98,11 +97,12 @@ class Jcheckboxmenuitem extends JCheckBoxMenuItem {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Jcheckboxmenuitem(String text) {
+	public Jcheckboxmenuitem(MyJFrame jframe, String text) {
 		super();
 		// setFont(JFrame_alpha.font_sub);
 		setText(text + "   ");
 		setActionCommand(text);
-		// addItemListener();
+
+		addActionListener(new MenuItemActionListen(jframe));
 	}
 }
