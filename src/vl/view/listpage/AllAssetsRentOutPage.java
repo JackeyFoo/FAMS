@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import dal.dal.AssetsDAO;
+import dal.dal.RentOutDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.RentOut;
@@ -37,11 +38,15 @@ public class AllAssetsRentOutPage extends MyTable {
 		
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
 		JMenuItem rentout = new JMenuItem("资产 " + o.getFormatID() + " 借出编辑");
+		JMenuItem rentouthis = new JMenuItem("资产 " + o.getFormatID()
+				+ " 借出历史");
 		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
 
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
 		popupmenu.add(rentout);
+		popupmenu.addSeparator();
+		popupmenu.add(rentouthis);
 		popupmenu.addSeparator();
 		popupmenu.add(returned);
 		
@@ -64,12 +69,24 @@ public class AllAssetsRentOutPage extends MyTable {
 			}
 			
 		});
+		
+		rentouthis.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new AllAssetsRentOutPage(jframe, RentOutDAO
+						.getRentOutHistory(assets.getAssetid()));
+			}
+
+		});
+		
 		returned.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewReturnPage(jframe, assets, null);
+				new NewReturnPage(jframe, assets, o);
 			}
 			
 		});

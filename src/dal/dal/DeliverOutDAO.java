@@ -74,6 +74,32 @@ public class DeliverOutDAO {
 		}
 	}
 
+	public static boolean returned(DeliverOut deliverout) {
+
+		try {
+
+			String sql = "UPDATE DeliverOut SET ReturnDate=?, ReturnStaff=? WHERE DeliverOutID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setString(1, deliverout.getReturndate());
+			statement.setString(2, deliverout.getReturnstaff());
+			statement.setInt(3, deliverout.getDeliveroutid());
+
+			statement.execute();
+
+			AssetsDAO.returned(deliverout.getAssetid());
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	private static boolean updateNewRecord(int assetid) {
 
 		try {
@@ -133,7 +159,7 @@ public class DeliverOutDAO {
 
 		try {
 
-			DeliverOut[] deliverouts;
+			DeliverOut[] deliverouts = null;
 			int size = 0;
 			int i = 0;
 
@@ -141,7 +167,7 @@ public class DeliverOutDAO {
 					.createStatement();
 
 			ResultSet result = select
-					.executeQuery("SELECT COUNT(*) FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID AND Assets.AssetInDeliverStatus='出库' AND Assets.AssetRunningStatus='正常'");
+					.executeQuery("SELECT COUNT(*) FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID AND Assets.AssetInDeliverStatus='出库' AND Assets.AssetRunningStatus='正常' AND DeliverOut.DeliverRecordIsNew='最新'");
 
 			while (result.next()) {
 				size = result.getInt(1);
@@ -150,7 +176,7 @@ public class DeliverOutDAO {
 			deliverouts = new DeliverOut[size];
 
 			result = select
-					.executeQuery("SELECT DeliverOut.* FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID AND Assets.AssetInDeliverStatus='出库' AND Assets.AssetRunningStatus='正常'");
+					.executeQuery("SELECT DeliverOut.* FROM DeliverOut, Assets WHERE Assets.AssetID = DeliverOut.AssetID AND Assets.AssetInDeliverStatus='出库' AND Assets.AssetRunningStatus='正常' AND DeliverOut.DeliverRecordIsNew='最新'");
 
 			while (result.next() && i < size) { // process results one row at a
 												// time
@@ -170,6 +196,51 @@ public class DeliverOutDAO {
 				deliverouts[i].setReturnstaff(result.getString(11));
 
 				i++;
+			}
+
+			return deliverouts;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
+	}
+
+	public static DeliverOut getDeliverOut(int id) {
+
+		try {
+
+			DeliverOut deliverouts = null;
+
+			String sql = "SELECT DeliverOut.* FROM DeliverOut WHERE AssetID=? AND DeliverRecordIsNew='最新'";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) { // process results one row at a
+									// time
+
+				deliverouts = new DeliverOut();
+
+				deliverouts.setDeliveroutid(result.getInt(1));
+				deliverouts.setAssetid(result.getInt(2));
+				deliverouts.setDeliverdepartment(result.getString(3));
+				deliverouts.setDeliverstaff(result.getString(4));
+				deliverouts.setDeliverdate(result.getString(5));
+				deliverouts.setDeliveraddress(result.getString(6));
+				deliverouts.setDeliverremark(result.getString(7));
+				deliverouts.setDelivercertificate(result.getString(8));
+				deliverouts.setDeliverrecordisnew(result.getString(9));
+				deliverouts.setReturndate(result.getString(10));
+				deliverouts.setReturnstaff(result.getString(11));
 			}
 
 			return deliverouts;

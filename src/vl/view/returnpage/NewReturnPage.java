@@ -9,10 +9,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import bll.controll.Controller;
 import dal.model.Assets;
+import dal.model.DeliverOut;
+import dal.model.RentOut;
 import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
 import vl.util.NWEDialog;
+import dal.dal.DeliverOutDAO;
+import dal.dal.RentOutDAO;
+import dal.dal.TransferDAO;
 import dal.interfaces.ModelObject;
 
 public class NewReturnPage extends MyDialog {
@@ -21,18 +28,22 @@ public class NewReturnPage extends MyDialog {
 
 	private ModelObject mo;
 
-	private JPanel contentpanel;
-	private JPanel controlpanel;
-	private JLabel returnmanLabel;
-	private JLabel returntimeLabel;
-	private JTextField returnman;
-	private JTextField returntime;
+	private JLabel assetsid;
+	private JLabel modelobjectid;
+	private JTextField returnstaff;
+	private JTextField returndate;
+	private JLabel modelobjectidlabel;
+
+	String status;
 
 	public NewReturnPage(MyJFrame jframe, Assets asset, ModelObject mo) {
 
-		super(jframe, "资产归还", false);
+		super(jframe, false);
+
 		this.jframe = jframe;
 		this.asset = asset;
+		this.mo = mo;
+
 		setResizable(false);
 		setSize(400, 200);
 		setLocation(400, 150);
@@ -55,7 +66,11 @@ public class NewReturnPage extends MyDialog {
 		add(controlpanel, BorderLayout.PAGE_END);
 
 		initContentPanel();
+
+		status = setTitle();
+
 		initControlPanel();
+
 	}
 
 	public void initControlPanel() {
@@ -85,8 +100,33 @@ public class NewReturnPage extends MyDialog {
 
 					packData();
 
-					// Controller.saveNewMaintainInfo(jframe, mo,
-					// NewReturnPage.this);
+					if (status.equals("DeliverOut")) {
+
+						((DeliverOut) mo).setReturndate(returndate.getText());
+						((DeliverOut) mo).setReturnstaff(returnstaff.getText());
+
+						Controller.deliveroutReturn(jframe, (DeliverOut) mo,
+								NewReturnPage.this);
+
+					} else if (status.equals("RentOut")) {
+
+						((RentOut) mo).setReturndate(returndate.getText());
+						((RentOut) mo).setReturnstaff(returnstaff.getText());
+
+						Controller.rentoutReturn(jframe, (RentOut) mo,
+								NewReturnPage.this);
+
+					} else if (status.equals("Transfer")) {
+
+						DeliverOut temp = DeliverOutDAO.getDeliverOut(asset
+								.getAssetid());
+
+						temp.setReturndate(returndate.getText());
+						temp.setReturnstaff(returnstaff.getText());
+
+						Controller.deliveroutReturn(jframe, temp, NewReturnPage.this);
+
+					}
 
 				} else {
 					NWEDialog.necessaryDataError(NewReturnPage.this);
@@ -105,36 +145,108 @@ public class NewReturnPage extends MyDialog {
 
 		contentpanel.add(leftpanel);
 
+		// 资产ID
+		JPanel leftpanel01 = new JPanel();
+		leftpanel.add(leftpanel01);
+
+		JLabel assetsidlabel = new JLabel("资产ID:  ");
+		assetsid = new JLabel(asset.getFormatID());
+
+		leftpanel01.add(assetsidlabel);
+		leftpanel01.add(assetsid);
+
+		// 对象ID
 		JPanel leftpanel02 = new JPanel();
 		leftpanel.add(leftpanel02);
 
-		// 归还人员（必填
-		returnmanLabel = new JLabel("归还人员(必填):  ");
-		returnman = new JTextField();
-		returnman.setColumns(30);
+		modelobjectidlabel = new JLabel();
+		modelobjectid = new JLabel();
 
-		leftpanel02.add(returnmanLabel);
-		leftpanel02.add(returnman);
+		leftpanel02.add(modelobjectidlabel);
+		leftpanel02.add(modelobjectid);
 
+		// 归还人员（必填)
 		JPanel leftpanel03 = new JPanel();
 		leftpanel.add(leftpanel03);
 
-		// 归还日期(必填)
-		returntimeLabel = new JLabel("归还日期(必填):  ");
-		returntime = new JTextField();
-		returntime.setColumns(30);
+		JLabel returnstafflabel = new JLabel("归还人员(必填):  ");
+		returnstaff = new JTextField();
+		returnstaff.setColumns(30);
 
-		leftpanel03.add(returntimeLabel);
-		leftpanel03.add(returntime);
+		leftpanel03.add(returnstafflabel);
+		leftpanel03.add(returnstaff);
+
+		// 归还日期(必填)
+
+		JPanel leftpanel04 = new JPanel();
+		leftpanel.add(leftpanel04);
+
+		JLabel returndatelabel = new JLabel("归还日期(必填):  ");
+		returndate = new JTextField();
+		returndate.setColumns(30);
+
+		leftpanel04.add(returndatelabel);
+		leftpanel04.add(returndate);
+	}
+
+	public String setTitle() {
+
+		if (mo != null) {
+
+			modelobjectid.setText(mo.getFormatID());
+
+			if (mo.getClass().getName().endsWith("DeliverOut")) {
+
+				this.setTitle("资产出库归还");
+				modelobjectidlabel.setText("资产出库ID:  ");
+
+				return "DeliverOut";
+
+			} else if (mo.getClass().getName().endsWith("RentOut")) {
+
+				this.setTitle("资产借出归还");
+				modelobjectidlabel.setText("资产借出ID:  ");
+
+				return "RentOut";
+
+			} else if (mo.getClass().getName().endsWith("Transfer")) {
+
+				this.setTitle("资产转移归还");
+				modelobjectidlabel.setText("资产转移ID:  ");
+
+				return "Transfer";
+
+			} else {
+
+				return "null";
+			}
+
+		} else {
+
+			if (asset.getAssetindeliverstatus().equals("出库")) {
+
+				mo = DeliverOutDAO.getDeliverOut(asset.getAssetid());
+
+			} else if (asset.getAssetindeliverstatus().equals("借出")) {
+
+				mo = RentOutDAO.getRentOut(asset.getAssetid());
+
+			} else if (asset.getAssetindeliverstatus().equals("转移")) {
+
+				mo = TransferDAO.getTransfer(asset.getAssetid());
+
+			}
+			return setTitle();
+		}
 	}
 
 	public void packData() {
 	}
 
 	public boolean isFull() {
-		if (returnman.getText().equals("")) {
+		if (returnstaff.getText().equals("")) {
 			return false;
-		} else if (returntime.getText().equals("")) {
+		} else if (returndate.getText().equals("")) {
 			return false;
 		} else {
 			return true;

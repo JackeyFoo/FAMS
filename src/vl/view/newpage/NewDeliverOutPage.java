@@ -45,8 +45,6 @@ public class NewDeliverOutPage extends MyDialog {
 
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentpanel;
-	private JPanel controlpanel;
 
 	public NewDeliverOutPage(MyJFrame jframe, Assets asset,
 			DeliverOut deliverout, boolean editable) {
@@ -78,6 +76,10 @@ public class NewDeliverOutPage extends MyDialog {
 		setVisible(true);
 		setLayout(new BorderLayout());
 		initDialog();
+		
+		if(!editable){
+			isEditable(false);
+		}
 
 		setVisible(true);
 	}
@@ -373,6 +375,8 @@ public class NewDeliverOutPage extends MyDialog {
 			deliveraddress.setEditable(false);
 			deliverremark.setEditable(false);
 			delivercertificate.setEditable(false);
+			returndate.setEditable(false);
+			returnstaff.setEditable(false);
 
 			cancel.setText("È·¶¨");
 			save.setVisible(false);

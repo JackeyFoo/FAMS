@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import vl.util.NWEDialog;
+
 public class FAMSServer {
 
 	private static int port = 8888;
@@ -48,6 +50,8 @@ public class FAMSServer {
 
 				serversocket = new ServerSocket(port);
 
+				NWEDialog.serverStartSuccess(null);
+				
 				listen.start();
 
 			}

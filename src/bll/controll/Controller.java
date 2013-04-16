@@ -1,6 +1,8 @@
 package bll.controll;
 
 import java.io.File;
+
+import vl.interfaces.MyDialog;
 import vl.interfaces.MyJFrame;
 import vl.main.Main;
 import vl.util.NWEDialog;
@@ -40,7 +42,7 @@ public class Controller {
 		asset.setAssetcontract(temp);
 
 		if (AssetsDAO.insert(asset)) {
-			
+
 			NWEDialog.dataSaveSuccess(page);
 
 			page.dispose();
@@ -51,7 +53,7 @@ public class Controller {
 		}
 
 	}
-	
+
 	public static void updateAssetInfo(MyJFrame jframe, Assets asset,
 			File[] files, NewAssetPage page) {
 
@@ -85,13 +87,14 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsDeliverOutPage(jframe, DeliverOutDAO.getAllDeliverOut());
+			new AllAssetsDeliverOutPage(jframe,
+					DeliverOutDAO.getAllDeliverOut());
 		} else {
 			NWEDialog.dataSaveFailed(page);
 		}
 
 	}
-	
+
 	public static void updateDeliverOutInfo(MyJFrame jframe,
 			DeliverOut deliverout, File[] files, NewDeliverOutPage page) {
 
@@ -105,15 +108,16 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsDeliverOutPage(jframe, DeliverOutDAO.getAllDeliverOut());
+			new AllAssetsDeliverOutPage(jframe,
+					DeliverOutDAO.getAllDeliverOut());
 		} else {
 			NWEDialog.dataUpdateFailed(page);
 		}
 
 	}
-	
-	public static void saveNewRentOutInfo(MyJFrame jframe,
-			RentOut rentout, File[] files, NewRentOutPage page) {
+
+	public static void saveNewRentOutInfo(MyJFrame jframe, RentOut rentout,
+			File[] files, NewRentOutPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, rentout);
 
@@ -131,9 +135,9 @@ public class Controller {
 		}
 
 	}
-	
-	public static void updateRentOutInfo(MyJFrame jframe,
-			RentOut rentout, File[] files, NewRentOutPage page) {
+
+	public static void updateRentOutInfo(MyJFrame jframe, RentOut rentout,
+			File[] files, NewRentOutPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, rentout);
 
@@ -151,9 +155,9 @@ public class Controller {
 		}
 
 	}
-	
-	public static void saveNewTransferInfo(MyJFrame jframe,
-			Transfer transfer, File[] files, NewTransferPage page) {
+
+	public static void saveNewTransferInfo(MyJFrame jframe, Transfer transfer,
+			File[] files, NewTransferPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, transfer);
 
@@ -171,9 +175,9 @@ public class Controller {
 		}
 
 	}
-	
-	public static void updateTransferInfo(MyJFrame jframe,
-			Transfer transfer, File[] files, NewTransferPage page) {
+
+	public static void updateTransferInfo(MyJFrame jframe, Transfer transfer,
+			File[] files, NewTransferPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, transfer);
 
@@ -192,8 +196,8 @@ public class Controller {
 
 	}
 
-	public static void saveNewMaintainInfo(MyJFrame jframe,
-			Maintain maintain, NewMaintainPage page) {
+	public static void saveNewMaintainInfo(MyJFrame jframe, Maintain maintain,
+			NewMaintainPage page) {
 
 		if (MaintainDAO.insert(maintain)) {
 
@@ -201,16 +205,16 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsMaintainPage(jframe,  MaintainDAO.getAllMaintain());
-			
+			new AllAssetsMaintainPage(jframe, MaintainDAO.getAllMaintain());
+
 		} else {
 			NWEDialog.dataSaveFailed(page);
 		}
 
 	}
-	
-	public static void updateMaintainInfo(MyJFrame jframe,
-			Maintain maintain, NewMaintainPage page) {
+
+	public static void updateMaintainInfo(MyJFrame jframe, Maintain maintain,
+			NewMaintainPage page) {
 
 		if (MaintainDAO.update(maintain)) {
 
@@ -218,16 +222,16 @@ public class Controller {
 
 			page.dispose();
 
-			new AllAssetsMaintainPage(jframe,  MaintainDAO.getAllMaintain());
-			
+			new AllAssetsMaintainPage(jframe, MaintainDAO.getAllMaintain());
+
 		} else {
 			NWEDialog.dataUpdateFailed(page);
 		}
 
 	}
-	
-	public static void saveNewDiscardInfo(MyJFrame jframe,
-			Discard discard, File[] files, NewDiscardPage page) {
+
+	public static void saveNewDiscardInfo(MyJFrame jframe, Discard discard,
+			File[] files, NewDiscardPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, discard);
 
@@ -245,9 +249,9 @@ public class Controller {
 		}
 
 	}
-	
-	public static void updateDiscardInfo(MyJFrame jframe,
-			Discard discard, File[] files, NewDiscardPage page) {
+
+	public static void updateDiscardInfo(MyJFrame jframe, Discard discard,
+			File[] files, NewDiscardPage page) {
 
 		String temp = new ImageFileCopy().copyFile(files, discard);
 
@@ -265,16 +269,72 @@ public class Controller {
 		}
 
 	}
-	
-	public static void showScanResult(String msg){
-		if(NWEDialog.showScan(msg)){
+
+	public static void showScanResult(String msg) {
+		if (NWEDialog.showScan(msg)) {
 			new AllAssetsPage(Main.mainpage, Integer.parseInt(msg));
 		}
 	}
-	
-	public static Assets getAssets(String msg){
+
+	public static Assets getAssets(String msg) {
 		Assets assets = AssetsDAO.getAsset(Integer.parseInt(msg));
-		
+
 		return assets;
+	}
+
+	public static void deliveroutReturn(MyJFrame jframe, DeliverOut deliverout,
+			MyDialog dialog) {
+		if (DeliverOutDAO.returned(deliverout)) {
+
+			NWEDialog.returnSuccess(dialog);
+
+			dialog.dispose();
+
+			new AllAssetsInStoragePage(Main.mainpage);
+
+		} else {
+			NWEDialog.returnFailed(dialog);
+		}
+	}
+
+	public static void rentoutReturn(MyJFrame jframe, RentOut rentout,
+			MyDialog dialog) {
+		if (RentOutDAO.returned(rentout)) {
+
+			NWEDialog.returnSuccess(dialog);
+
+			dialog.dispose();
+
+			new AllAssetsInStoragePage(Main.mainpage);
+
+		} else {
+			NWEDialog.returnFailed(dialog);
+		}
+	}
+
+	public static void maintainFinished(MyJFrame jframe, Assets asset,
+			Maintain maintain, MyDialog dialog) {
+
+		if (MaintainDAO.maintainFinished(maintain)) {
+
+			NWEDialog.dataUpdateSuccess(dialog);
+
+			dialog.dispose();
+
+			if (asset.getAssetindeliverstatus().equals("³ö¿â")) {
+
+				new AllAssetsDeliverOutPage(jframe,
+						DeliverOutDAO.getAllDeliverOut());
+
+			} else if (asset.getAssetindeliverstatus().equals("×ªÒÆ")) {
+
+				new AllAssetsTransferPage(jframe, TransferDAO.getAllTransfer());
+
+			}
+
+		} else {
+
+			NWEDialog.dataUpdateFailed(dialog);
+		}
 	}
 }

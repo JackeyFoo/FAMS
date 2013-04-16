@@ -7,6 +7,17 @@ import dal.interfaces.ModelObject;
 
 public class Discard implements ModelObject {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	
 	private int assetid;
 	private int discardid = 0;
 

@@ -8,6 +8,17 @@ import dal.interfaces.ModelObject;
 
 public class RentOut implements ModelObject {
 	
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	
 	private int rentoutid = 0;
 	private int assetid;
 	

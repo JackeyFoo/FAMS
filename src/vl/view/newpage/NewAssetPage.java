@@ -22,8 +22,6 @@ import java.awt.event.ActionListener;
 
 public class NewAssetPage extends MyDialog {
 
-	private Assets asset;
-
 	private JLabel assetid;
 	private JTextField assettype;
 	private JTextField assetname;
@@ -37,16 +35,10 @@ public class NewAssetPage extends MyDialog {
 	private JLabel assetrunningstatus;
 	private JTextField assetcontract;
 
-	// private JPanel rightpanel01;
-
-	// private File[] files;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private JPanel contentpanel;
-	private JPanel controlpanel;
 
 	public NewAssetPage(MyJFrame jframe, Assets a, boolean editable) {
 

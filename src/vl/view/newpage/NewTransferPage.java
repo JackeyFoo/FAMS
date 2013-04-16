@@ -30,9 +30,6 @@ public class NewTransferPage extends MyDialog {
 
 	private Transfer transfer;
 
-	private JPanel contentpanel;
-	private JPanel controlpanel;
-
 	private JLabel assetid;
 	private JLabel transferid;
 	private JTextField transferdepartment;
@@ -79,6 +76,9 @@ public class NewTransferPage extends MyDialog {
 		setLayout(new BorderLayout());
 		initDialog();
 
+		if(!editable){
+			isEditable(false);
+		}
 		setVisible(true);
 
 	}

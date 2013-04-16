@@ -7,6 +7,18 @@ import vl.interfaces.MyJFrame;
 import vl.main.Main;
 
 public class NWEDialog {
+	
+	public static void serverStartSuccess(MyJFrame jframe) {
+		JOptionPane.showMessageDialog(Main.mainpage, "服务器启动成功!", "SUCCESS",
+				JOptionPane.INFORMATION_MESSAGE);
+
+	}
+	
+	public static void notImageError(MyDialog dialog) {
+		JOptionPane.showMessageDialog(dialog, "请正确的数图片!", "ERROR",
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
 
 	public static void necessaryDataError(MyDialog dialog) {
 		JOptionPane.showMessageDialog(dialog, "请填写必要的数据!", "ERROR",
@@ -50,8 +62,8 @@ public class NWEDialog {
 	}
 
 	public static void exportFailed() {
-		JOptionPane.showMessageDialog(Main.mainpage, "数据导出失败,文件不存在或正被使用!", "ERROR",
-				JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(Main.mainpage, "数据导出失败,文件不存在或正被使用!",
+				"ERROR", JOptionPane.ERROR_MESSAGE);
 	}
 
 	public static void fileNotFound(MyJFrame jframe) {
@@ -63,22 +75,35 @@ public class NWEDialog {
 		JOptionPane.showMessageDialog(jframe, "数据不存在!", "ERROR",
 				JOptionPane.ERROR_MESSAGE);
 	}
-	
-	public static void noDataFound(MyJFrame jframe){
+
+	public static void noDataFound(MyJFrame jframe) {
 		JOptionPane.showMessageDialog(jframe, "数据不存在, 添加新的数据!", "ERROR",
 				JOptionPane.ERROR_MESSAGE);
 	}
 
 	public static boolean showScan(String id) {
 
-		int result = JOptionPane.showConfirmDialog(Main.mainpage, "是否展示客户端扫描结果？", "QUESTION",
-				JOptionPane.YES_NO_OPTION);
-		
-		if(result == JOptionPane.YES_OPTION){
+		int result = JOptionPane.showConfirmDialog(Main.mainpage,
+				"是否展示客户端扫描结果？", "QUESTION", JOptionPane.YES_NO_OPTION);
+
+		if (result == JOptionPane.YES_OPTION) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 
 	}
+
+	public static void returnSuccess(MyDialog dialog) {
+
+		JOptionPane.showMessageDialog(dialog, "资产归还成功!", "SUCCESS",
+				JOptionPane.INFORMATION_MESSAGE);
+
+	}
+
+	public static void returnFailed(MyDialog dialog) {
+		JOptionPane.showMessageDialog(dialog, "资产归还失败!", "ERROR",
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
 }

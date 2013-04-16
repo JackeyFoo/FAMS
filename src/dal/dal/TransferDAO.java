@@ -178,15 +178,15 @@ public class TransferDAO {
 		}
 
 	}
-	
+
 	public static Transfer[] getTransferHistory(int id) {
 
 		try {
 
-			Transfer[] transfers;
+			Transfer[] transfers = null;
 			int size = 0;
 			int i = 0;
-			
+
 			String sql = "SELECT COUNT(*) FROM Transfer WHERE AssetID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
@@ -203,12 +203,11 @@ public class TransferDAO {
 			transfers = new Transfer[size];
 
 			sql = "SELECT * FROM Transfer WHERE AssetID=?";
-			
-			statement = SQLDBConnect.getSQLDBConection()
-					.prepareStatement(sql);
-			
+
+			statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
+
 			statement.setInt(1, id);
-			
+
 			result = statement.executeQuery();
 
 			while (result.next() && i < size) { // process results one row at a
@@ -227,6 +226,48 @@ public class TransferDAO {
 				transfers[i].setTransferrecordisnew(result.getString(9));
 
 				i++;
+			}
+
+			return transfers;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
+	}
+
+	public static Transfer getTransfer(int id) {
+
+		try {
+
+			Transfer transfers = null;
+
+			String sql = "SELECT Transfer.* FROM Transfer WHERE AssetID=? AND TransferRecordIsNew='×îÐÂ'";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) { // process results one row at a
+									// time
+				transfers = new Transfer();
+
+				transfers.setTransferid((result.getInt(1)));
+				transfers.setAssetid(result.getInt(2));
+				transfers.setTransferdepartment(result.getString(3));
+				transfers.setTransferdate(result.getString(4));
+				transfers.setTransferhandler(result.getString(5));
+				transfers.setTransferremark(result.getString(6));
+				transfers.setTransfercertificate(result.getString(7));
+				transfers.setTransferstatus(result.getString(8));
+				transfers.setTransferrecordisnew(result.getString(9));
 			}
 
 			return transfers;

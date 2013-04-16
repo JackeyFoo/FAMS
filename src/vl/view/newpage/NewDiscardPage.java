@@ -30,8 +30,6 @@ public class NewDiscardPage extends MyDialog {
 
 	private Discard discard;
 
-	private JPanel contentpanel;
-	private JPanel controlpanel;
 	private JLabel assetid;
 	private JLabel discardid;
 	private JTextField discarddepartment;

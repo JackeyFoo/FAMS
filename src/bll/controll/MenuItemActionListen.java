@@ -21,6 +21,7 @@ import vl.view.listpage.AllAssetsPage;
 import vl.view.listpage.AllAssetsRentOutPage;
 import vl.view.listpage.AllAssetsTransferPage;
 import vl.view.newpage.NewAssetPage;
+import vl.view.searchpage.AdvancedSearchPage;
 import vl.view.searchpage.IDSearchPage;
 
 public class MenuItemActionListen implements ActionListener {
@@ -79,6 +80,12 @@ public class MenuItemActionListen implements ActionListener {
 
 			new IDSearchPage(jframe);
 		}
+		
+		if (e.getActionCommand().equals("高级搜索")) {
+
+			new AdvancedSearchPage(jframe);
+		}
+
 
 		if (e.getActionCommand().equals("资产数据导出")) {
 

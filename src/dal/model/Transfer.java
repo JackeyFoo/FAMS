@@ -9,6 +9,18 @@ import dal.interfaces.ModelObject;
 public class Transfer implements ModelObject {
 	
 
+	/**
+	 * 
+	 */
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	
 	private int transferid = 0;
 	private int assetid;
 	private String transferdepartment = null;

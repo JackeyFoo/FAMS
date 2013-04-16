@@ -26,8 +26,6 @@ public class NewRentOutPage extends MyDialog {
 
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentpanel;
-	private JPanel controlpanel;
 	private JLabel assetid;
 	private JLabel rentoutid;
 	private JTextField rentdepartment;
@@ -70,7 +68,6 @@ public class NewRentOutPage extends MyDialog {
 			}
 
 			this.rentout = rentout;
-			;
 		}
 
 		setResizable(false);
@@ -80,6 +77,10 @@ public class NewRentOutPage extends MyDialog {
 		setLayout(new BorderLayout());
 		initDialog();
 
+		if(!editable){
+			isEditable(false);
+		}
+		
 		setVisible(true);
 
 	}
@@ -391,6 +392,8 @@ public class NewRentOutPage extends MyDialog {
 			renthandler.setEditable(false);
 			rentremark.setEditable(false);
 			rentcertificate.setEditable(false);
+			returndate.setEditable(false);
+			returnstaff.setEditable(false);
 
 			cancel.setText("È·¶¨");
 			save.setVisible(false);

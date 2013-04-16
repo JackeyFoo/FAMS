@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import bll.controll.Controller;
+import dal.dal.MaintainDAO;
 import dal.model.Assets;
 import dal.model.Maintain;
 import vl.interfaces.MyDialog;
@@ -18,21 +21,22 @@ import vl.util.NWEDialog;
 public class MantainFinishedPage extends MyDialog {
 	private static final long serialVersionUID = 1L;
 
-	private Maintain maintain;
+	private Maintain mo;
 
-	private JPanel contentpanel;
-	private JPanel controlpanel;
-	private JLabel complimentLabel;
-	private JTextField compliment;
+	private JLabel assetsid;
+	private JLabel maintainid;
+	private JTextField maintainfinisheddate;
 
 	public MantainFinishedPage(MyJFrame jframe, Assets asset, Maintain maintain) {
-		
+
 		super(jframe, "资产维修完成", false);
-		
+
 		this.jframe = jframe;
 		this.asset = asset;
+		this.mo = maintain;
+		
 		setResizable(false);
-		setSize(400, 150);
+		setSize(400, 200);
 		setLocation(400, 150);
 		setVisible(true);
 		setLayout(new BorderLayout());
@@ -44,7 +48,7 @@ public class MantainFinishedPage extends MyDialog {
 	public void initDialog() {
 
 		contentpanel = new JPanel();
-		contentpanel.setBorder(BorderFactory.createTitledBorder("完成信息"));
+		contentpanel.setBorder(BorderFactory.createTitledBorder("维修完成信息"));
 
 		add(contentpanel, BorderLayout.CENTER);
 
@@ -53,6 +57,8 @@ public class MantainFinishedPage extends MyDialog {
 		add(controlpanel, BorderLayout.PAGE_END);
 
 		initContentPanel();
+		getMaintain();
+		
 		initControlPanel();
 	}
 
@@ -83,8 +89,7 @@ public class MantainFinishedPage extends MyDialog {
 
 					packData();
 
-					// Controller.saveNewMaintainInfo(jframe, mo,
-					// NewReturnPage.this);
+					Controller.maintainFinished(jframe, asset, mo, MantainFinishedPage.this);
 
 				} else {
 					NWEDialog.necessaryDataError(MantainFinishedPage.this);
@@ -103,29 +108,58 @@ public class MantainFinishedPage extends MyDialog {
 
 		contentpanel.add(leftpanel);
 
+		// 资产ID
+		JPanel leftpanel01 = new JPanel();
+		leftpanel.add(leftpanel01);
+
+		JLabel assetsidlabel = new JLabel("资产ID:  ");
+		assetsid = new JLabel(asset.getFormatID());
+
+		leftpanel01.add(assetsidlabel);
+		leftpanel01.add(assetsid);
+
+		// 维修ID
 		JPanel leftpanel02 = new JPanel();
 		leftpanel.add(leftpanel02);
 
-		// 归还人员（必填
-		complimentLabel = new JLabel("完成日期(必填):  ");
-		compliment = new JTextField();
-		compliment.setColumns(30);
+		JLabel maintainidlabel = new JLabel("维修ID:  ");
+		maintainid = new JLabel();
 
-		leftpanel02.add(complimentLabel);
-		leftpanel02.add(compliment);
+		leftpanel02.add(maintainidlabel);
+		leftpanel02.add(maintainid);
 
+		// 维修完成时间
 		JPanel leftpanel03 = new JPanel();
 		leftpanel.add(leftpanel03);
 
-		// 归还日期(必填)
+		JLabel maintainfinisheddatelabel = new JLabel("维修完成时间(必填):  ");
+		maintainfinisheddate = new JTextField();
+		maintainfinisheddate.setColumns(30);
 
+		leftpanel03.add(maintainfinisheddatelabel);
+		leftpanel03.add(maintainfinisheddate);
+
+	}
+
+	public void getMaintain() {
+
+		if (mo == null) {
+
+			if (asset.getAssetrunningstatus().equals("维修")) {
+
+				mo = MaintainDAO.getMaintain(asset.getAssetid());
+				getMaintain();
+			}
+		} else {
+			maintainid.setText(mo.getFormatID());
+		}
 	}
 
 	public void packData() {
 	}
 
 	public boolean isFull() {
-		if (compliment.getText().equals("")) {
+		if (maintainfinisheddate.getText().equals("")) {
 			return false;
 		} else {
 			return true;

@@ -53,7 +53,7 @@ public class ExcelExportor {
 		titlestyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
 		titlestyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
 		titlestyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
-		titlestyle.setFillForegroundColor(HSSFColor.RED.index);
+		titlestyle.setFillForegroundColor(HSSFColor.SKY_BLUE.index);
 		titlestyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 		titlestyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		titlestyle.setFont(titlefont);

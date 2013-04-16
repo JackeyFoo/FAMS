@@ -11,6 +11,7 @@ import vl.view.newpage.NewDiscardPage;
 import vl.view.newpage.NewMaintainPage;
 import vl.view.returnpage.MantainFinishedPage;
 import dal.dal.AssetsDAO;
+import dal.dal.MaintainDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.Maintain;
@@ -38,12 +39,16 @@ public class AllAssetsMaintainPage extends MyTable {
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
 		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 维修编辑");
+		JMenuItem maintainhis = new JMenuItem("资产 " + o.getFormatID()
+				+ " 维修历史");
 		JMenuItem maintained = new JMenuItem("资产 " + o.getFormatID() + " 维修完毕");
 		JMenuItem discard = new JMenuItem("资产 " + o.getFormatID() + " 申请报废");
 
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
 		popupmenu.add(maintain);
+		popupmenu.addSeparator();
+		popupmenu.add(maintainhis);
 		popupmenu.addSeparator();
 		popupmenu.add(maintained);
 		popupmenu.add(discard);
@@ -76,6 +81,17 @@ public class AllAssetsMaintainPage extends MyTable {
 				new NewMaintainPage(jframe, assets, (Maintain) o, true);
 			}
 			
+		});
+		
+		maintainhis.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new AllAssetsMaintainPage(jframe, MaintainDAO
+						.getMaintainHistory(assets.getAssetid()));
+			}
+
 		});
 		
 		maintained.addActionListener(new ActionListener(){

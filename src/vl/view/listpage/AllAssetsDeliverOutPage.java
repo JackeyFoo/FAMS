@@ -13,6 +13,7 @@ import vl.view.newpage.NewMaintainPage;
 import vl.view.newpage.NewTransferPage;
 import vl.view.returnpage.NewReturnPage;
 import dal.dal.AssetsDAO;
+import dal.dal.DeliverOutDAO;
 import dal.interfaces.ModelObject;
 import dal.model.Assets;
 import dal.model.DeliverOut;
@@ -41,6 +42,8 @@ public class AllAssetsDeliverOutPage extends MyTable{
 
 		JMenuItem asset = new JMenuItem("资产 " + o.getFormatID() + " 详情");
 		JMenuItem deliverout = new JMenuItem("资产 " + o.getFormatID() + " 出库编辑");
+		JMenuItem deliverouthis = new JMenuItem("资产 " + o.getFormatID()
+				+ " 出库历史");
 		JMenuItem transfer = new JMenuItem("资产 " + o.getFormatID() + " 转移");
 		JMenuItem returned = new JMenuItem("资产 " + o.getFormatID() + " 归还");
 		JMenuItem maintain = new JMenuItem("资产 " + o.getFormatID() + " 申请维修");
@@ -50,6 +53,8 @@ public class AllAssetsDeliverOutPage extends MyTable{
 		popupmenu.add(asset);
 		popupmenu.addSeparator();
 		popupmenu.add(deliverout);
+		popupmenu.addSeparator();
+		popupmenu.add(deliverouthis);
 		popupmenu.addSeparator();
 		popupmenu.add(transfer);
 		popupmenu.addSeparator();
@@ -80,6 +85,17 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			}
 			
 		});		
+		
+		deliverouthis.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new AllAssetsDeliverOutPage(jframe, DeliverOutDAO
+						.getDeliverOutHistory(assets.getAssetid()));
+			}
+
+		});
 
 		
 		transfer.addActionListener(new ActionListener(){
@@ -117,7 +133,7 @@ public class AllAssetsDeliverOutPage extends MyTable{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				new NewReturnPage(jframe, assets, null);
+				new NewReturnPage(jframe, assets, o);
 			}
 			
 		});

@@ -1,6 +1,8 @@
 package dal.interfaces;
 
-public interface ModelObject {
+import java.io.Serializable;
+
+public interface ModelObject extends Serializable{
 	
 	public String getFormatID();
 	

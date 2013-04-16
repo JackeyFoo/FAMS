@@ -21,6 +21,8 @@ public abstract class MyDialog extends JDialog {
 	protected File[] files;
 	protected MyJFrame jframe;
 	protected Assets asset;
+	protected JPanel contentpanel;
+	protected JPanel controlpanel;
 
 	public MyDialog(MyJFrame jframe, boolean b) {
 		super(jframe, b);
@@ -58,7 +60,7 @@ public abstract class MyDialog extends JDialog {
 
 			for (int i = 0; i < h; i++) {
 
-				ImagePanel imgpanel = new ImagePanel(files[i].getAbsolutePath());
+				ImagePanel imgpanel = new ImagePanel(this, files[i].getAbsolutePath());
 
 				height += (int) imgpanel.getheight();
 

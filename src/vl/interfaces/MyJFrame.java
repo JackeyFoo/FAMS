@@ -39,7 +39,9 @@ public class MyJFrame extends JFrame{
 	public void setTerminalPane(){
 		
 		if(splitpane != null && terminalpane != null){
-					
+			
+			terminalpane.refreshJTree();
+			
 			splitpane.setRightComponent(null);
 			splitpane.setRightComponent(terminalpane);
 		}

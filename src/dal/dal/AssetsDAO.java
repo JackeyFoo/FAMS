@@ -386,4 +386,54 @@ public class AssetsDAO {
 		}
 
 	}
+	
+	public static boolean returned(int assetid) {
+
+		try {
+
+			String sql = "update Assets set AssetInDeliverStatus='¿âÖÐ' "
+					+ "where AssetID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, assetid);
+
+			statement.execute();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return false;
+		}
+
+	}
+	
+	public static boolean maintainFinished(int assetid) {
+
+		try {
+
+			String sql = "update Assets set AssetRunningStatus='Õý³£' "
+					+ "where AssetID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, assetid);
+
+			statement.execute();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return false;
+		}
+
+	}
 }

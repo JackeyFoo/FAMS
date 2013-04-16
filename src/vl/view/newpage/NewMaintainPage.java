@@ -27,9 +27,6 @@ public class NewMaintainPage extends MyDialog {
 
 	private Maintain maintain;
 
-	private JPanel contentpanel;
-	private JPanel controlpanel;
-
 	private JLabel assetid;
 	private JLabel maintainid;
 	private JTextField maintaindepartment;
@@ -68,7 +65,6 @@ public class NewMaintainPage extends MyDialog {
 			}
 
 			this.maintain = maintain;
-			;
 		}
 
 		setResizable(false);
@@ -77,6 +73,10 @@ public class NewMaintainPage extends MyDialog {
 		setVisible(true);
 		setLayout(new BorderLayout());
 		initDialog();
+		
+		if(!editable){
+			isEditable(false);
+		}
 
 		setVisible(true);
 	}
@@ -363,6 +363,7 @@ public class NewMaintainPage extends MyDialog {
 			maintainprocess.setEditable(false);
 			devicestatus.setEditable(false);
 			maintaincost.setEditable(false);
+			maintainfinisheddate.setEnabled(false);
 
 			cancel.setText("È·¶¨");
 			save.setVisible(false);

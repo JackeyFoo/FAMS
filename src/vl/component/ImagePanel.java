@@ -12,6 +12,9 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import vl.interfaces.MyDialog;
+import vl.util.NWEDialog;
+
 public class ImagePanel extends JPanel {
 	/**
 	 * 
@@ -25,31 +28,35 @@ public class ImagePanel extends JPanel {
 	private String imagpath;
 	private long clickTime = 0;
 
-	public ImagePanel(String path) {
+	public ImagePanel(MyDialog dialog, String path) {
 
 		imagpath = path;
 		try {
 
 			image = ImageIO.read(new File(path));
+			
+			if(image != null){
+				height = image.getHeight() / (image.getWidth() / width);
 
-			height = image.getHeight() / (image.getWidth() / width);
+				this.addMouseListener(new MouseAdapter() {
+					public void mouseReleased(MouseEvent e) {
 
-			this.addMouseListener(new MouseAdapter() {
-				public void mouseReleased(MouseEvent e) {
+						if (checkClickTime()) {
+							try {
 
-					if (checkClickTime()) {
-						try {
+								Desktop.getDesktop().open(new File(imagpath));
+								
+							} catch (IOException ed) {
+								System.out.println(ed);
+							}
 
-							Desktop.getDesktop().open(new File(imagpath));
-							
-						} catch (IOException ed) {
-							System.out.println(ed);
 						}
-
 					}
-				}
 
-			});
+				});
+			}else{
+				NWEDialog.notImageError(dialog);
+			}
 
 		} catch (IOException ex) {
 			// handle exception...

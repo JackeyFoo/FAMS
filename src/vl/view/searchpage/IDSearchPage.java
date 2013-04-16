@@ -20,11 +20,9 @@ public class IDSearchPage extends MyDialog {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	private MyJFrame jf;
 	private JLabel assetid;
 	private JTextField assetidtype;
-	private JPanel contentpanel;
-	private JPanel controlpanel;
+
 	int textvalue;
 
 	/**
@@ -37,7 +35,7 @@ public class IDSearchPage extends MyDialog {
 	public IDSearchPage(MyJFrame jframe) {
 
 		super(jframe, "ËÑË÷", false);
-		this.jf = jframe;
+		this.jframe = jframe;
 
 		setResizable(false);
 		setSize(400, 120);
@@ -91,7 +89,7 @@ public class IDSearchPage extends MyDialog {
 
 						int id = Integer.parseInt(assetidtype.getText());
 
-						new AllAssetsPage(jf, id);
+						new AllAssetsPage(jframe, id);
 
 						IDSearchPage.this.dispose();
 

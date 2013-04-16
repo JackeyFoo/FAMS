@@ -7,6 +7,17 @@ import dal.interfaces.ModelObject;
 
 public class Assets implements ModelObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	
 	private int assetid = 0;
 	private String assettype = null;
 	private String assetname = null;

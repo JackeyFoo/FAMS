@@ -21,21 +21,54 @@ public class AdvancedSearchPage extends MyDialog {
 
 	private static final long serialVersionUID = 1L;
 
-	private MyJFrame jf;
-	private JPanel contentpanel;
-	private JPanel controlpanel;
-	private JCheckBox newasset;
+	private JCheckBox asset;
 	private JCheckBox deliverout;
 	private JCheckBox rentout;
 	private JCheckBox transfer;
 	private JCheckBox maintain;
 	private JCheckBox discard;
 
+	private String searchstr[][];
+
+	private JTextField assetkeyword;
+
+	private JTextField assetpurchasedate;
+
+	private JTextField discardkeyword;
+
+	private JTextField discarddate;
+
+	private JTextField deliveroutkeyword;
+
+	private JTextField deliverdate;
+
+	private JTextField deliverreturndate;
+
+	private JTextField transferkeyword;
+
+	private JTextField transferdate;
+
+	private JTextField transferreturndate;
+
+	private JTextField rentoutkeyword;
+
+	private JTextField rentdate;
+
+	private JTextField rentreturndate;
+
+	private JTextField maintainkeyword;
+
+	private JTextField downdate;
+
+	private JTextField maintainfinisheddate;
+
 	public AdvancedSearchPage(MyJFrame jframe) {
 
 		super(jframe, "搜索", false);
-		
-		this.jf = jframe;
+
+		this.jframe = jframe;
+
+		searchstr = new String[6][3];
 
 		setResizable(false);
 		setSize(800, 500);
@@ -107,13 +140,13 @@ public class AdvancedSearchPage extends MyDialog {
 		panel01.setLayout(new BoxLayout(panel01, BoxLayout.Y_AXIS));
 		contentpanel.add(panel01);
 
-		newasset = new JCheckBox("资产项");
-		panel01.add(newasset);
+		asset = new JCheckBox("资产项");
+		panel01.add(asset);
 
 		JPanel panel011 = new JPanel();
 		panel01.add(panel011);
 		JLabel assetkeywordlabel = new JLabel("资产关键字:      ");
-		final JTextField assetkeyword = new JTextField();
+		assetkeyword = new JTextField();
 		assetkeyword.setColumns(30);
 
 		panel011.add(assetkeywordlabel);
@@ -122,29 +155,29 @@ public class AdvancedSearchPage extends MyDialog {
 		JPanel panel012 = new JPanel();
 		panel01.add(panel012);
 		JLabel assetdatelabel = new JLabel("资产入库日期:    ");
-		final JTextField assetdate = new JTextField();
-		assetdate.setColumns(30);
+		assetpurchasedate = new JTextField();
+		assetpurchasedate.setColumns(30);
 
 		panel012.add(assetdatelabel);
-		panel012.add(assetdate);
+		panel012.add(assetpurchasedate);
 
 		assetkeyword.setEditable(false);
-		assetdate.setEditable(false);
+		assetpurchasedate.setEditable(false);
 
-		newasset.addItemListener(new ItemListener() {
+		asset.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
 				// TODO Auto-generated method stub
-				if (newasset.isSelected()) {
+				if (asset.isSelected()) {
 
 					assetkeyword.setEditable(true);
-					assetdate.setEditable(true);
+					assetpurchasedate.setEditable(true);
 
 				} else {
 
 					assetkeyword.setEditable(false);
-					assetdate.setEditable(false);
+					assetpurchasedate.setEditable(false);
 
 				}
 			}
@@ -162,22 +195,22 @@ public class AdvancedSearchPage extends MyDialog {
 		JPanel panel061 = new JPanel();
 		panel06.add(panel061);
 		JLabel discardwordlabel = new JLabel("资产报废关键字:    ");
-		final JTextField discardword = new JTextField();
-		discardword.setColumns(30);
+		discardkeyword = new JTextField();
+		discardkeyword.setColumns(30);
 
 		panel061.add(discardwordlabel);
-		panel061.add(discardword);
+		panel061.add(discardkeyword);
 
 		JPanel panel062 = new JPanel();
 		panel06.add(panel062);
 		JLabel discarddatelabel = new JLabel("资产报废日期:      ");
-		final JTextField discarddate = new JTextField();
+		discarddate = new JTextField();
 		discarddate.setColumns(30);
 
 		panel062.add(discarddatelabel);
 		panel062.add(discarddate);
 
-		discardword.setEditable(false);
+		discardkeyword.setEditable(false);
 		discarddate.setEditable(false);
 
 		discard.addItemListener(new ItemListener() {
@@ -187,12 +220,12 @@ public class AdvancedSearchPage extends MyDialog {
 				// TODO Auto-generated method stub
 				if (discard.isSelected()) {
 
-					discardword.setEditable(true);
+					discardkeyword.setEditable(true);
 					discarddate.setEditable(true);
 
 				} else {
 
-					discardword.setEditable(false);
+					discardkeyword.setEditable(false);
 					discarddate.setEditable(false);
 
 				}
@@ -211,33 +244,33 @@ public class AdvancedSearchPage extends MyDialog {
 		JPanel panel021 = new JPanel();
 		panel02.add(panel021);
 		JLabel deliveroutwordlabel = new JLabel("资产出库关键字:  ");
-		final JTextField deliveroutword = new JTextField();
-		deliveroutword.setColumns(30);
+		deliveroutkeyword = new JTextField();
+		deliveroutkeyword.setColumns(30);
 
 		panel021.add(deliveroutwordlabel);
-		panel021.add(deliveroutword);
+		panel021.add(deliveroutkeyword);
 
 		JPanel panel022 = new JPanel();
 		panel02.add(panel022);
 		JLabel deliveroutdatelabel = new JLabel("资产出库时间:    ");
-		final JTextField deliveroutdate = new JTextField();
-		deliveroutdate.setColumns(30);
+		deliverdate = new JTextField();
+		deliverdate.setColumns(30);
 
 		panel022.add(deliveroutdatelabel);
-		panel022.add(deliveroutdate);
+		panel022.add(deliverdate);
 
 		JPanel panel023 = new JPanel();
 		panel02.add(panel023);
 		JLabel deliveroutreturnlabel = new JLabel("资产归还时间:    ");
-		final JTextField deliveroutreturn = new JTextField();
-		deliveroutreturn.setColumns(30);
+		deliverreturndate = new JTextField();
+		deliverreturndate.setColumns(30);
 
 		panel023.add(deliveroutreturnlabel);
-		panel023.add(deliveroutreturn);
+		panel023.add(deliverreturndate);
 
-		deliveroutword.setEditable(false);
-		deliveroutdate.setEditable(false);
-		deliveroutreturn.setEditable(false);
+		deliveroutkeyword.setEditable(false);
+		deliverdate.setEditable(false);
+		deliverreturndate.setEditable(false);
 
 		deliverout.addItemListener(new ItemListener() {
 
@@ -246,15 +279,15 @@ public class AdvancedSearchPage extends MyDialog {
 				// TODO Auto-generated method stub
 				if (deliverout.isSelected()) {
 
-					deliveroutword.setEditable(true);
-					deliveroutdate.setEditable(true);
-					deliveroutreturn.setEditable(true);
+					deliveroutkeyword.setEditable(true);
+					deliverdate.setEditable(true);
+					deliverreturndate.setEditable(true);
 
 				} else {
 
-					deliveroutword.setEditable(false);
-					deliveroutdate.setEditable(false);
-					deliveroutreturn.setEditable(false);
+					deliveroutkeyword.setEditable(false);
+					deliverdate.setEditable(false);
+					deliverreturndate.setEditable(false);
 
 				}
 			}
@@ -273,16 +306,16 @@ public class AdvancedSearchPage extends MyDialog {
 		JPanel panel041 = new JPanel();
 		panel04.add(panel041);
 		JLabel transferwordlabel = new JLabel("资产转移关键字:    ");
-		final JTextField transferword = new JTextField();
-		transferword.setColumns(30);
+		transferkeyword = new JTextField();
+		transferkeyword.setColumns(30);
 
 		panel041.add(transferwordlabel);
-		panel041.add(transferword);
+		panel041.add(transferkeyword);
 
 		JPanel panel042 = new JPanel();
 		panel04.add(panel042);
 		JLabel transferdatelabel = new JLabel("资产转移时间:      ");
-		final JTextField transferdate = new JTextField();
+		transferdate = new JTextField();
 		transferdate.setColumns(30);
 
 		panel042.add(transferdatelabel);
@@ -291,15 +324,15 @@ public class AdvancedSearchPage extends MyDialog {
 		JPanel panel043 = new JPanel();
 		panel04.add(panel043);
 		JLabel transferreturnlabel = new JLabel("资产转移归还时间:  ");
-		final JTextField transferreturn = new JTextField();
-		transferreturn.setColumns(30);
+		transferreturndate = new JTextField();
+		transferreturndate.setColumns(30);
 
 		panel043.add(transferreturnlabel);
-		panel043.add(transferreturn);
+		panel043.add(transferreturndate);
 
-		transferword.setEditable(false);
+		transferkeyword.setEditable(false);
 		transferdate.setEditable(false);
-		transferreturn.setEditable(false);
+		transferreturndate.setEditable(false);
 
 		transfer.addItemListener(new ItemListener() {
 
@@ -308,15 +341,15 @@ public class AdvancedSearchPage extends MyDialog {
 				// TODO Auto-generated method stub
 				if (transfer.isSelected()) {
 
-					transferword.setEditable(true);
+					transferkeyword.setEditable(true);
 					transferdate.setEditable(true);
-					transferreturn.setEditable(true);
+					transferreturndate.setEditable(true);
 
 				} else {
 
-					transferword.setEditable(false);
+					transferkeyword.setEditable(false);
 					transferdate.setEditable(false);
-					transferreturn.setEditable(false);
+					transferreturndate.setEditable(false);
 
 				}
 			}
@@ -335,33 +368,33 @@ public class AdvancedSearchPage extends MyDialog {
 		JPanel panel031 = new JPanel();
 		panel03.add(panel031);
 		JLabel rentoutwordlabel = new JLabel("资产借出关键字:  ");
-		final JTextField rentoutword = new JTextField();
-		rentoutword.setColumns(30);
+		rentoutkeyword = new JTextField();
+		rentoutkeyword.setColumns(30);
 
 		panel031.add(rentoutwordlabel);
-		panel031.add(rentoutword);
+		panel031.add(rentoutkeyword);
 
 		JPanel panel032 = new JPanel();
 		panel03.add(panel032);
 		JLabel rentoutdatelabel = new JLabel("资产借出时间:    ");
-		final JTextField rentoutdate = new JTextField();
-		rentoutdate.setColumns(30);
+		rentdate = new JTextField();
+		rentdate.setColumns(30);
 
 		panel032.add(rentoutdatelabel);
-		panel032.add(rentoutdate);
+		panel032.add(rentdate);
 
 		JPanel panel033 = new JPanel();
 		panel03.add(panel033);
 		JLabel rentoutreturnlabel = new JLabel("资产借出归还时间:");
-		final JTextField rentoutreturn = new JTextField();
-		rentoutreturn.setColumns(30);
+		rentreturndate = new JTextField();
+		rentreturndate.setColumns(30);
 
 		panel033.add(rentoutreturnlabel);
-		panel033.add(rentoutreturn);
+		panel033.add(rentreturndate);
 
-		rentoutword.setEditable(false);
-		rentoutdate.setEditable(false);
-		rentoutreturn.setEditable(false);
+		rentoutkeyword.setEditable(false);
+		rentdate.setEditable(false);
+		rentreturndate.setEditable(false);
 
 		rentout.addItemListener(new ItemListener() {
 
@@ -370,15 +403,15 @@ public class AdvancedSearchPage extends MyDialog {
 				// TODO Auto-generated method stub
 				if (rentout.isSelected()) {
 
-					rentoutword.setEditable(true);
-					rentoutdate.setEditable(true);
-					rentoutreturn.setEditable(true);
+					rentoutkeyword.setEditable(true);
+					rentdate.setEditable(true);
+					rentreturndate.setEditable(true);
 
 				} else {
 
-					rentoutword.setEditable(false);
-					rentoutdate.setEditable(false);
-					rentoutreturn.setEditable(false);
+					rentoutkeyword.setEditable(false);
+					rentdate.setEditable(false);
+					rentreturndate.setEditable(false);
 
 				}
 			}
@@ -396,33 +429,33 @@ public class AdvancedSearchPage extends MyDialog {
 		JPanel panel051 = new JPanel();
 		panel05.add(panel051);
 		JLabel maintainwordlabel = new JLabel("资产维修关键字:    ");
-		final JTextField maintainword = new JTextField();
-		maintainword.setColumns(30);
+		maintainkeyword = new JTextField();
+		maintainkeyword.setColumns(30);
 
 		panel051.add(maintainwordlabel);
-		panel051.add(maintainword);
+		panel051.add(maintainkeyword);
 
 		JPanel panel052 = new JPanel();
 		panel05.add(panel052);
-		JLabel maintaindatelabel = new JLabel("资产报修时间:      ");
-		final JTextField maintaindate = new JTextField();
-		maintaindate.setColumns(30);
+		JLabel maintaindatelabel = new JLabel("资产故障时间:      ");
+		downdate = new JTextField();
+		downdate.setColumns(30);
 
 		panel052.add(maintaindatelabel);
-		panel052.add(maintaindate);
+		panel052.add(downdate);
 
 		JPanel panel053 = new JPanel();
 		panel05.add(panel053);
 		JLabel maintainreturnlabel = new JLabel("资产维修完成时间:  ");
-		final JTextField maintainreturn = new JTextField();
-		maintainreturn.setColumns(30);
+		maintainfinisheddate = new JTextField();
+		maintainfinisheddate.setColumns(30);
 
 		panel053.add(maintainreturnlabel);
-		panel053.add(maintainreturn);
+		panel053.add(maintainfinisheddate);
 
-		maintainword.setEditable(false);
-		maintaindate.setEditable(false);
-		maintainreturn.setEditable(false);
+		maintainkeyword.setEditable(false);
+		downdate.setEditable(false);
+		maintainfinisheddate.setEditable(false);
 
 		maintain.addItemListener(new ItemListener() {
 
@@ -431,15 +464,15 @@ public class AdvancedSearchPage extends MyDialog {
 				// TODO Auto-generated method stub
 				if (maintain.isSelected()) {
 
-					maintainword.setEditable(true);
-					maintaindate.setEditable(true);
-					maintainreturn.setEditable(true);
+					maintainkeyword.setEditable(true);
+					downdate.setEditable(true);
+					maintainfinisheddate.setEditable(true);
 
 				} else {
 
-					maintainword.setEditable(false);
-					maintaindate.setEditable(false);
-					maintainreturn.setEditable(false);
+					maintainkeyword.setEditable(false);
+					downdate.setEditable(false);
+					maintainfinisheddate.setEditable(false);
 
 				}
 			}
@@ -451,15 +484,126 @@ public class AdvancedSearchPage extends MyDialog {
 	public void packData() {
 		// TODO Auto-generated method stub
 
+		/********** asset *************/
+		if (asset.isSelected() && !assetkeyword.equals("")) {
+			searchstr[0][0] = assetkeyword.getText();
+		} else {
+			searchstr[0][0] = null;
+		}
+
+		if (asset.isSelected() && !assetpurchasedate.equals("")) {
+			searchstr[0][1] = assetpurchasedate.getText();
+		} else {
+			searchstr[0][1] = null;
+		}
+		
+		searchstr[0][2] = null;
+		
+		/********** deliverout *************/
+		if (deliverout.isSelected() && !deliveroutkeyword.equals("")) {
+			searchstr[1][0] = deliveroutkeyword.getText();
+		} else {
+			searchstr[1][0] = null;
+		}
+
+		if (deliverout.isSelected() && !deliverdate.equals("")) {
+			searchstr[1][1] = deliverdate.getText();
+		} else {
+			searchstr[1][1] = null;
+		}
+		
+		if (deliverout.isSelected() && !deliverreturndate.equals("")) {
+			searchstr[1][2] = deliverdate.getText();
+		} else {
+			searchstr[1][2] = null;
+		}
+		
+		/********** rentout *************/
+		if (rentout.isSelected() && !rentoutkeyword.equals("")) {
+			searchstr[2][0] = rentoutkeyword.getText();
+		} else {
+			searchstr[2][0] = null;
+		}
+
+		if (rentout.isSelected() && !rentdate.equals("")) {
+			searchstr[2][1] = rentdate.getText();
+		} else {
+			searchstr[2][1] = null;
+		}
+		
+		if (rentout.isSelected() && !rentreturndate.equals("")) {
+			searchstr[2][2] = rentreturndate.getText();
+		} else {
+			searchstr[2][2] = null;
+		}
+		
+		/********** transfer *************/
+		if (transfer.isSelected() && !transferkeyword.equals("")) {
+			searchstr[2][0] = transferkeyword.getText();
+		} else {
+			searchstr[2][0] = null;
+		}
+
+		if (rentout.isSelected() && !transferdate.equals("")) {
+			searchstr[2][1] = transferdate.getText();
+		} else {
+			searchstr[2][1] = null;
+		}
+		
+		if (rentout.isSelected() && !transferreturndate.equals("")) {
+			searchstr[2][2] = rentreturndate.getText();
+		} else {
+			searchstr[2][2] = null;
+		}
+		
+		/********** asset *************/
+		if (asset.isSelected() && !assetkeyword.equals("")) {
+			searchstr[0][0] = assetkeyword.getText();
+		} else {
+			searchstr[0][0] = null;
+		}
+
+		if (asset.isSelected() && !assetpurchasedate.equals("")) {
+			searchstr[0][1] = assetpurchasedate.getText();
+		} else {
+			searchstr[0][1] = null;
+		}
+		
+		
+		/********** asset *************/
+		if (asset.isSelected() && !assetkeyword.equals("")) {
+			searchstr[0][0] = assetkeyword.getText();
+		} else {
+			searchstr[0][0] = null;
+		}
+
+		if (asset.isSelected() && !assetpurchasedate.equals("")) {
+			searchstr[0][1] = assetpurchasedate.getText();
+		} else {
+			searchstr[0][1] = null;
+		}
+		
+		
+		/********** asset *************/
+		if (asset.isSelected() && !assetkeyword.equals("")) {
+			searchstr[0][0] = assetkeyword.getText();
+		} else {
+			searchstr[0][0] = null;
+		}
+
+		if (asset.isSelected() && !assetpurchasedate.equals("")) {
+			searchstr[0][1] = assetpurchasedate.getText();
+		} else {
+			searchstr[0][1] = null;
+		}
+
+		searchstr[0][2] = null;
+
 	}
 
 	@Override
 	public boolean isFull() {
 		// TODO Auto-generated method stub
-
-		// if(assetidtype.getText()){
-		//
-		// }
 		return false;
 	}
 

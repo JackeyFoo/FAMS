@@ -6,21 +6,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import dal.model.RentOut;
 
-
 public class RentOutDAO {
 
 	public static boolean insert(RentOut rentout) {
-		
+
 		try {
 			updateNewRecord(rentout.getAssetid());
-			
+
 			String sql = "insert into RentOut(AssetID, RentDepartment, RentStaff, RentDate,"
-				+ "ForeCastReturnDate, RentHandler, RentRemark, RentCertificate, RentRecordIsNew, ReturnDate, "
-				+ "ReturnStaff) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			
+					+ "ForeCastReturnDate, RentHandler, RentRemark, RentCertificate, RentRecordIsNew, ReturnDate, "
+					+ "ReturnStaff) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
-			
+
 			statement.setInt(1, rentout.getAssetid());
 			statement.setString(2, rentout.getRentdepartment());
 			statement.setString(3, rentout.getRentstaff());
@@ -32,33 +31,31 @@ public class RentOutDAO {
 			statement.setString(9, rentout.getRentrecordisnew());
 			statement.setString(10, rentout.getReturndate());
 			statement.setString(11, rentout.getReturndate());
-			
+
 			statement.execute();
-			
+
 			AssetsDAO.rentOut(rentout.getAssetid());
-			
+
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
 	}
-	
-	
+
 	public static boolean update(RentOut rentout) {
-		
+
 		try {
-			
+
 			String sql = "UPDATE RentOut SET RentDepartment=?, RentStaff=?, RentDate=?,"
-				+ "ForeCastReturnDate=?, RentHandler=?, RentRemark=?, RentCertificate=?, ReturnDate=?, "
-				+ "ReturnStaff=? WHERE RentOutID=?";
-			
+					+ "ForeCastReturnDate=?, RentHandler=?, RentRemark=?, RentCertificate=?, ReturnDate=?, "
+					+ "ReturnStaff=? WHERE RentOutID=?";
+
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
 					.prepareStatement(sql);
-			
-			
+
 			statement.setString(1, rentout.getRentdepartment());
 			statement.setString(2, rentout.getRentstaff());
 			statement.setString(3, rentout.getRentdate());
@@ -69,20 +66,20 @@ public class RentOutDAO {
 			statement.setString(8, rentout.getReturndate());
 			statement.setString(9, rentout.getReturndate());
 			statement.setInt(10, rentout.getRentoutid());
-			
+
 			statement.execute();
-			
+
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
 	}
-	
+
 	private static boolean updateNewRecord(int assetid) {
-		
+
 		try {
 
 			String sql = "update RentOut set RentRecordIsNew='·ñ' "
@@ -96,15 +93,15 @@ public class RentOutDAO {
 			statement.execute();
 
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 			return false;
 		}
 	}
-	
+
 	public static int getID() {
 		int id = -1;
 
@@ -135,7 +132,7 @@ public class RentOutDAO {
 
 		return id + 1;
 	}
-	
+
 	public static RentOut[] getAllRentOut() {
 
 		try {
@@ -192,16 +189,14 @@ public class RentOutDAO {
 
 	}
 
-	
 	public static RentOut[] getRentOutHistory(int id) {
 
 		try {
 
-			RentOut[] rentouts;
+			RentOut[] rentouts = null;
 			int size = 0;
 			int i = 0;
 
-			
 			String sql = "SELECT COUNT(*) FROM RentOut WHERE AssetID=?";
 
 			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
@@ -218,12 +213,11 @@ public class RentOutDAO {
 			rentouts = new RentOut[size];
 
 			sql = "SELECT * FROM RentOut WHERE AssetID=?";
-			
-			statement = SQLDBConnect.getSQLDBConection()
-					.prepareStatement(sql);
-			
+
+			statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
+
 			statement.setInt(1, id);
-			
+
 			result = statement.executeQuery();
 
 			while (result.next() && i < size) { // process results one row at a
@@ -258,4 +252,78 @@ public class RentOutDAO {
 		}
 
 	}
+
+	public static boolean returned(RentOut rentout) {
+
+		try {
+
+			String sql = "UPDATE RentOut SET ReturnDate=?, ReturnStaff=? WHERE RentOutID=?";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setString(1, rentout.getReturndate());
+			statement.setString(2, rentout.getReturnstaff());
+			statement.setInt(3, rentout.getRentoutid());
+
+			statement.execute();
+
+			AssetsDAO.returned(rentout.getAssetid());
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static RentOut getRentOut(int id) {
+
+		try {
+
+			RentOut rentouts = null;
+
+			String sql = "SELECT RentOut.* FROM RentOut WHERE AssetID=? AND RentRecordIsNew='×îÐÂ'";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) { // process results one row at a
+									// time
+
+				rentouts = new RentOut();
+
+				rentouts.setRentoutid(result.getInt(1));
+				rentouts.setAssetid(result.getInt(2));
+				rentouts.setRentdepartment(result.getString(3));
+				rentouts.setRentstaff(result.getString(4));
+				rentouts.setRentdate(result.getString(5));
+				rentouts.setForecastreturndate(result.getString(6));
+				rentouts.setRenthandler(result.getString(7));
+				rentouts.setRentremark(result.getString(8));
+				rentouts.setRentcertificate(result.getString(9));
+				rentouts.setRentrecordisnew(result.getString(10));
+				rentouts.setReturndate(result.getString(11));
+				rentouts.setReturnstaff(result.getString(12));
+
+			}
+
+			return rentouts;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
+	}
+
 }

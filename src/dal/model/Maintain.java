@@ -7,6 +7,17 @@ import dal.interfaces.ModelObject;
 
 public class Maintain implements ModelObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	
 	private int assetid;
 	private int maintainid = 0;
 	private String maintaindepartment = null;

@@ -82,12 +82,39 @@ public class MaintainDAO {
 		PreparedStatement statement;
 		try {
 
-			String sql = "update Maintain set MaintainRecordIsNew='否' "
-					+ "where AssetID=? AND MaintainRecordIsNew='最新'";
+			String sql = "UPDATE Maintain SET MaintainRecordIsNew='否' "
+					+ "WHERE AssetID=? AND MaintainRecordIsNew='最新'";
 
 			statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
 
 			statement.setInt(1, assetid);
+
+			statement.execute();
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return false;
+		}
+	}
+	
+	public static boolean maintainFinished(Maintain maintain) {
+
+		PreparedStatement statement;
+		try {
+
+			String sql = "UPDATE Maintain SET MaintainFinishedDate=? "
+					+ "WHERE AssetID=?";
+
+			statement = SQLDBConnect.getSQLDBConection().prepareStatement(sql);
+
+			statement.setString(1, maintain.getMaintainfinisheddate());
+			statement.setInt(2, maintain.getMaintainid());
+			
+			AssetsDAO.maintainFinished(maintain.getAssetid());
 
 			statement.execute();
 
@@ -136,7 +163,7 @@ public class MaintainDAO {
 
 		try {
 
-			Maintain[] maintains;
+			Maintain[] maintains = null;
 			int size = 0;
 			int i = 0;
 
@@ -238,6 +265,52 @@ public class MaintainDAO {
 				maintains[i].setMaintainfinisheddate(result.getString(12));
 
 				i++;
+			}
+
+			return maintains;
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return null;
+		}
+
+	}
+	
+	public static Maintain getMaintain(int id) {
+
+		try {
+
+			Maintain maintains = null;
+
+			String sql = "SELECT Maintain.* FROM Maintain WHERE AssetID=? AND MaintainRecordIsNew='最新'";
+
+			PreparedStatement statement = SQLDBConnect.getSQLDBConection()
+					.prepareStatement(sql);
+
+			statement.setInt(1, id);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) { // process results one row at a
+									// time
+
+				maintains = new Maintain();
+
+				maintains.setMaintainid(result.getInt(1));
+				maintains.setAssetid(result.getInt(2));
+				maintains.setMaintaindepartment(result.getString(3));
+				maintains.setDowndate(result.getString(4));
+				maintains.setMaintainhandler(result.getString(5));
+				maintains.setDownremark(result.getString(6));
+				maintains.setDownphenomenon(result.getString(7));
+				maintains.setMaintainprocess(result.getString(8));
+				maintains.setDevicestatus(result.getString(9));
+				maintains.setMaintaincost(result.getDouble(10));
+				maintains.setMaintainrecordisnew(result.getString(11));
+				maintains.setMaintainfinisheddate(result.getString(12));
 			}
 
 			return maintains;
