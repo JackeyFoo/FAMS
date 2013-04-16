@@ -210,7 +210,7 @@ public class NewDeliverOutPage extends MyDialog {
 		JPanel leftpanel04 = new JPanel();
 		leftpanel.add(leftpanel04);
 
-		JLabel deliverstafflabel = new JLabel("领用人(必填):  ");
+		JLabel deliverstafflabel = new JLabel("领用人(必填):    ");
 		deliverstaff = new JTextField(deliverout.getDeliverstaff());
 		deliverstaff.setColumns(30);
 
@@ -243,7 +243,7 @@ public class NewDeliverOutPage extends MyDialog {
 		JPanel leftpanel07 = new JPanel();
 		leftpanel.add(leftpanel07);
 
-		JLabel deliverremarklabel = new JLabel("备注:  ");
+		JLabel deliverremarklabel = new JLabel("备注:            ");
 		deliverremark = new JTextField(deliverout.getDeliverremark());
 		deliverremark.setColumns(30);
 
@@ -255,7 +255,7 @@ public class NewDeliverOutPage extends MyDialog {
 		JPanel leftpanel11 = new JPanel();
 		leftpanel.add(leftpanel11);
 
-		JLabel returndatelabel = new JLabel("归还日期 :  ");
+		JLabel returndatelabel = new JLabel("归还日期 :       ");
 		returndate = new JTextField(deliverout.getReturndate());
 		returndate.setColumns(30);
 
@@ -266,7 +266,7 @@ public class NewDeliverOutPage extends MyDialog {
 		JPanel leftpanel12 = new JPanel();
 		leftpanel.add(leftpanel12);
 
-		JLabel returnstafflabel = new JLabel("归还人员:  ");
+		JLabel returnstafflabel = new JLabel("归还人员:        ");
 		returnstaff = new JTextField(deliverout.getReturnstaff());
 		returnstaff.setColumns(30);
 

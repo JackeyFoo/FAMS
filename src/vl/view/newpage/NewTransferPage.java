@@ -221,7 +221,7 @@ public class NewTransferPage extends MyDialog {
 		JPanel leftpanel05 = new JPanel();
 		leftpanel.add(leftpanel05);
 
-		JLabel transferhandlerlabel = new JLabel("经办人(必填):  ");
+		JLabel transferhandlerlabel = new JLabel("经办人(必填):    ");
 		transferhandler = new JTextField(transfer.getTransferhandler());
 		transferhandler.setColumns(30);
 
@@ -232,7 +232,7 @@ public class NewTransferPage extends MyDialog {
 		JPanel leftpanel06 = new JPanel();
 		leftpanel.add(leftpanel06);
 
-		JLabel transferremarklabel = new JLabel("备注:  ");
+		JLabel transferremarklabel = new JLabel("备注:            ");
 		transferremark = new JTextField(transfer.getTransferremark());
 		transferremark.setColumns(30);
 

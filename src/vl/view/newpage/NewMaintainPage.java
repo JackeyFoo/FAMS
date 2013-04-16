@@ -214,7 +214,7 @@ public class NewMaintainPage extends MyDialog {
 		JPanel leftpanel05 = new JPanel();
 		leftpanel.add(leftpanel05);
 
-		JLabel maintainhandlerlabel = new JLabel("经办人(必填):  ");
+		JLabel maintainhandlerlabel = new JLabel("经办人(必填):    ");
 		maintainhandler = new JTextField(maintain.getMaintainhandler());
 		maintainhandler.setColumns(30);
 
@@ -225,7 +225,7 @@ public class NewMaintainPage extends MyDialog {
 		JPanel leftpanel06 = new JPanel();
 		leftpanel.add(leftpanel06);
 
-		JLabel downremarklabel = new JLabel("故障情况:  ");
+		JLabel downremarklabel = new JLabel("故障情况:        ");
 		downremark = new JTextField(maintain.getDownremark());
 		downremark.setColumns(30);
 
@@ -236,7 +236,7 @@ public class NewMaintainPage extends MyDialog {
 		JPanel leftpanel07 = new JPanel();
 		leftpanel.add(leftpanel07);
 
-		JLabel downphenomenonlabel = new JLabel("故障现象:  ");
+		JLabel downphenomenonlabel = new JLabel("故障现象:        ");
 		downphenomenon = new JTextField(maintain.getDownphenomenon());
 		downphenomenon.setColumns(30);
 
@@ -247,7 +247,7 @@ public class NewMaintainPage extends MyDialog {
 		JPanel leftpanel08 = new JPanel();
 		leftpanel.add(leftpanel08);
 
-		JLabel maintainprocesslabel = new JLabel("维修过程:  ");
+		JLabel maintainprocesslabel = new JLabel("维修过程:        ");
 		maintainprocess = new JTextField(maintain.getMaintainprocess());
 		maintainprocess.setColumns(30);
 
@@ -258,7 +258,7 @@ public class NewMaintainPage extends MyDialog {
 		JPanel leftpanel09 = new JPanel();
 		leftpanel.add(leftpanel09);
 
-		JLabel devicestatuslabel = new JLabel("设备状况:  ");
+		JLabel devicestatuslabel = new JLabel("设备状况:        ");
 		devicestatus = new JTextField(maintain.getDevicestatus());
 		devicestatus.setColumns(30);
 
@@ -269,7 +269,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel10 = new JPanel();
 		leftpanel.add(leftpanel10);
 
-		JLabel maintaincostlabel = new JLabel("维修费用(RMB):  ");
+		JLabel maintaincostlabel = new JLabel("维修费用(RMB):   ");
 		maintaincost = new JTextField(maintain.getMaintaincost() + "");
 		maintaincost.setColumns(30);
 
@@ -280,7 +280,7 @@ public class NewMaintainPage extends MyDialog {
 		leftpanel10 = new JPanel();
 		leftpanel.add(leftpanel10);
 
-		JLabel maintainfinisheddatelabel = new JLabel("维修完成时间:  ");
+		JLabel maintainfinisheddatelabel = new JLabel("维修完成时间:    ");
 		maintainfinisheddate = new JTextField(maintain.getMaintainfinisheddate());
 		maintainfinisheddate.setColumns(30);
 

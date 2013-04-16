@@ -210,7 +210,7 @@ public class NewRentOutPage extends MyDialog {
 		JPanel leftpanel04 = new JPanel();
 		leftpanel.add(leftpanel04);
 
-		JLabel rentstafflabel = new JLabel("领用人(必填):  ");
+		JLabel rentstafflabel = new JLabel("领用人(必填):    ");
 		rentstaff = new JTextField(rentout.getRentstaff());
 		rentstaff.setColumns(30);
 
@@ -232,7 +232,7 @@ public class NewRentOutPage extends MyDialog {
 		JPanel leftpanel06 = new JPanel();
 		leftpanel.add(leftpanel06);
 
-		JLabel forecastreturndatelabel = new JLabel("预归还日期(必填):  ");
+		JLabel forecastreturndatelabel = new JLabel("预归还日期(必填):");
 		forecastreturndate = new JTextField(rentout.getForecastreturndate());
 		forecastreturndate.setColumns(30);
 
@@ -243,7 +243,7 @@ public class NewRentOutPage extends MyDialog {
 		JPanel leftpanel07 = new JPanel();
 		leftpanel.add(leftpanel07);
 
-		JLabel renthandlerlabel = new JLabel("经办人(必填):  ");
+		JLabel renthandlerlabel = new JLabel("经办人(必填):    ");
 		renthandler = new JTextField(rentout.getRenthandler());
 		renthandler.setColumns(30);
 
@@ -254,7 +254,7 @@ public class NewRentOutPage extends MyDialog {
 		JPanel leftpanel08 = new JPanel();
 		leftpanel.add(leftpanel08);
 
-		JLabel rentremarklabel = new JLabel("备注:  ");
+		JLabel rentremarklabel = new JLabel("备注:            ");
 		rentremark = new JTextField(rentout.getRentremark());
 		rentremark.setColumns(30);
 
@@ -265,7 +265,7 @@ public class NewRentOutPage extends MyDialog {
 		JPanel leftpanel11 = new JPanel();
 		leftpanel.add(leftpanel11);
 
-		JLabel returndatelabel = new JLabel("归还日期 :  ");
+		JLabel returndatelabel = new JLabel("归还日期 :       ");
 		returndate = new JTextField(rentout.getReturndate());
 		returndate.setColumns(30);
 
@@ -276,7 +276,7 @@ public class NewRentOutPage extends MyDialog {
 		JPanel leftpanel12 = new JPanel();
 		leftpanel.add(leftpanel12);
 
-		JLabel returnstafflabel = new JLabel("归还人员:  ");
+		JLabel returnstafflabel = new JLabel("归还人员:        ");
 		returnstaff = new JTextField(rentout.getReturnstaff());
 		returnstaff.setColumns(30);
 

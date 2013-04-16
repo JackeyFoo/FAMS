@@ -248,7 +248,7 @@ public class NewAssetPage extends MyDialog {
 		JPanel leftpanel08 = new JPanel();
 		leftpanel.add(leftpanel08);
 
-		JLabel manufacturerlabel = new JLabel("资产生产商(必填):  ");
+		JLabel manufacturerlabel = new JLabel("资产生产商(必填):");
 		assetmanufacturer = new JTextField(asset.getAssetManufacturer());
 		assetmanufacturer.setColumns(30);
 
@@ -259,7 +259,7 @@ public class NewAssetPage extends MyDialog {
 		JPanel leftpanel09 = new JPanel();
 		leftpanel.add(leftpanel09);
 
-		JLabel dealerlabel = new JLabel("资产经销商(必填):  ");
+		JLabel dealerlabel = new JLabel("资产经销商(必填):");
 		assetdealer = new JTextField(asset.getAssetdealer());
 		assetdealer.setColumns(30);
 
